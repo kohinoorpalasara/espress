@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ESPRESS &middot; Blogger site </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui.css" />
+	<script src="{{ STATIC_URL }}js/jquery-1.9.1.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
+
+    <style type="text/css">
+		     
+		body { 
+			background: #FDFDFD; 
+		}
+		input { 
+			width: 60% 
+		}
+
+		h1 { 
+			
+			color:"red" 
+		}
+		#submit { 
+			background: url("../images/submit_bg.gif") repeat-x scroll 0 0 transparent; 
+			border: 1px solid #B7D6DF; 
+			border-radius: 2px 2px 2px 2px; 
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
+			color: #437182; 
+			cursor: pointer; 
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+			font-size: 14px;
+			font-weight: bold; 
+			height: auto; 
+			padding: 6px 10px; 
+			text-shadow: 0 1px 0 #FFFFFF; 
+			width: auto; 
+		}
+
+
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      </style>
+
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../website/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+
+     <script>
+			function formValidation()  
+			{  
+				// alert('hello');
+				var fname=document.registration.firstname;
+				var lname = document.registration.lastname;
+				var uname = document.registration.username;
+				var password = document.registration.password;
+				var confirm_password= document.registration.confirm_password;
+				var email = document.registration.email; 
+				//alert('hello1')
+				if(userid_validation(uname,5,12))   
+				{  
+					//alert('hello2')
+					if(passid_validation(password,confirm_password,7,12))  
+					{  
+						//alert('hello3')
+						if(ValidateEmail(email))  
+						{    
+							//alert('hello4')
+							document.forms["registration"].submit();
+						}  
+					}  
+				}
+				return false;  
+			}  
+
+			function userid_validation(uname,mx,my)  
+				{  
+				var uname_len = uname.value.length;  
+				if (uname_len == 0 || uname_len >= my || uname_len < mx)  
+				{  
+				alert("User Id should not be empty / length be between "+mx+" to "+my);  
+				uname.focus();  
+				return false;  
+				}   
+				}
+
+			function passid_validation(password,confirm_password,mx,my)  
+				{  
+				var password_len = password.value.length;
+				var confirm_password_len = confirm_password.value.length;  
+				if (password_len == 0 ||password_len >= my || password_len < mx)  
+				{  
+				alert("Password and confirm password should be match and should not be empty / length be between "+mx+" to "+my);  
+				password.focus();  
+				return false;  
+				}
+  
+				} 
+
+			function ValidateEmail(email)  
+				{  
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+				if(email.value.match(mailformat))  
+				{  
+				return true;  
+				}  
+				else  
+				{  
+				alert("You have entered an invalid email address!");  
+				email.focus();  
+				return false;  
+				}  
+				} 
+
+</script>
+
+
+  </head>
+
+
+
+<body background="b.jpg">
+
+	<form action="{% url 'registration' %}" method ="POST" name="registration">
+		{%csrf_token %}
+
+ 
+
+
+     <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/login">Espress</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+               <li class="active"><a href="/login">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="/travel">Travel Information</a></li>
+              <li><a href="/forum">Forum</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container" color="orange" align ="center">
+        <h1 class="form-signin-heading">ESPRESS</h1>
+    </div>
+
+		<table align="center">
+	<h1 align="center" >Registration</t1><br><br>
+			<tr>
+				<td>Firstname : </td>
+				<td><input type="text" name="firstname" value=""></td>
+			</tr>
+			<tr>
+				<td>Lastname : </td>
+				<td><input type="text" name = "lastname" value=""></td>
+			</tr>
+			<tr>
+				<td>Username : </td>
+				<td><input type="text" name = "username" value="" ></td>
+			</tr>
+			<tr>
+				<td>Email ID : </td>
+				<td><input type="text" name = "email" value="" ></td>
+			</tr>
+			<tr>
+				<td>Password : </td>
+				<td><input type="password" name = "password" value="" ></td>
+			</tr>
+			<tr>
+				<td>Confirm Password : </td>
+				<td><input type="password" name = "confirm_password" value=""></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><select name="gender" value = "">
+					<option value="na">Gender</option>
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+				</select></td>
+			</tr>
+
+			<tr>
+				<td>DOB</td>
+				<td><input type="date" name="dob" /></td>
+			</tr>
+
+		
+
+			<tr>
+				<td><input type="submit" value="Submit" onclick="formValidation()">
+				</td>
+
+				<!--<td><a href="javascript:formValidation()">Register</a></td> -->
+			</tr>
+
+</table>
+</form>
+ 
+<script>
+ 
+$(function() {
+$( "#datepicker" ).datepicker();
+});
+</script>
+</body>
+</html>

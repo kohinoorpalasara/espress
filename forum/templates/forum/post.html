@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Post - {{post.pk}}</title>
+	</head>
+
+	<body>
+		<div>
+			<b>{{post.author.getname}}</b> - {{post.timestamp}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type = "button" name = "delete" value="&times;"><br/>
+			{{post.description}}
+			<ul>
+				{% for comment in post.comments %}
+					<li>
+						<b>{{comment.author.getname}}</b> - {{comment.timestamp}}<br/>
+						{{comment.description}}
+					</li>
+				{% endfor %}
+					<li>
+						<b>{{uname}}</b><br>					
+</script>  <textarea rows="2" cols="40" name= "commentadd"></textarea>
+					</li>
+			</ul>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,2562 @@
+<!DOCTYPE HTML>
+<html xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
+<head>
+<script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
+<script type="text/javascript">
+            var isLiveServer= false;
+        </script>
+ 
+<script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26489750-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        isLiveServer= true;
+        </script>
+<script type="text/javascript">
+            var FB_APP_ID_JS;
+            var HTTP_HOST;
+            var HTTPS_URL;
+            var FB_LOGIN;
+            var LOGIN_SESSION;
+            var TRIPIT_CRED;
+            var FBAPP;
+        </script>
+<meta name="p:domain_verify" content="acbcd3027403c6e0beb01234b661060c"/>
+<meta name="msvalidate.01" content="3213EA37B2F511630809F569C5B37894"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content="Georama is a one-stop solution that lets travelers plan, book, and share their trips on a one-of-a-kind interactive map. It is visual, immersive, and fun!"/>
+<meta property="og:title" content="Georama - Plan, Book, Share Travel on a Map!"/>
+<meta property="og:description" content="Georama is a one-stop solution that lets travelers plan, book, and share their trips on a one-of-a-kind interactive map. It is visual, immersive, and fun!"/>
+<meta property="og:image" content="http://www.georama.com/images/georama_PBS.png"/>
+<meta name="keywords" content="Georama, Georama Travel, Plan Book Share, travel platform, leisure travel platform, end-to-end travel platform, travel, leisure travel, travel planning, trip planner, trip organizer, travel recommendations, travel personalization, trip management, itinerary management, travel booking, travel sharing, travel on a map, travel map, interactive travel map, visual travel, visual travel map, social travel, high-tech travel, map platform, interactive map, travel planning map, travel reviews, travel tips, geo rama, GeoPlaces, geo places"/>
+<meta name="viewport" id="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
+<link href="{{STATIC_URL}}img/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="{{STATIC_URL}}img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Georama – Plan, Book, Share Travel on a Map!</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/jquery.mCustomScrollbar.css?v=1.15.92">
+<link href="{{STATIC_URL}}js/zoom-slider-control.css?v=1.15.92" media="screen" rel="stylesheet" type="text/css"/> <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.6.2.min.js"></script>
+<script src="{{STATIC_URL}}js/georama.js?v=1.15.92" type="text/javascript"></script>
+<script src="{{STATIC_URL}}js/ui.js?v=1.15.92"></script>
+<script src="{{STATIC_URL}}js/all.js"></script>
+<script src="{{STATIC_URL}}js/jquery.mCustomScrollbar.concat.min.js?v=1.15.92"></script>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script src="{{STATIC_URL}}js/gacategory.js?v=1.15.92" type="text/javascript"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/geomap.js,{{STATIC_URL}}js/world-en.js,{{STATIC_URL}}js/scrollplus.js,{{STATIC_URL}}js/bookpanel.js?v=1.15.92"></script> <script src="{{STATIC_URL}}js/jquery.actual.min.js" type="text/javascript"></script>
+</head>
+<body onResize="chkbrowser()">
+ 
+<div id="overlay">&nbsp;</div>
+<div id="StaticPageContent"></div>
+<div id="fb-root"></div>
+<div id="header-wrap">
+<style>.tipsy{position:absolute;visibility:hidden;top:100%;}#main-top-nav li:hover .tipsy{visibility:visible;}.tip{position:absolute;left:50%;top:-8px;margin:0px 0 0 -9px;width:17px;height:8px;display:block;background-image:url("/images/tipsy.png");}.tipsy-inner{font-size:14px;padding:5px 8px 4px 8px;background-color:#ffcc00;color:#555555;max-width:200px;text-align:center;border-radius:5px;box-shadow:0px 0px 3px rgba(0,0,0,0.4);text-shadow:none}.tipsy-north{background-position:top center;}.tipsy-south{background-position:bottom center;}.tipsy-east{background-position:right center;}.tipsy-west{background-position:left center;}</style>
+</style>
+<script>
+$(document).ready(function(){
+	$('#main-top-nav li').hover(function(){
+		var tooltipWidth = $(this).children('.tipsy').width();
+		var tooltipCont = $(this).width();
+		//console.log('crunt tooltip width' + tooltipWidth + 'li width' + tooltipCont);
+		var tooltipPosition = parseInt((tooltipWidth-tooltipCont)/2);
+		$(this).children('.tipsy').css({'margin-left': - tooltipPosition});	
+	});
+});
+</script>
+<div id="header" class="welcomeHeader">
+<div id="wrapper">
+<div id="logo">
+<p><a style="cursor:pointer" href="javascript:void(0);" onClick="checkTripFlag();" class="lnkHome homeLink"></a><img src="{{STATIC_URL}}img/header-separator.png" alt=""/><img src="{{STATIC_URL}}img/plan-book-share.png" alt="Plan. Book. Share"/></p>
+</div>
+<div id="signininfo">
+<span class="free">Sign up for Free!</span>
+<div id="loginPanel"><a href="javascript:void(0);" id="a_loginFromHeader" class="header-facebook" onclick="member_login_header();"><img src="{{STATIC_URL}}img/facebook-sign-in.gif" alt=""/></a> </div>
+<div class="fb_social" id="facepile_div">
+<iframe src="//facebook.com/plugins/facepile.php?action=xyz&amp;size=medium&amp;max_rows=1&amp;width=200&amp;colorscheme=light&amp;appId=140862215971215" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:70px" allowTransparency="true"> </iframe>
+</div>
+<script type="text/javascript">
+                           $("#facepile_div").hide();
+                        </script>
+<div class="clear"></div>
+</div>
+<ul id="main-top-nav">
+<li id="mainNavhome"><a id="homeLink" onClick="$('#mapOverlay').hide();checkTripFlag();" class="active lnkHome">
+<label><span>Home</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">Go to Home page</div>
+</div>
+</li>
+<li id="explore"><a id="exploreAnchorID" onClick="$('#mapOverlay').hide();geoExplore();abortAjaxCall();">
+<label><span>Explore</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">Explore destinations and add items to your trip</div>
+</div>
+</li>
+<li id="mytripslitab"><a id="myTripsId" onClick="$('#mapOverlay').hide();myTripsClick();abortAjaxCall();">
+<label><span>My Trips</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">View and modify your trips</div>
+</div>
+</li>
+<li id="friendstripslitab"><a id="friendsTripsId" onClick="$('#mapOverlay').hide();friendsTripsClick();abortAjaxCall();">
+<label><span>Friends Trips</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">View your friends trips and give recommendations</div>
+</div>
+</li>
+<li id="geofarelitab"><a id="fareSearchAnchorID" onClick="$('#mapOverlay').hide();fareSearchClick();abortAjaxCall();">
+<label><span>Fare Search</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">Search for fares</div>
+</div>
+</li>
+<li id="geoPlacesTab"><a id="Geoplaces_tab" href=" http://www.georama.com/geoplaces" onclick="javascript:openGeoplacesTab(this.href);return false;">
+<label><span>GeoPlaces</span></label>
+</a>
+<div class="tipsy">
+<div class="tip"></div>
+<div class="tipsy-inner">Share your travel experiences</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<script type="text/javascript">$("#loginPanel .header-facebook").attr('onclick', '').css('opacity', '.3');</script>
+<div id="topbar-wrap" class="tripNavigation" style="visibility:hidden;top:0;">
+<div id="tempContent" style="display:none;"></div>
+<div id="topBar-new">
+<div id="selection-leftWidget" class="fl marginL5">
+<label class="active-lab marginR10 marginT3">active trip:</label>
+<div id="trip-widget" class="fl ">
+<div class="tripinfo marginT5">
+<nobr><span class="tripPlace marginT3" id="tripPlaceName" title="Untitled Trip">Untitled Trip</span></nobr>
+<input type="hidden" id="tripPlaceId" name="tripPlaceId" value="837085"/>
+<input type="hidden" id="tripPartId" name="tripPartId" value="0"/>
+<input type="hidden" id="trip_part_response" name="trip_part_response" value=""/>
+<input type="hidden" id="tripItemIds" name="tripItemIds" value=""/>
+<input type="hidden" id="tripItemSourceIds" name="tripItemSourceIds" value=""/>
+<input type="hidden" id="userItemSourceIds" name="userItemSourceIds" value=""/>
+<input type="hidden" id="tripItemStatus" name="tripItemStatus" value=""/>
+</div>
+<ul class="topnav fl">
+<li> <a href="javascript:void(0)" id="trip_change_text" onClick="showMyTripList();"></a> </li>
+</ul>
+<div id="topNavTripList" style="position: absolute; top: 34px; width: 250px; display:none;" class="new_drop-widget drop-widget"> </div>
+<a href="javascript:void(0);" class="fl view-link marginT10" style="font-size:11px;" onClick="myTripsClick();abortAjaxCall();">View</a> </div>
+ 
+<img src="{{STATIC_URL}}img/header-bottom-separator.png" width="7" height="28" alt="" class="fl">
+<input id="txtHeadOrigin" type="text" value="Select an Origin" class="topbartext fl marginL5 hide marginT3" style="width:150px;" onFocus="$('.help').hide();" onblur="this.value = (this.value == '') ? 'Select an Origin' : this.value"/>
+<span class="selct_orignmsg help">Please Select an Origin</span>
+<div id="originContainer" class="fl marginT3">
+<label class="origin-lab marginT7 marginL5">Origin:</label>
+<div id="origin-widget" class="fl font_13 marginL5" style="position:relative;"> </div>
+</div>
+<img src="/images/header-bottom-separator.png" width="7" height="28" alt="" class="fl">
+<input id="txtHeadDestination" type="text" value="Select a Destination" class="topbartext fl marginL5 hide marginT3" onFocus="$('.help').hide();" style="width:150px;" onblur="this.value = (this.value == '') ? 'Select a Destination' : this.value"/>
+<span class="selct_destimsg help">Please Select a Destination</span>
+<div id="destinationContainer" class="fl marginT3">
+<label class="destination-lab marginT7 marginL5 marginR5">Destination:</label>
+<div id="destination-widget" class="fl font_13 marginL5"> </div>
+</div>
+<div id="multi-destination-arrow" class="relative fl"> </div>
+ 
+<img src="{{STATIC_URL}}img/header-bottom-separator.png" width="7" height="28" alt="" class="fl"> </div>
+<label class="pot-destination marginL5 marginR10 marginT3" style="margin-left:30px;">Potential Destinations:</label>
+ 
+ 
+<div id="pot-destination-widget" class="fl font_13 marginL5 marginT3"> </div>
+<div id="pot-destination-arrow" class="relative fl"> </div>
+<img src="{{STATIC_URL}}img/header-bottom-separator.png" width="7" height="28" alt="" class="fl">
+<div id="tag-city-widget" class="fl">
+<input type="text" name="" value="Add a City" class="wickEnabled" id="header_city" onFocus="$('.help').hide();" onblur="this.value = (this.value == '') ? 'Add a City' : this.value"/>
+<span class="select_citymsg help">Please Select a Potential Destination</span>
+<div style="display: none;" class="georama-tagCityPointer"> <span class="georama-tagCityPointer-text"><b>Add any city to the map!</b></span> <img style="position: absolute; top: 0px; left: 171px;" src="/images/html5/georama-tagCityPointer.png" alt=""> </div>
+</div>
+<div id="share-trip-widget" class="fr marginR10"> <img src="{{STATIC_URL}}img/header-bottom-separator.png" width="7" height="28" alt="" class="fl">
+<label class="share-lab-trip font_10 fl marginT7">Share Trip:</label>
+<div class="fl marginT7"> <a href="javascript:void(0);" id="FbshareTopNav" onClick="tripShareFromTopNav('www.georama.com','facebook');"><img src="{{STATIC_URL}}img/facebook.png" width="19" height="20" alt="facebook"></a> <a href="javascript:void(0);" id="TwitterShareTopNav" onClick="tripShareFromTopNav('www.georama.com','twitter');"><img src="{{STATIC_URL}}img/twitter.png" width="19" height="20" alt="facebook"></a> <a href="javascript:void(0);" onClick="openEmailContainter();"><img src="{{STATIC_URL}}img/icon-mail.gif" width="19" height="20" style="border-radius:4px;" alt="facebook"></a> </div>
+</div>
+</div>
+ 
+</div>
+</div>
+<script type="text/javascript">
+chkbrowser();
+//alert($('#facepile_div span:first').width());
+</script>
+   
+<script type="text/javascript">
+var FBAPP ="";
+$("#tripPlaceId").val(837085);
+$("#tripPartId").val(0);
+</script>
+<input type="hidden" name="initial_city_id" id="initial_city_id" value="0"/>
+<input type="hidden" name="initial_city_name" id="initial_city_name" value=""/>
+<input type="hidden" name="initial_city_country" id="initial_city_country" value=""/>
+<input type="hidden" name="initial_city_lat" id="initial_city_lat" value=""/>
+<input type="hidden" name="initial_city_lon" id="initial_city_lon" value=""/>
+<input type="hidden" name="initial_city_description" id="initial_city_description" value=""/>
+<input type="hidden" name="initial_currency_code" id="initial_currency_code" value=""/>
+<input type="hidden" name="userId" id="userId" value="0"/>
+<section class="welcome_overlay welcome_pnl" id="georama_welcome_overlay"></section>
+<a id="window-8-Application" target="_blank" href="http://apps.microsoft.com/windows/en-US/app/georama/d4f94361-c9f3-47ac-bc16-3a6d30dfecd2" style="display:none;"><img src="{{STATIC_URL}}img/window-8-Application.png?a=12345" title="Window 8 Application" alt="Window 8 Application"/></a>
+<div id="welcome_close">
+<div class="or" id="OrSkip">or</div>
+<a class="welcome_pnl curHandPointer" onclick='showhideWelcomePanel("hide");CloseBtnClick();showTips();' tabindex="13">
+<span class="font_21">Skip to Map »</span></a>
+</div>
+<span id="backWrap" style="display:none">
+ 
+<a id="welcome_back" class="welcome_pnl curHandPointer" onclick="welcomeAction('', 'welcome2');" tabindex="12">
+<span class="font_21">« Back</span></a>
+</span>
+<div id="OutrContainer" class="welcome_contents welcome_pnl">
+<section class="new_welcome_wrapper">
+<article class="nw_welcome_left">
+<p class="nw_left_logo"><img src="{{STATIC_URL}}img/georama_left_logo.png" alt="georama"/></p>
+<p class="white">Georama is a one-stop solution that lets travelers plan, book, and share their trips on a one-of-a-kind interactive map. It is visual, immersive, and fun!</p>
+<a id="launchVideoDemo" onclick="launchUTVideo('JnZDJ1aPgJI','Georama Presentation at DEMO!',560);" class="block curHandPointer" style="color:#1B9EDF !important" tabindex="11"><img src="{{STATIC_URL}}img/launchvideo.png" class="valign" alt="Georama Launch"/> Our Presentation at DEMO </a>   </article>
+<article id="welcome_questions" class="nw_welcome_right">
+<h2>Know Where You Want To Go?</h2>
+<div class="nw_strip strip_orange"> <a id="wel_No" class="curHandPointer" onclick="welcomeAction('no', 'welcome1')" tabindex="1">
+<label>No</label>
+<span class="descr">Give me destination recommendations!</span></a> </div>
+<div class="nw_strip strip_green"> <a id="wel_Maybe" class="curHandPointer" onclick="welcomeAction('maybe', 'welcome1')" tabindex="1">
+<label>Maybe</label>
+<span class="descr">Help me decide between cities!</span></a> </div>
+<div class="nw_strip strip_blue"> <a id="wel_Yes" class="curHandPointer" onclick="welcomeAction('yes', 'welcome1')" tabindex="1">
+<label>Yes</label>
+<span class="descr">Find me great fares!</span></a> </div>
+</article>
+</section>
+<article class="feature_div clearfloat ">
+<h4>Featured on:</h4>
+<a class="tech-crunch"></a><a class="venture-beat"></a> <a class="msnbc"></a> <a class="yahoo"></a> <a target="_blank" class="market-watch"></a> <a class="eye-on-travel"></a> <a class="built-in-chicago"></a><a class="crains"></a></article>
+<div class="clearfloat"></div>
+</div>
+<section id="yes_wrap" class="recomendation_wrapper welcome_pnl welcome_selection weltab">
+<h2>Get Destination Recommendations!</h2>
+<script type="text/javascript">  	
+	var welDate=new Date();
+	var month_names = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");	
+  </script>
+<section class="gr_form_wrapper">
+<div class="approx_month">
+<label>Desired Month</label>
+<input name="aproxMonth" id="aproxMonth" type="hidden"/>
+<span class="custom_select" style="width: 118px;">
+<label id="lblAproxMonth" class="lblNo"><script>document.write(month_names[welDate.getMonth()]); $('#aproxMonth').val(welDate.getMonth()+1);</script></label>
+<ul id="lstAproxMonth" class="dropdown" style="display:none; width:98px;">
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="1">January</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="2">February</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="3">March</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="4">April</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="5">May</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="6">June</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="7">July</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="8">August</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a rel="9" class="active curHandPointer">September</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="10">October</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="11">November</a></li>
+<li onclick="$('#aproxMonth').val($('a', $(this)).attr('rel')); $('#lblAproxMonth').html($('a', $(this)).html());"><a class="curHandPointer" rel="12">December</a></li>
+</ul>
+</span> </div>
+<div class="select_budget">
+<label>Budget (Coming Soon)  </label>
+<input id="minBudget" type="hidden"/>
+<input id="maxBudget" type="hidden"/>
+<input id="amount" name="amount" type="text" readonly="readonly" value="Up to $2,000"/>
+<div id="budget-range" style="width:180px;"></div>
+</div>
+<div class="no_of_days">
+<label># of days</label>
+<input name="numDays" id="numDays" type="hidden"/>
+<span class="custom_select" style="width: 80px;">
+<label id="lblAproxNum" class="lblNo">7</label>
+<ul id="lstNumDays" class="dropdown" style="display:none; width:60px; ">
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="1">1</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="2">2</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="3">3</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="4">4</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="5">5</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="6">6</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer active" rel="7">7</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="8">8</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="9">9</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="10">10</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="11">11</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="12">12</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="12">13</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="12">14</a></li>
+<li onclick="$('#numDays').val($('a', $(this)).attr('rel')); $('#lblAproxNum').html($('a', $(this)).html());"><a class="curHandPointer" rel="12">15</a></li>
+</ul>
+</span> </div>
+<div class="region">
+<label>Region</label>
+<input name="region" id="region" type="hidden"/>
+<span class="custom_select" style="width: 173px;">
+<label id="lblwRegion" class="lblNo">World</label>
+<ul id="lstRegion" class="dropdown" style="display:none;width: 153px;">
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a rel="0" class="active curHandPointer">World</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="1">North America</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="8">Central America</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="2">South America</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="3">Europe</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="4">Africa</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="7">Middle East</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="5">Asia</a></li>
+<li onclick="$('#region').val($('a', $(this)).attr('rel')); $('#lblwRegion').html($('a', $(this)).html());"><a class="curHandPointer" rel="6">Australia and Oceania</a></li>
+</ul>
+</span> </div>
+</section>
+<section class="select_interests_wrapper">
+<div class="select_interests_heading">
+<label>Select Interests:</label>
+<input type="hidden"/>
+<ul id="welcomeInterests" class="colorIcons">
+<li><a class="curHandPointer" id="rel1" rel="1" onclick="setActivitiesValue('1','Adventure');"><img src="{{STATIC_URL}}img/adventure.jpg" alt="" class="sprite-adventure"/><span>Adventure</span></a></li>
+<li><a class="curHandPointer" id="rel2" rel="2" onclick="setActivitiesValue('2','Architecture');"><img src="{{STATIC_URL}}img/architecture.jpg" alt="" class="sprite-architecture"/><span>Architecture</span></a></li>
+<li><a class="curHandPointer" id="rel3" rel="3" onclick="setActivitiesValue('3','Arts');"><img src="{{STATIC_URL}}img/arts.jpg" alt="" class="sprite-arts"/><span>Arts</span></a></li>
+<li><a class="curHandPointer" id="rel4" rel="4" onclick="setActivitiesValue('4','Beach');"><img src="{{STATIC_URL}}img/beach.jpg" alt="" class="sprite-beach"/><span>Beach</span></a></li>
+<li><a class="curHandPointer" id="rel6" rel="6" onclick="setActivitiesValue('6','Culinary');"><img src="{{STATIC_URL}}img/culinary.jpg" alt="" class="sprite-culinary"/><span>Culinary</span></a></li>
+<li><a class="curHandPointer" id="rel7" rel="7" onclick="setActivitiesValue('7','Culture');"><img src="{{STATIC_URL}}img/culture.jpg" alt="" class="sprite-culture"/><span>Culture</span></a></li>
+ 
+<li><a class="curHandPointer" id="rel9" style="font-size:smaller;" rel="9" onclick="setActivitiesValue('9','Entertainment');"><img src="{{STATIC_URL}}img/entertainment.jpg" alt="" class="sprite-entertainment"/><span>Entertainment</span></a></li>
+ 
+<li><a class="curHandPointer" id="rel11" rel="11" onclick="setActivitiesValue('11','Golf');"><img src="{{STATIC_URL}}img/golf.jpg" alt="" class="sprite-golf"/><span>Golf</span></a></li>
+<li><a class="curHandPointer" id="rel12" rel="12" onclick="setActivitiesValue('12','History');"><img src="{{STATIC_URL}}img/history.jpg" alt="" class="sprite-history"/><span>History</span></a></li>
+<li><a class="curHandPointer" id="rel13" rel="13" onclick="setActivitiesValue('13','Honeymoon');"><img src="{{STATIC_URL}}img/honeymoon.jpg" alt="" class="sprite-honeymoon"/><span>Honeymoon</span></a></li>
+<li><a class="curHandPointer" id="rel14" rel="14" onclick="setActivitiesValue('14','Luxury');"><img src="{{STATIC_URL}}img/luxury.jpg" alt="" class="sprite-luxary"/><span>Luxury</span></a></li>
+<li><a class="curHandPointer" id="rel15" rel="15" onclick="setActivitiesValue('15','Nightlife');"><img src="{{STATIC_URL}}img/nightlife.jpg" alt="" class="sprite-welcome-nightlife"/><span>Nightlife</span></a></li>
+<li><a class="curHandPointer" id="rel16" rel="16" onclick="setActivitiesValue('16','Relaxation');"><img src="{{STATIC_URL}}img/relaxation.jpg" alt="" class="sprite-relaxation"/><span>Relaxation</span></a></li>
+<li><a class="curHandPointer" id="rel17" rel="17" onclick="setActivitiesValue('17','Romantic');"><img src="{{STATIC_URL}}img/romantic.jpg" alt="" class="sprite-romance"/><span>Romantic</span></a></li>
+ 
+<li><a class="curHandPointer" id="rel19" rel="19" onclick="setActivitiesValue('19','Ski');"><img src="{{STATIC_URL}}img/ski.jpg" alt="" class="sprite-ski"/><span>Ski</span></a></li>
+<li><a class="curHandPointer" id="rel20" rel="20" onclick="setActivitiesValue('20','Summer');"><img src="{{STATIC_URL}}img/summer.jpg" alt="" class="sprite-summer"/><span>Summer</span></a></li>
+ 
+</ul>
+<div class="clearfloat"></div>
+</div>
+</section>
+<input type="hidden" id="hdnfield" name="hdnfield" value=""/>
+<input type="hidden" id="hdnfieldValue" name="hdnfieldValue" value=""/>
+<section class="button_wrapper clearfloat ">
+  <div class="btn_Lmargin" style="border-radius:6px; overflow:hidden; display:inline-block"><button id="a_exploreWelcomeNo" class="btn_explore" type="button" onclick="tripFinderCities();">Explore</button></div>
+<img id="explorebtn_loader" src="{{STATIC_URL}}img/loading-50x50.gif" style="margin-left:10px; display:none;" width="25px" height="25px" alt=""/></section>
+</section>
+<section id="may_be_wrap" class="plan_wrapper welcome_pnl welcome_selection weltab">
+<h2>Compare Cities</h2>
+<section class="gr_form_wrapper welcome_form ">
+<div class="WelcomeTagacity">
+<article>
+<label class="reset">Add a City</label>
+<input type="text" id="tagWelcomeCity1" value="Select a City" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" maxlength="40"/>
+</article>
+<article>
+<label class="reset">Add a City</label>
+<input type="text" id="tagWelcomeCity2" value="Select a City" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" maxlength="40"/>
+</article>
+<article>
+<label class="reset">Add a City</label>
+<input type="text" id="tagWelcomeCity3" value="Select a City" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" maxlength="40"/>
+</article>
+</div>
+</section>
+<div class="select_interests_wrapper">
+<section class="emptyMessage">Enter destinations <br/>
+to learn more about them!</section>
+<div id="welcomeMayBeCont">
+<section id="welcomeCity1" class="topList">&nbsp;</section>
+<section id="welcomeCity2" class="topList">&nbsp;</section>
+<section id="welcomeCity3" class="topList">&nbsp;</section>
+</div>
+<div class="clearfloat"></div>
+</div>
+</section>
+<section class="book_wrapper welcome_pnl welcome_selection" id="welcome_booking_trip_panel">
+<section class="weltab">
+<h2>Search For Fares</h2>
+<section class="gr_form_wrapper welcome_form ">
+<div id="TravelTabs">
+<div class="clearfloat"></div>
+<div>
+<div id="welcomebook" class="inset-shadow lk-for">
+<ul>
+<li><a class="curHandPointer" tabindex="2" id="wflight" rel="flight" onclick="toggleWelcomeBookButton('#wflight');updateComponents(this.id);"><img src="{{STATIC_URL}}img/welcome-flight.png" alt=""/></a></li>
+<li><a tabindex="2" id="whotel" rel="hotel" class="selected curHandPointer" onclick="toggleWelcomeBookButton('#whotel');updateComponents(this.id);"><img src="{{STATIC_URL}}img/welcome-hotel.png" alt=""/></a></li>
+<li><a class="curHandPointer" tabindex="2" id="whostel" rel="hostel" onclick="getHostelCurrencyFromWelcome(); toggleWelcomeBookButton('#whostel');updateComponents(this.id);"><img src="{{STATIC_URL}}img/welcome-hostel.png" alt=""/></a></li>
+<li><a class="curHandPointer" tabindex="2" id="wcar" rel="car" onclick="toggleWelcomeBookButton('#wcar');updateComponents(this.id);"><img src="{{STATIC_URL}}img/welcome-car.png" alt=""/></a></li>
+<li><a class="curHandPointer" tabindex="2" id="wactivity" rel="activity" onclick="toggleWelcomeBookButton('#wactivity');updateComponents(this.id);"><img src="{{STATIC_URL}}img/welcome-activity.png" alt=""/></a></li>
+</ul>
+<div class="clearfloat"></div>
+</div>
+<div id="BlockOutr" class="width_100">
+<div id="wflightpnl" class="pnlwelcomebook" style="display:none;">
+<form id="welcomeflightSearchForm" name="bflightSearchForm" onsubmit="flightCheckAvailabilityWelcome();return false;" method="get">
+<div id="roundtrip_container">
+<span class="error" id="errorFlightWC" style="display:none;"></span>
+<div class="clearfloat marginR10">
+<article class="fl width_60">
+<div id="Wfdestination" class="clearfloat">
+<label id="w" class="fl marginR10">Origin<br/>
+<input value="Enter a City or Airport" name="Wf1" id="Wf1" rel="" pushpindata='' type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" autocomplete="off" class="validate[required,maxSize[70]]" style="width:250px;" maxlength="70">
+<input id="WfHdn_from" name="wfcityHdn[]" class="flightPushpin" value="" type="hidden">
+</label>
+<label class="fl marginR10">Leaving<br/>
+<input value="" class="calendar" name="Wfl1" id="Wfl1" type="text" readonly="readonly">
+</label>
+<label class="fl marginR10">Destination<br/>
+<input value="Enter a City or Airport" name="Wfd1" id="Wfd1" rel="" pushpindata='' type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" autocomplete="off" class="validate[required,maxSize[70]]" style="width:250px;" maxlength="70">
+<input id="WfHdn_to" name="wfcityHdn[]" class="flightPushpin" value="" type="hidden">
+</label>
+<label class="fl marginR10 wreturning" id="returning-dt">Returning<br/>
+<input value="" class="calendar" name="Wfr1" id="Wfr1" type="text" readonly="readonly">
+</label>
+</div>
+<div class="num_select">
+<label>Adults</label>
+<div class="stylize-select flight-grp">
+<select name='adWC' id='adWC'>
+<option value="0">0</option>
+<option value="1" selected>1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+<br clear="all"/>
+<p class="semi-light reset ">(18+ yrs)</p>
+</div>
+<div class="num_select">
+<label>Seniors</label>
+<div class="stylize-select flight-grp">
+<select id='seWC' name='seWC'>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+<br clear="all"/>
+<p class="semi-light reset">(65+ yrs)</p>
+</div>
+<div class="num_select">
+<label>Children</label>
+<div class="stylize-select flight-grp">
+<select id='chWC' name='chWC'>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>
+</div>
+<br clear="all"/>
+<p class="semi-light reset ">(2-12 yrs)</p>
+</div>
+</article>
+<article class="width_40 fl">
+<div class="width_40 textTransformNormal">
+<label>CLASS</label>
+<label>
+<input name="Class" type="radio" value="ECONOMY" id="regularEconomy" onclick="updateComponents(this.id);" checked="checked"/>
+ECONOMY</label>
+<label>
+<input name="Class" type="radio" value="BUSINESS" id="regularBusiness" onclick="updateComponents(this.id);"/>
+BUSINESS</label>
+<label>
+<input name="Class" type="radio" value="FIRST" id="regularFirst" onclick="updateComponents(this.id);"/>
+FIRST</label>
+</div>
+<div class="width_50 textTransformNormal marginL15">
+<label>TRIP TYPE</label>
+<label>
+<input name="Trip_Type" type="radio" value="ONEWAYTRIP" id="regularOneway" onclick="updateComponents(this.id);"/>
+ONE WAY</label>
+<label>
+<input name="Trip_Type" type="radio" value="ROUNDTRIP" id="regularRoundway" checked="checked" onclick="updateComponents(this.id);"/>
+ROUND TRIP</label>
+<label>
+<input name="Trip_Type" type="radio" value="MULTICITYTRIP" id="regularManyway" onclick="updateComponents(this.id);"/>
+MULTI-CITY TRIP</label>
+ 
+</div>
+<div class="clearfloat">&nbsp;</div>
+<div class="marginT30" id="welcome-search-bt">
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px;margin-top: 10px"><input id="in_searchFlightR_yes" type="button" onclick="flightCheckAvailabilityWelcome();" title="Search" class="book_now font_18 whotelserach" value="Search"></div>
+</div>
+</article>
+</div></div>
+ 
+<div id="muticity-container" style="display:none;margin-left:-15px;">
+<article style="width:65%; " class="fl">
+<div id="WfdestinationMC" class="marginT10 multicityVScroll2">
+<table id="Wfdestination1"><tbody>
+ 
+<tr class="flYesSegment">
+<td style="padding-top:16px;"><span class="grey1 roundbg labelId" style="background-color:#77a1ad">1</span></td>
+<td class="fromAirYes">
+<span id="w" class="grey1">FROM<br/>
+<input id="multicity_from1" name="multicity[1][from]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_from1" name="multicityHdn[]" class="flightPushpin multicityHdnYes_fromCityId" value="" type="hidden">
+</span>
+</td>
+<td>
+<span class="grey1">TO<br/>
+<input id="multicity_to1" name="multicity[1][to]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport  validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_to1" name="multicityHdn[]" value="" type="hidden">
+</span>
+</td>
+<td colspan="2"><span class="grey1">LEAVING<br/>
+<input name="multicity[1][from_date]" value="" class="calendar" type="text" style="width:82px !important;" id="Yes_seg_date1" readonly="readonly">
+</span></td>
+</tr>
+ 
+<tr class="flYesSegment">
+<td style="padding-top:16px;"><span class="grey1 roundbg labelId" style="background-color:#77a1ad">2</span></td>
+<td class="fromAirYes"><span id="w" class="grey1">FROM<br/>
+<input id="multicity_from2" name="multicity[2][from]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_from2" name="multicityHdn[]" value="" class="multicityHdnYes_fromCityId" type="hidden"></span></td>
+<td><span class="grey1">TO<br/>
+<input id="multicity_to2" name="multicity[2][to]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_to2" name="multicityHdn[]" value="" type="hidden">
+</span></td>
+<td colspan="2"><span class="grey1">LEAVING<br/>
+<input name="multicity[2][from_date]" value="" class="calendar" type="text" style="width:82px !important;" id="Yes_seg_date2" readonly="readonly">
+</span></td>
+</tr>
+ 
+<tr class="flYesSegment">
+<td style="padding-top:16px;"><span class="grey1 roundbg labelId" style="background-color:#77a1ad">3</span></td>
+<td class="fromAirYes"><span id="w" class="grey1">FROM<br/>
+<input id="multicity_from3" name="multicity[3][from]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_from3" name="multicityHdn[]" value="" class="multicityHdnYes_fromCityId" type="hidden"></span></td>
+<td><span class="grey1">TO<br/>
+<input id="multicity_to3" name="multicity[3][to]" value="Enter a City or Airport" type="text" onfocus="this.value = (this.value == 'Enter a City or Airport') ? '' : this.value" onblur="this.value=(this.value=='') ? 'Enter a City or Airport' : this.value;" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">
+<input id="multicityHdn_to3" name="multicityHdn[]" value="" type="hidden">
+</span></td>
+<td><span class="grey1">LEAVING<br/>
+<input name="multicity[3][from_date]" value="" class="calendar" type="text" style="width:82px !important;" id="Yes_seg_date3" readonly="readonly">
+</span></td>
+<td style="padding-top:16px; cursor:pointer !important" onclick="deleteSegmentYes(this);"><span class="grey1 roundbg" style="background-color:#bf8369">x</span></td>
+</tr>
+ 
+<tr id="Add_segment_link"><td>&nbsp;</td><td colspan="4"><a class="blue_link" style="cursor:pointer !important" onclick="addSegmentsYes();">+ <span style="border-bottom:1px solid">Add a Segment</span></a></td></tr>
+</tbody></table>
+</div>
+</article>
+ 
+<article class="fr marginL2 marginT15" style="box-shadow: 14px 0 12px #000000 inset; padding: 5px 0px 5px 10px; width: 30%;">
+<table><tbody>
+<tr>
+<td><span class="fl width_30 grey1">TRIP TYPE</span></td>
+<td><div class="stylize-select" style="width:120px">
+<select name="Trip_Type" style="width:140px" onchange="updateComponents(this.value);">
+<option value="ONEWAYTRIP" id="multiOneway">One Way</option>
+<option value="ROUNDTRIP" id="multiRoundway">Round Trip</option>
+<option value="MULTICITY" id="multiManyway" selected="selected">Multi-city Trip</option>
+</select>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class="fl grey1">CLASS</span></td>
+<td><div class="stylize-select" style="width:120px">
+<select name="Class" style="width:140px" onchange="updateComponents(this.value);">
+<option value="ECONOMY" id="multiEconomy" selected="selected">Economy</option>
+<option value="BUSINESS" id="multiBusiness">Business</option>
+<option value="FIRST" id="multiFirst">First</option>
+</select>
+</div>
+</td>
+</tr>
+<tr><td>
+<span class="fl grey1">ADULTS<br/><small class="offwhite">(18+ yrs)</small></span></td>
+<td>
+<div class="stylize-select flight-grp">
+<select name='adWC' id='multi_adWC'>
+<option value="0">0</option>
+<option value="1" selected>1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+</td></tr>
+<tr><td>
+<span class="fl grey1">SENIORS<br/><small class="offwhite">(65+ yrs)</small></span></td><td>
+<div class="stylize-select flight-grp">
+<select id='multi_seWC' name='seWC'>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+</td></tr>
+<tr><td>
+<span class="fl grey1">CHILDREN<br/><small class="offwhite">(0-17 yrs)</small></span></td>
+<td><div class="stylize-select flight-grp">
+<select id='multi_chWC' name='chWC'>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>
+</div></td></tr>
+<tr><td colspan="2"><div id="welcome-search-bt">
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px; margin-top: 10px"><input id="in_searchFlightMC_yes" type="button" title="Search" class="book_now font_18 whotelserach" value="Search" onclick="MCflightCheckAvailabilityWelcome();"></div>
+</div></td></tr>
+</tbody></table>
+</article>
+</div> 
+</form>
+</div>
+ 
+<input type="hidden" id="hdn_WCpic_location" value=""/>
+<input type="hidden" id="hdn_WCdrop_location" value=""/>
+<div id="wcarpnl" class="pnlwelcomebook">
+<form id="WCcarForm" name="WCcarForm" action="#" method="post">
+<div id="WCabe_step1_Container" class="ct_s1_maincontainer">
+<article class="width_100 fl">
+<div id="WCabe_pickupDiv" class="marginR10 fl"> <span id="WCabe_l_pickupTitle" style="display:none;" class="font_13"><strong>Pick Up</strong></span>
+<label id="WCabe_l_ASlocation_xml" for="abe_ASlocation_xml">Pick Up Location</label>
+<div class="search_form">
+  <input type="text" autocomplete="off" style="width:180px;" size="40" value="Select a Location" maxlength="70" id="WCpic_location" name="WCpic_location" placeholder="Select a Location" onfocus="this.placeholder = (this.value == '') ? 'Select a Location' : '',this.value = (this.value == 'Select a Location') ? '' : this.value" onblur="this.placeholder = (this.value == '') ? 'Select a Location' : '', this.value = (this.value == '') ? 'Select a Location' : this.value"/>
+</div>
+</div>
+<article class="fl marginR10">
+<label class="fl marginR10"> <span>Date</span>
+<input class="calendar marginT5 " readonly="readonly" name="welcomeCarPickupDt" id="welcomeCarPickupDt" type="text">
+</label>
+<div class="num_select" style="margin-right:10px !important;">
+<label>Time</label>
+<div class="stylize-select car-time">
+<select id="WCtimepick_off" name="WCtimepick_off" class="validate[required]" style="width:120px">
+<option value="00:00">12:00 AM</option>
+<option value="00:15">12:15 AM</option>
+<option value="00:30">12:30 AM</option>
+<option value="00:45">12:45 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="01:15">01:15 AM</option>
+<option value="01:30">01:30 AM</option>
+<option value="01:45">01:45 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="02:15">02:15 AM</option>
+<option value="02:30">02:30 AM</option>
+<option value="02:45">02:45 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="03:15">03:15 AM</option>
+<option value="03:30">03:30 AM</option>
+<option value="03:45">03:45 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="04:15">04:15 AM</option>
+<option value="04:30">04:30 AM</option>
+<option value="04:45">04:45 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="05:15">05:15 AM</option>
+<option value="05:30">05:30 AM</option>
+<option value="05:45">05:45 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="06:15">06:15 AM</option>
+<option value="06:30">06:30 AM</option>
+<option value="06:45">06:45 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="07:15">07:15 AM</option>
+<option value="07:30">07:30 AM</option>
+<option value="07:45">07:45 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="08:15">08:15 AM</option>
+<option value="08:30">08:30 AM</option>
+<option value="08:45">08:45 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="09:15">09:15 AM</option>
+<option value="09:30">09:30 AM</option>
+<option value="09:45">09:45 AM</option>
+<option selected="selected" value="10:00">10:00 AM</option>
+<option value="10:15">10:15 AM</option>
+<option value="10:30">10:30 AM</option>
+<option value="10:45">10:45 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="11:15">11:15 AM</option>
+<option value="11:30">11:30 AM</option>
+<option value="11:45">11:45 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="12:15">12:15 PM</option>
+<option value="12:30">12:30 PM</option>
+<option value="12:45">12:45 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="13:15">01:15 PM</option>
+<option value="13:30">01:30 PM</option>
+<option value="13:45">01:45 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="14:15">02:15 PM</option>
+<option value="14:30">02:30 PM</option>
+<option value="14:45">02:45 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="15:15">03:15 PM</option>
+<option value="15:30">03:30 PM</option>
+<option value="15:45">03:45 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="16:15">04:15 PM</option>
+<option value="16:30">04:30 PM</option>
+<option value="16:45">04:45 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="17:15">05:15 PM</option>
+<option value="17:30">05:30 PM</option>
+<option value="17:45">05:45 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="18:15">06:15 PM</option>
+<option value="18:30">06:30 PM</option>
+<option value="18:45">06:45 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="19:15">07:15 PM</option>
+<option value="19:30">07:30 PM</option>
+<option value="19:45">07:45 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="20:15">08:15 PM</option>
+<option value="20:30">08:30 PM</option>
+<option value="20:45">08:45 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="21:15">09:15 PM</option>
+<option value="21:30">09:30 PM</option>
+<option value="21:45">09:45 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="22:15">10:15 PM</option>
+<option value="22:30">10:30 PM</option>
+<option value="22:45">10:45 PM</option>
+<option value="23:00">11:00 PM</option>
+<option value="23:15">11:15 PM</option>
+<option value="23:30">11:30 PM</option>
+<option value="23:45">11:45 PM</option>
+</select>
+</div>
+</div>
+ 
+<div class="num_select">
+<div id="WCabe_b_currency">
+<label>Currency</label>
+<div class="stylize-select car-currency">
+<select id="WCcurrency_type" name="WCcurrency_type" class="abe_step1_mandatory validate[required]" style="width:170px;">
+<option value="EUR">Euro [&euro;]</option>
+<option value="GBP">GB Pound [&pound;]</option>
+<option selected="selected" value="USD">US Dollar [$]</option>
+<option value="ARS">Argentine Pesos [$]</option>
+<option value="AUD">Australian Dollars [$]</option>
+<option value="BHD">Bahrain Dinar [BHD]</option>
+<option value="BDT">Bangladesh Taka [Tk]</option>
+<option value="BRL">Brazilian Reais [R$]</option>
+<option value="BGN">Bulgarian Lev [&Pi;&szlig;]</option>
+<option value="MMK">Burmese Kyat [K]</option>
+<option value="CAD">Canadian Dollars [$]</option>
+<option value="CLP">Chilean Pesos [$]</option>
+<option value="CNY">Chinese Yuan Renminbi [元]</option>
+<option value="CZK">Czech Koruny [Kč]</option>
+<option value="DKK">Danish Kroner [kr]</option>
+<option value="EGP">Egyptian Pounds [EGP]</option>
+<option value="FJD">Fiji Dollars [$]</option>
+<option value="HKD">Hong Kong Dollars [元]</option>
+<option value="HUF">Hungarian Forint [Ft]</option>
+<option value="ISK">Icelandic Kroner [kr]</option>
+<option value="INR">Indian Rupees [₨]</option>
+<option value="IDR">Indonesia Rupiahs [Rp]</option>
+<option value="ILS">Israeli Shekel [₪]</option>
+<option value="JPY">Japanese Yen [¥]</option>
+<option value="JOD">Jordan Dinars [JOD]</option>
+<option value="KES">Kenyan Shilling [KSh]</option>
+<option value="KRW">Korean Won [₩]</option>
+<option value="KWD">Kuwaiti Dinars [KWD]</option>
+<option value="MOP">Macau Pataca [MOP$]</option>
+<option value="MYR">Malaysian Ringgit [$]</option>
+<option value="MXN">Mexican Pesos [$]</option>
+<option value="NAD">Namibian Dollars [$]</option>
+<option value="NZD">New Zealand Dollars [$]</option>
+<option value="NGN">Nigerian Naira [₦]</option>
+<option value="NOK">Norwegian Kroner [kr]</option>
+<option value="OMR">Omani Rials [OMR]</option>
+<option value="PKR">Pakistan Rupees [₨]</option>
+<option value="PHP">Philippines Pesos [₱]</option>
+<option value="PLN">Polish Złoty [zł]</option>
+<option value="QAR">Qatari Riyals [﷼]</option>
+<option value="RON">Romanian Lei [Lei]</option>
+<option value="RUB">Russian Rubles [руб]</option>
+<option value="SAR">Saudi Riyals [﷼]</option>
+<option value="RSD">Serbian Dinar [PCД]</option>
+<option value="SGD">Singapore Dollars [$]</option>
+<option value="ZAR">South African Rand [R]</option>
+<option value="LKR">Sri Lanka Rupees [₨]</option>
+<option value="SEK">Swedish Kronor [kr]</option>
+<option value="CHF">Swiss Francs [CHF]</option>
+<option value="TWD">Taiwan New Dollars [NT$]</option>
+<option value="TZS">Tanzanian Shilling [TZS]</option>
+<option value="THB">Thai Baht [฿]</option>
+<option value="TRY">Turkey New Lira [TL]</option>
+<option value="UAH">Ukrainian hryvnia [₴]</option>
+<option value="AED">United Arab Emirates Dirhams [AED]</option>
+<option value="VND">Vietnam Dong [₫]</option>
+</select>
+</div>
+</div>
+</div>
+</article>
+</article>
+<article class="width_100 fl">
+<div id="WCabe_dropoffDiv" class="date_div marginR10">
+<label id="WCabe_l_ASlocation_dropoff_xml" for="abe_ASlocation_dropoff_xml">Drop Off Location</label>
+<div class="search_form">
+  <input type="text" autocomplete="off" style="width:180px;" size="40" maxlength="70" value="Select a Location" id="WCdrop_location" name="WCdrop_location" placeholder="Select a Location" onfocus="this.placeholder = (this.value == '') ? 'Select a Location' : '',this.value = (this.value == 'Select a Location') ? '' : this.value" onblur="this.placeholder = (this.value == '') ? 'Select a Location' : '', this.value = (this.value == '') ? 'Select a Location' : this.value"/>
+</div>
+</div>
+<article class="fl">
+<label class="fl marginR10"> <span>Date</span>
+<input class="calendar wreturning marginT5 " readonly="readonly" name="welcomeCarDropupDt" id="welcomeCarDropupDt" type="text">
+</label>
+<div class="num_select" style="margin-right:10px !important;">
+<label>Time</label>
+<div class="stylize-select car-time">
+<select id="WCtimedrop_off" name="WCtimedrop_off" class="validate[required]" style="width:120px">
+<option value="00:00">12:00 AM</option>
+<option value="00:15">12:15 AM</option>
+<option value="00:30">12:30 AM</option>
+<option value="00:45">12:45 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="01:15">01:15 AM</option>
+<option value="01:30">01:30 AM</option>
+<option value="01:45">01:45 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="02:15">02:15 AM</option>
+<option value="02:30">02:30 AM</option>
+<option value="02:45">02:45 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="03:15">03:15 AM</option>
+<option value="03:30">03:30 AM</option>
+<option value="03:45">03:45 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="04:15">04:15 AM</option>
+<option value="04:30">04:30 AM</option>
+<option value="04:45">04:45 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="05:15">05:15 AM</option>
+<option value="05:30">05:30 AM</option>
+<option value="05:45">05:45 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="06:15">06:15 AM</option>
+<option value="06:30">06:30 AM</option>
+<option value="06:45">06:45 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="07:15">07:15 AM</option>
+<option value="07:30">07:30 AM</option>
+<option value="07:45">07:45 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="08:15">08:15 AM</option>
+<option value="08:30">08:30 AM</option>
+<option value="08:45">08:45 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="09:15">09:15 AM</option>
+<option value="09:30">09:30 AM</option>
+<option value="09:45">09:45 AM</option>
+<option value="10:00" selected="selected">10:00 AM</option>
+<option value="10:15">10:15 AM</option>
+<option value="10:30">10:30 AM</option>
+<option value="10:45">10:45 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="11:15">11:15 AM</option>
+<option value="11:30">11:30 AM</option>
+<option value="11:45">11:45 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="12:15">12:15 PM</option>
+<option value="12:30">12:30 PM</option>
+<option value="12:45">12:45 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="13:15">01:15 PM</option>
+<option value="13:30">01:30 PM</option>
+<option value="13:45">01:45 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="14:15">02:15 PM</option>
+<option value="14:30">02:30 PM</option>
+<option value="14:45">02:45 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="15:15">03:15 PM</option>
+<option value="15:30">03:30 PM</option>
+<option value="15:45">03:45 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="16:15">04:15 PM</option>
+<option value="16:30">04:30 PM</option>
+<option value="16:45">04:45 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="17:15">05:15 PM</option>
+<option value="17:30">05:30 PM</option>
+<option value="17:45">05:45 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="18:15">06:15 PM</option>
+<option value="18:30">06:30 PM</option>
+<option value="18:45">06:45 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="19:15">07:15 PM</option>
+<option value="19:30">07:30 PM</option>
+<option value="19:45">07:45 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="20:15">08:15 PM</option>
+<option value="20:30">08:30 PM</option>
+<option value="20:45">08:45 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="21:15">09:15 PM</option>
+<option value="21:30">09:30 PM</option>
+<option value="21:45">09:45 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="22:15">10:15 PM</option>
+<option value="22:30">10:30 PM</option>
+<option value="22:45">10:45 PM</option>
+<option value="23:00">11:00 PM</option>
+<option value="23:15">11:15 PM</option>
+<option value="23:30">11:30 PM</option>
+<option value="23:45">11:45 PM</option>
+</select>
+ 
+</div>
+</div>
+<div class="num_select">
+<div id="WCabe_b_residence">
+<label>Country of Residence</label>
+<div class="stylize-select car-country" style="width:160px;">
+<select id="WCcountry_residence" name="WCcountry_residence" class="abe_step1_mandatory validate[required]" style="width:220px;">
+<option value="">Select</option>
+<option value="AF" class="ct_countryList">Afghanistan</option>
+<option value="AX" class="ct_countryList">Aland Islands</option>
+<option value="AL" class="ct_countryList">Albania</option>
+<option value="DZ" class="ct_countryList">Algeria</option>
+<option value="AS" class="ct_countryList">American Samoa</option>
+<option value="AD" class="ct_countryList">Andorra</option>
+<option value="AO" class="ct_countryList">Angola</option>
+<option value="AI" class="ct_countryList">Anguilla</option>
+<option value="AQ" class="ct_countryList">Antarctica</option>
+<option value="AG" class="ct_countryList">Antigua and Barbuda</option>
+<option value="AR" class="ct_countryList">Argentina</option>
+<option value="AM" class="ct_countryList">Armenia</option>
+<option value="AW" class="ct_countryList">Aruba</option>
+<option value="AU" class="ct_countryList">Australia</option>
+<option value="AT" class="ct_countryList">Austria</option>
+<option value="AZ" class="ct_countryList">Azerbaijan</option>
+<option value="BS" class="ct_countryList">Bahamas</option>
+<option value="BH" class="ct_countryList">Bahrain</option>
+<option value="BD" class="ct_countryList">Bangladesh</option>
+<option value="BB" class="ct_countryList">Barbados</option>
+<option value="BY" class="ct_countryList">Belarus</option>
+<option value="BE" class="ct_countryList">Belgium</option>
+<option value="BZ" class="ct_countryList">Belize</option>
+<option value="BJ" class="ct_countryList">Benin</option>
+<option value="BM" class="ct_countryList">Bermuda</option>
+<option value="BT" class="ct_countryList">Bhutan</option>
+<option value="BO" class="ct_countryList">Bolivia</option>
+<option value="BA" class="ct_countryList">Bosnia and Herzegovina</option>
+<option value="BW" class="ct_countryList">Botswana</option>
+<option value="BV" class="ct_countryList">Bouvet Island</option>
+<option value="BR" class="ct_countryList">Brazil</option>
+<option value="IO" class="ct_countryList">British Indian Ocean Territory</option>
+<option value="BN" class="ct_countryList">Brunei Darussalam</option>
+<option value="BG" class="ct_countryList">Bulgaria</option>
+<option value="BF" class="ct_countryList">Burkina Faso</option>
+<option value="BI" class="ct_countryList">Burundi</option>
+<option value="KH" class="ct_countryList">Cambodia</option>
+<option value="CM" class="ct_countryList">Cameroon</option>
+<option value="CA" class="ct_countryList">Canada</option>
+<option value="CV" class="ct_countryList">Cape Verde</option>
+<option value="KY" class="ct_countryList">Cayman Islands</option>
+<option value="CF" class="ct_countryList">Central African Republic</option>
+<option value="TD" class="ct_countryList">Chad</option>
+<option value="CL" class="ct_countryList">Chile</option>
+<option value="CN" class="ct_countryList">China</option>
+<option value="CX" class="ct_countryList">Christmas Island</option>
+<option value="CC" class="ct_countryList">Cocos (Keeling) Islands</option>
+<option value="CO" class="ct_countryList">Colombia</option>
+<option value="KM" class="ct_countryList">Comoros</option>
+<option value="CD" class="ct_countryList">Congo, the Democratic Republic of the</option>
+<option value="CG" class="ct_countryList">Congo</option>
+<option value="CK" class="ct_countryList">Cook Islands</option>
+<option value="CR" class="ct_countryList">Costa Rica</option>
+<option value="CI" class="ct_countryList">Cote D'Ivoire</option>
+<option value="HR" class="ct_countryList">Croatia</option>
+<option value="CU" class="ct_countryList">Cuba</option>
+<option value="CY" class="ct_countryList">Cyprus</option>
+<option value="CZ" class="ct_countryList">Czech Republic</option>
+<option value="DK" class="ct_countryList">Denmark</option>
+<option value="DJ" class="ct_countryList">Djibouti</option>
+<option value="DM" class="ct_countryList">Dominica</option>
+<option value="DO" class="ct_countryList">Dominican Republic</option>
+<option value="EC" class="ct_countryList">Ecuador</option>
+<option value="EG" class="ct_countryList">Egypt</option>
+<option value="SV" class="ct_countryList">El Salvador</option>
+<option value="GQ" class="ct_countryList">Equatorial Guinea</option>
+<option value="ER" class="ct_countryList">Eritrea</option>
+<option value="EE" class="ct_countryList">Estonia</option>
+<option value="ET" class="ct_countryList">Ethiopia</option>
+<option value="FK" class="ct_countryList">Falkland Islands (Malvinas)</option>
+<option value="FO" class="ct_countryList">Faroe Islands</option>
+<option value="FJ" class="ct_countryList">Fiji</option>
+<option value="FI" class="ct_countryList">Finland</option>
+<option value="FR" class="ct_countryList">France</option>
+<option value="GF" class="ct_countryList">French Guiana</option>
+<option value="PF" class="ct_countryList">French Polynesia</option>
+<option value="TF" class="ct_countryList">French Southern Territories</option>
+<option value="GA" class="ct_countryList">Gabon</option>
+<option value="GM" class="ct_countryList">Gambia</option>
+<option value="GE" class="ct_countryList">Georgia</option>
+<option value="DE" class="ct_countryList">Germany</option>
+<option value="GH" class="ct_countryList">Ghana</option>
+<option value="GI" class="ct_countryList">Gibraltar</option>
+<option value="GR" class="ct_countryList">Greece</option>
+<option value="GL" class="ct_countryList">Greenland</option>
+<option value="GD" class="ct_countryList">Grenada</option>
+<option value="GP" class="ct_countryList">Guadeloupe</option>
+<option value="GU" class="ct_countryList">Guam</option>
+<option value="GT" class="ct_countryList">Guatemala</option>
+<option value="GG" class="ct_countryList">Guernsey</option>
+<option value="GN" class="ct_countryList">Guinea</option>
+<option value="GW" class="ct_countryList">Guinea-Bissau</option>
+<option value="GY" class="ct_countryList">Guyana</option>
+<option value="HT" class="ct_countryList">Haiti</option>
+<option value="HM" class="ct_countryList">Heard Island and Mcdonald Islands</option>
+<option value="VA" class="ct_countryList">Holy See (Vatican City State)</option>
+<option value="HN" class="ct_countryList">Honduras</option>
+<option value="HK" class="ct_countryList">Hong Kong</option>
+<option value="HU" class="ct_countryList">Hungary</option>
+<option value="IS" class="ct_countryList">Iceland</option>
+<option value="IN" class="ct_countryList">India</option>
+<option value="ID" class="ct_countryList">Indonesia</option>
+<option value="IR" class="ct_countryList">Iran, Islamic Republic of</option>
+<option value="IQ" class="ct_countryList">Iraq</option>
+<option value="IE" class="ct_countryList">Ireland</option>
+<option value="IM" class="ct_countryList">Isle of Man</option>
+<option value="IL" class="ct_countryList">Israel</option>
+<option value="IT" class="ct_countryList">Italy</option>
+<option value="JM" class="ct_countryList">Jamaica</option>
+<option value="JP" class="ct_countryList">Japan</option>
+<option value="JE" class="ct_countryList">Jersey</option>
+<option value="JO" class="ct_countryList">Jordan</option>
+<option value="KZ" class="ct_countryList">Kazakhstan</option>
+<option value="KE" class="ct_countryList">Kenya</option>
+<option value="KI" class="ct_countryList">Kiribati</option>
+<option value="KP" class="ct_countryList">Korea, Democratic People's Republic of</option>
+<option value="KR" class="ct_countryList">Korea, Republic of</option>
+<option value="KO" class="ct_countryList">Kosovo</option>
+<option value="KW" class="ct_countryList">Kuwait</option>
+<option value="KG" class="ct_countryList">Kyrgyzstan</option>
+<option value="LA" class="ct_countryList">Lao People's Democratic Republic</option>
+<option value="LV" class="ct_countryList">Latvia</option>
+<option value="LB" class="ct_countryList">Lebanon</option>
+<option value="LS" class="ct_countryList">Lesotho</option>
+<option value="LR" class="ct_countryList">Liberia</option>
+<option value="LY" class="ct_countryList">Libyan Arab Jamahiriya</option>
+<option value="LI" class="ct_countryList">Liechtenstein</option>
+<option value="LT" class="ct_countryList">Lithuania</option>
+<option value="LU" class="ct_countryList">Luxembourg</option>
+<option value="MO" class="ct_countryList">Macao</option>
+<option value="MK" class="ct_countryList">Macedonia, the Former Yugoslav Republic of</option>
+<option value="MG" class="ct_countryList">Madagascar</option>
+<option value="MW" class="ct_countryList">Malawi</option>
+<option value="MY" class="ct_countryList">Malaysia</option>
+<option value="MV" class="ct_countryList">Maldives</option>
+<option value="ML" class="ct_countryList">Mali</option>
+<option value="MT" class="ct_countryList">Malta</option>
+<option value="MH" class="ct_countryList">Marshall Islands</option>
+<option value="MQ" class="ct_countryList">Martinique</option>
+<option value="MR" class="ct_countryList">Mauritania</option>
+<option value="MU" class="ct_countryList">Mauritius</option>
+<option value="YT" class="ct_countryList">Mayotte</option>
+<option value="MX" class="ct_countryList">Mexico</option>
+<option value="FM" class="ct_countryList">Micronesia, Federated States of</option>
+<option value="MD" class="ct_countryList">Moldova, Republic of</option>
+<option value="MC" class="ct_countryList">Monaco</option>
+<option value="MN" class="ct_countryList">Mongolia</option>
+<option value="ME" class="ct_countryList">Montenegro</option>
+<option value="MS" class="ct_countryList">Montserrat</option>
+<option value="MA" class="ct_countryList">Morocco</option>
+<option value="MZ" class="ct_countryList">Mozambique</option>
+<option value="MM" class="ct_countryList">Myanmar</option>
+<option value="NA" class="ct_countryList">Namibia</option>
+<option value="NR" class="ct_countryList">Nauru</option>
+<option value="NP" class="ct_countryList">Nepal</option>
+<option value="NL" class="ct_countryList">Netherlands</option>
+<option value="AN" class="ct_countryList">Netherlands Antilles</option>
+<option value="NC" class="ct_countryList">New Caledonia</option>
+<option value="NZ" class="ct_countryList">New Zealand</option>
+<option value="NI" class="ct_countryList">Nicaragua</option>
+<option value="NE" class="ct_countryList">Niger</option>
+<option value="NG" class="ct_countryList">Nigeria</option>
+<option value="NU" class="ct_countryList">Niue</option>
+<option value="NF" class="ct_countryList">Norfolk Island</option>
+<option value="MP" class="ct_countryList">Northern Mariana Islands</option>
+<option value="NO" class="ct_countryList">Norway</option>
+<option value="OM" class="ct_countryList">Oman</option>
+<option value="PK" class="ct_countryList">Pakistan</option>
+<option value="PW" class="ct_countryList">Palau</option>
+<option value="PS" class="ct_countryList">Palestinian Territory, Occupied</option>
+<option value="PA" class="ct_countryList">Panama</option>
+<option value="PG" class="ct_countryList">Papua New Guinea</option>
+<option value="PY" class="ct_countryList">Paraguay</option>
+<option value="PE" class="ct_countryList">Peru</option>
+<option value="PH" class="ct_countryList">Philippines</option>
+<option value="PN" class="ct_countryList">Pitcairn</option>
+<option value="PL" class="ct_countryList">Poland</option>
+<option value="PT" class="ct_countryList">Portugal</option>
+<option value="PR" class="ct_countryList">Puerto Rico</option>
+<option value="QA" class="ct_countryList">Qatar</option>
+<option value="RS" class="ct_countryList">Republic of Serbia</option>
+<option value="RE" class="ct_countryList">Reunion</option>
+<option value="RO" class="ct_countryList">Romania</option>
+<option value="RU" class="ct_countryList">Russian Federation</option>
+<option value="RW" class="ct_countryList">Rwanda</option>
+<option value="SH" class="ct_countryList">Saint Helena</option>
+<option value="KN" class="ct_countryList">Saint Kitts and Nevis</option>
+<option value="LC" class="ct_countryList">Saint Lucia</option>
+<option value="PM" class="ct_countryList">Saint Pierre and Miquelon</option>
+<option value="VC" class="ct_countryList">Saint Vincent and the Grenadines</option>
+<option value="WS" class="ct_countryList">Samoa</option>
+<option value="SM" class="ct_countryList">San Marino</option>
+<option value="ST" class="ct_countryList">Sao Tome and Principe</option>
+<option value="SA" class="ct_countryList">Saudi Arabia</option>
+<option value="SN" class="ct_countryList">Senegal</option>
+<option value="CS" class="ct_countryList">Serbia</option>
+<option value="SC" class="ct_countryList">Seychelles</option>
+<option value="SL" class="ct_countryList">Sierra Leone</option>
+<option value="SG" class="ct_countryList">Singapore</option>
+<option value="SK" class="ct_countryList">Slovakia</option>
+<option value="SI" class="ct_countryList">Slovenia</option>
+<option value="SB" class="ct_countryList">Solomon Islands</option>
+<option value="SO" class="ct_countryList">Somalia</option>
+<option value="ZA" class="ct_countryList">South Africa</option>
+<option value="GS" class="ct_countryList">South Georgia and the South Sandwich Islands</option>
+<option value="ES" class="ct_countryList">Spain</option>
+<option value="LK" class="ct_countryList">Sri Lanka</option>
+<option value="SD" class="ct_countryList">Sudan</option>
+<option value="SR" class="ct_countryList">Suriname</option>
+<option value="SJ" class="ct_countryList">Svalbard and Jan Mayen</option>
+<option value="SZ" class="ct_countryList">Swaziland</option>
+<option value="SE" class="ct_countryList">Sweden</option>
+<option value="CH" class="ct_countryList">Switzerland</option>
+<option value="SY" class="ct_countryList">Syrian Arab Republic</option>
+<option value="TW" class="ct_countryList">Taiwan</option>
+<option value="TJ" class="ct_countryList">Tajikistan</option>
+<option value="TZ" class="ct_countryList">Tanzania, United Republic of</option>
+<option value="TH" class="ct_countryList">Thailand</option>
+<option value="TL" class="ct_countryList">Timor-Leste</option>
+<option value="TG" class="ct_countryList">Togo</option>
+<option value="TK" class="ct_countryList">Tokelau</option>
+<option value="TO" class="ct_countryList">Tonga</option>
+<option value="TT" class="ct_countryList">Trinidad and Tobago</option>
+<option value="TN" class="ct_countryList">Tunisia</option>
+<option value="TR" class="ct_countryList">Turkey</option>
+<option value="TM" class="ct_countryList">Turkmenistan</option>
+<option value="TC" class="ct_countryList">Turks and Caicos Islands</option>
+<option value="TV" class="ct_countryList">Tuvalu</option>
+<option value="UG" class="ct_countryList">Uganda</option>
+<option value="UA" class="ct_countryList">Ukraine</option>
+<option value="AE" class="ct_countryList">United Arab Emirates</option>
+<option value="GB" class="ct_countryList">United Kingdom</option>
+<option value="US" class="ct_countryList" selected="selected">United States</option>
+<option value="UM" class="ct_countryList">United States Minor Outlying Islands</option>
+<option value="UY" class="ct_countryList">Uruguay</option>
+<option value="UZ" class="ct_countryList">Uzbekistan</option>
+<option value="VU" class="ct_countryList">Vanuatu</option>
+<option value="VE" class="ct_countryList">Venezuela</option>
+<option value="VN" class="ct_countryList">Vietnam</option>
+<option value="VG" class="ct_countryList">Virgin Islands, British</option>
+<option value="VI" class="ct_countryList">Virgin Islands, U.S.</option>
+<option value="WF" class="ct_countryList">Wallis and Futuna</option>
+<option value="EH" class="ct_countryList">Western Sahara</option>
+<option value="YE" class="ct_countryList">Yemen</option>
+<option value="ZM" class="ct_countryList">Zambia</option>
+<option value="ZW" class="ct_countryList">Zimbabwe</option>
+</select>
+</div>
+</div>
+</div>
+</article>
+</article>
+<div class="abeclear"></div>
+<article class="width_100 fl">
+<div class="num_select" style="margin:0;">
+<label>Car Group</label>
+<div class="stylize-select car-group marginR10" style="width:190px;">
+<select id="WCcar_group_val" name="WCcar_group_val" class="abe_step1_mandatory validate[required]" style="width:210px;">
+ 
+<option selected="selected" value="Show All">Show All</option>
+<option value="Economy">Economy</option>
+<option value="Compact">Compact</option>
+<option value="Standard">Standard/intermediate</option>
+<option value="Fullsize">Fullsize</option>
+<option value="Luxury">Luxury/premium</option>
+<option value="Minivan">Van/minivan</option>
+<option value="SUV">SUV</option>
+<option value="Exotic">Exotic/special</option>
+</select>
+</div>
+</div>
+<div class="fl marginR10">
+<label id="WCabe_l_driverAge" for="WCabe_driverAge">Driver's Age</label>
+<input type="text" name="WCdriver_age" id="WCdriver_age" class="validate[custom[integer],min[18] max[99]]" size="10" maxlength="2"/>
+</div>
+<div id="welcome-search-bt" class="marginT30 fr">
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px"><input id="in_searchCar_yes" type="button" onclick="carSearchWelcome()" value="Search" title="Search" class="book_now font_18 whotelserach"></div>
+</div>
+<div class="clearfloat">&nbsp;</div>
+</article>
+ 
+</div>
+</form>
+</div>
+ 
+<div class="pnlwelcomebook form_wrapper  width_100" id="whotelpnl" style="display:block;">
+<form id="welcomeHotelSearchForm" name="welcomeHotelSearchForm" action="#" method="post">
+<article id="destination" class="fl width_40">
+<div class="fl marginR10">
+<label class="font_13 marginR10">DESTINATION</label>
+<input type="hidden" id="welcomeHotelBookCityId" value=""/>
+<input tabindex="3" type="text" id="welcomeHotelCity" name="welcomeHotelCity" value="Select a City" maxlength="40" size="40" autocomplete="off" class="validate[required]" style="width:165px;" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value"/>
+</div>
+<div class="num_select" style="margin-right:10px !important;">
+<label>Rooms</label>
+<div class="stylize-select hotel-rac paddingleft5">
+<select tabindex="4" onchange="addHotelRooms(this.options[this.selectedIndex].value, 'welcome');" name="welcomenumberOfRoom" id="welcomenumberOfRoom">
+<option selected="" value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>
+</div>
+</div>
+<br class="clearfloat"/>
+<label class="fl marginR10"> <span class="marginB10">Check-in</span>
+<input tabindex="7" readonly="readonly" class="calendar wreturning " name="wd1" id="wd1" type="text">
+</label>
+<label class="marginR10 wreturning"><span class="marginB10">Check-out</span>
+<input tabindex="8" readonly="readonly" class="calendar  wreturning" name="wdr1" id="wdr1" type="text">
+</label>
+</article>
+<div class="fl width_60">
+<div id="showListRoomsAC">
+<h4 style="display:none; font-size:16px;">Select Adults and Children:</h4>
+<div style="overflow:hidden; margin-left:70px;" class="marginB5" id="welcomehotelRoomsLabels">
+<div class="fl marginR5">
+<label class="reset"> Adults: </label>
+<small class="semi-light">(age 18+)</small>
+</div>
+<div class="fl marginR5">
+<label class="reset"> Children: </label>
+<small class="semi-light">(age 0-17)</small>
+</div>
+<div class="fl marginR5 marginL5 childLabel1 hide">
+<label class="reset"> Child 1 </label><small class="semi-light">(age)</small></div>
+<div class="fl marginR5 marginL5 childLabel2 hide">
+<label class="reset"> Child 2 </label><small class="semi-light">(age)</small></div>
+<div class="fl marginR5 marginL5 childLabel3 hide">
+<label class="reset"> Child 3 </label><small class="semi-light">(age)</small></div>
+</div>
+<div class="form_wrapper clear" id="welcomeselect_hotel_rooms"></div>
+<br clear="all"/>
+<div class="clearfloat align-center marginT10 width_100 align-center">
+<a style="display:none;border-radius:5px;" id="welcomeChildClose" class="btn_black curHandPointer" onclick="$('#showListRoomsAC').hide();">Done</a>
+</div>
+</div>
+<div id="room1n2txt" class="font_13 marginT10 clearfloat " style="display:none; color:#999;">
+<span id="welcomeRoom2n2Count"><span>4</span> Adult(s) | <span>0</span> Child(ren)</span> [<a class="blue_link curHandPointer" onclick="$('#showListRoomsAC').show();">Change</a>]</div>
+</div>
+<div id="welcome-search-bt" class="clearfloat width_100">
+ 
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px"><input id="in_searchHotel_yes" tabindex="9" value="Search" class="book_now font_18 whotelserach" title="Search" type="button" onclick="searchHotelFromWelcome();"></div>
+</div>
+</form>
+</div>
+ 
+<div class="pnlwelcomebook form_wrapper  width_100" id="whostelpnl" style="display:none;">
+<form id="welcomeHostelSearchForm" name="welcomeHostelSearchForm" action="#" method="post">
+<article id="hosteldestination" class="fl width_40">
+<div class="fl marginR10">
+<label class="font_13 marginR10">DESTINATION</label>
+<input tabindex="3" type="text" id="welcomeHostelCity" name="welcomeHostelCity" value="Select a City" maxlength="40" size="40" autocomplete="off" class="validate[required]" style="width:165px;" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value"/>
+</div>
+<div class="num_select" style="margin-right:10px !important;">
+<label>Guests</label>
+<div class="stylize-select hotel-rac paddingleft5">
+<select tabindex="4" onchange="" name="welcomenumberOfGuest" id="welcomenumberOfGuest">
+<option value="1">1</option>
+<option value="2" selected="selected">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+</select>
+</div>
+</div>
+<br class="clearfloat"/>
+<label class="fl marginR10"> <span class="marginB10">Check-in</span>
+<input tabindex="6" class="calendar" name="whd1" id="whd1" type="text" readonly="readonly">
+</label>
+<label class="marginR10 wreturning fl"><span class="marginB10">Check-out</span>
+<input tabindex="7" class="calendar" name="whdr1" id="whdr1" type="text" readonly="readonly">
+</label>
+<div class="fl">
+<label style="padding-top:3px">Currency</label>
+<div class="stylize-select marginR5">
+<select style="width:110%" class="hotelDetailSelect" id="Whostel_currency_check" name="Whostel_currency_check" tabindex="8">
+<optgroup label="Popular currencies">
+<option value="AUD">Australia, Dollars (AUD/$)</option>
+<option value="CAD">Canada, Dollars (CAD/$)</option>
+<option value="EUR">Euros (EUR/€ )</option>
+<option value="GBP">UK, Pounds (GBP/£)</option>
+<option value="USD">USA, Dollars (USD/$)</option>
+</optgroup>
+<optgroup label="All currencies">
+<option value="ARS">Argentina, Pesos (ARS/$)
+</option><option value="AUD">Australia, Dollars (AUD/$)</option>
+<option value="BRL">Brazil, Reals (BRL/R$)</option>
+<option value="CAD">Canada, Dollars (CAD/$)</option>
+<option value="CNY">China, Yuan Renminbi (CNY/¥)</option>
+<option value="HRK">Croatia, Kuna (HRK/kn)</option>
+<option value="CZK">Czech Republic, Koruny (CZK/Kč)</option>
+<option value="DKK">Denmark, Kroner (DKK/kr)</option>
+<option value="EUR">Euros (EUR/€ )</option>
+<option value="HUF">Hungary, Forint (HUF/Ft)</option>
+<option value="INR">India, Rupees (INR/INR)</option>
+<option value="JPY">Japan, Yen (JPY/¥)</option>
+<option value="NZD">New Zealand, Dollars (NZD/$)</option>
+<option value="NOK">Norway, Krone (NOK/kr)</option>
+<option value="PLN">Poland, Złoty (PLN/zł)</option>
+<option value="RUB">Russia, Rubles (RUB/ руб)</option>
+<option value="ZAR">South Africa, Rand (ZAR/R)</option>
+<option value="KRW">South Korea Won (KRW/KRW)</option>
+<option value="SEK">Sweden, Kronor (SEK/kr)</option>
+<option value="CHF">Switzerland, Francs (CHF/CHF)</option>
+<option value="TRY">Turkey, Lira (TRY/TL)</option>
+<option value="GBP">UK, Pounds (GBP/£)</option>
+<option value="USD">USA, Dollars (USD/$)</option>
+</optgroup>
+</select>
+</div> 
+</div>
+</article>
+<article class="width_50 fl">
+<div class="property_type marginR10">
+<label>Property Type </label>
+<p>
+<span class="fl marginR15">
+<label>
+<input checked="checked" type="checkbox" id="WsrcHostels" name="WsrcHostels" tabindex="5"/>
+Hostels</label>
+<label>
+<input checked="checked" type="checkbox" id="WsrcCampsite" name="WsrcCampsite" tabindex="5"/>
+Campsites</label></span>
+<span class="fr">
+<label>
+<input checked="checked" type="checkbox" id="WsrcGuestHouse" name="WsrcGuestHouse" tabindex="5"/>
+Guest Houses</label>
+<label>
+<input checked="checked" type="checkbox" id="WsrcAppartments" name="WsrcAppartments" tabindex="5"/>
+Apartments</label></span>
+</p>
+</div>
+<div id="welcome-hostelsearch-bt" class="clearfloat" style="margin-top:20%">
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px"><input id="in_searchHostel_yes" tabindex="9" value="Search" class="book_now font_18 whotelserach" title="Search" type="button" onclick="searchHostelFromWelcomeScreen();"></div>
+</div>
+</article>
+</form>
+</div>
+ 
+<div id="wactivitypnl" style="display:none;" class="form_wrapper width_100 pnlwelcomebook">
+<form id="welcomeActivityForm" name="welcomeActivityForm" action="#" method="post">
+<span class="fl marginR10">
+<label>DESTINATION</label>
+<input type="text" id="wActivityLoc" name="wActivityLoc" value="Select a City" class="validate[required]" maxlength="40" onblur="this.value = (this.value == '') ? 'Select a City' : this.value" onfocus="this.value = (this.value == 'Select a City') ? '' : this.value"/>
+</span>
+<div class="fl">
+<label>SELECT CATEGORY</label>
+<div id="wViator_category" class="stylize-select property_type fl marginR10" style="width:250px;">
+<select style="width:280px;" class="validate[required]">
+<option>Select a city to load categories</option>
+</select>
+</div>
+</div>
+<br class="clearfloat"/>
+<div style="display:inline-block; float:none; display:block;" class="marginT10">
+<label style="display:inline-block; padding:0px; height:20px">
+<input type="checkbox" onclick="getDateSelectionChoice(this)" checked="checked" id="selectDateCheck" style="vertical-align: sub;"/>
+<em style="font:normal normal 14px/18px Arial, Helvetica, sans-serif">Select Specific Dates</em></label>
+</div>
+<div id="activityDatesCont"><span class="fl marginR10">
+<label>FROM</label>
+<input id="wActivityFromDt" class="calendar cwActivityFromDt" type="text" name="wActivityFromDt" readonly="readonly"/>
+</span> <span class="fl marginR10">
+<label>TO</label>
+<input id="wActivityToDt" class="calendar cwActivityFromDt" type="text" name="wActivityToDt" readonly="readonly"/>
+</span></div>
+<div style="display: inline-block; overflow: hidden; float: none; border-radius: 3px; margin-top: 30px"><input id="in_searchActvities_yes" class="book_now font_18 whotelserach fl" type="button" onclick="welcomeActivities();" title="Search" value="Search"></div>
+<div class="clearfloat"></div>
+</form>
+</div>
+<div class="clearfloat"></div>
+ 
+<div class="fr width_100">
+<div class="inset-shadow lk-for width_100 marginT20 paddingT15 fl" id="wntReady"> <img src="{{STATIC_URL}}img/newwelcome-icon.png" alt=""/>
+<div class="wmsgDisplay fl"> <span>Not ready to book yet? </span> Create a trip to start planning your itinerary </div>
+ 
+<div class="roundedCornerBtnContIE">
+<div style="display: inline-block; overflow: hidden; border-radius: 3px;margin:0 auto;margin-top:3px !important"><input style="margin-top:0px !important" id="in_createTrip_yes" value="Create" onclick="createTripFromWelcome('createTrip');" class="Wbook_now fr" title="Create Trip" type="button"tabindex="10"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="clearfloat"></div>
+    <div style="float:left; height:150px; width:100%; visibility:hidden; display:none;"></div>
+  </section>
+</section>
+<section class="fixed_footer_wrapper welcome_pnl">
+  <section class="fixed_footer">
+    <div class="ff_left">No upcoming trip?</div>
+       <div class="ff_right" id="GeoPLink">Visualize & Share your past travel experiences on an <a href="http://www.georama.com/geoplaces" target="_blank" tabindex="14">interactive map!</a></div>
+      </section>
+</section>
+<script type="text/javascript">
+activeWelcomePanel = 'no';
+/*hashLocationURL = $.trim(location.hash);
+	switch(hashLocationURL){
+		case '#Welcome':
+				$("#georama_welcome_overlay").show();
+				$('#welcome_close').show();
+				$("#OutrContainer").show();
+				//$("#showWelcomescreen").trigger('click');
+				//welcomeHashState = true;
+				
+				break;	
+		case "#Welcome/No":
+				$("#georama_welcome_overlay").show();
+				$('#welcome_close').show();
+				$("#OutrContainer").show();
+				//$("#wel_No").trigger('click');
+				welcomeHashState = true;
+				$('.welcomeRestore').show();
+				$('.new_welcome_wrapper').css('opacity', 0);
+				welcomeAction('no', 'welcome1');
+				break;	
+		case "#Welcome/Maybe":
+				$("#PlanBookComponent").hide();
+				$("#georama_welcome_overlay").show();
+				$('#welcome_close').show();
+				$("#OutrContainer").show();
+				welcomeHashState = true;
+				$('.welcomeRestore').show();
+				$('.new_welcome_wrapper').css('opacity', 0);
+				welcomeAction('maybe', 'welcome1');
+				break;		
+		case "#Welcome/Yes":
+				//$("#my_trip_wrapper").hide();
+				//$('#cityInfoScreen').hide();
+				//$("#geofarelitab").removeClass("active");
+				//$("#explore").addClass("active");
+				$("#georama_welcome_overlay").show();
+				$('#welcome_close').show();
+				$("#OutrContainer").show();
+				
+				welcomeHashState = true;
+				$('.new_welcome_wrapper').css('opacity', 0);
+				$('.welcomeRestore').show();
+				welcomeAction('yes', 'welcome1');
+				break;	
+	} */
+	
+	/* Center Aligning New Welcome Screen */
+	setWelcomePosition();
+	$("#OutrContainer").show();
+	
+	$( "#budget-range" ).slider({
+			range: "min",
+			value: 2000,
+			min: 250,
+			max: 5000,
+			slide: function( event, ui ) {
+				$( "#amount" ).val( "Upto $" + ui.value );
+			}
+	});
+	
+	
+		var a = $('#tagWelcomeCity1').autocomplete1({ 
+		serviceUrl:'/feed/citysuggest/',
+		minChars:2, 
+		maxHeight:400,
+		width:200,
+		zIndex: 9999,
+		noCache: false, //default is false, set to true to disable caching
+		onSelect: function(value, data){ 
+			var arrdata =data.split('|'); 
+			//alert(arrdata);
+			try{
+				var pushpinimage = $("svg").find("#p_"+arrdata[3]);
+				var pintype="";
+				if (typeof pushpinimage != 'undefined'){
+					pintype = pushpinimage.attr("xlink:href");
+				}
+				
+				if(typeof pintype == 'undefined')
+					 pintype= "";
+					 
+				if (pintype != "" && pintype.lastIndexOf("bing-plan-recommendation-pushpin")<0){
+					//
+				}else{
+					$('#rootvectormap').vectorMap('set', 'label', {"n":arrdata[0], "c": arrdata[4].toLowerCase(), "d":arrdata[5],"lat":arrdata[1],"lon":arrdata[2], "pin":1, "pcolor":"white", "key":arrdata[3], "l":5, "latVar":0, "lonVar":0});
+					saveTripPart(arrdata[3]);
+					map.updateTripNavigationBar("A", "");
+                                        map.pushpins[arrdata[3]].hide();
+				}
+				
+				$('.emptyMessage').fadeOut(function(){
+					//$('#welcomeCity1').html(preloadDivS).fadeIn();	
+					fillPlanBucket(1,arrdata[3]);	
+				});
+			}
+			catch(err) {}
+		}	
+	});
+	
+	
+	var a = $('#welcomeCarCity').autocomplete1({ 
+		serviceUrl:'/feed/citysuggest/',
+		minChars:2, 
+		maxHeight:400,
+		width:200,
+		zIndex: 9999,
+		noCache: false, //default is false, set to true to disable caching
+		onSelect: function(value, data){ 
+			var arrdata =data.split('|'); 
+			//alert(arrdata);
+			try{
+				//$('#rootvectormap').vectorMap('set', 'label', {"n":arrdata[0], "c": arrdata[4].toLowerCase(), "d":arrdata[5],"lat":arrdata[1],"lon":arrdata[2], "pin":1, "pcolor":"white", "key":arrdata[3], "l":1, "latVar":0, "lonVar":0});	
+				//$('#rootvectormap').vectorMap('set', 'triggerPinClick', arrdata[3]);		
+				$('.emptyMessage').fadeOut(function(){
+					//$('#welcomeCity1').html(preloadDivS).fadeIn();	
+				//	fillPlanBucket(1,arrdata[3]);	
+				});
+			}
+			catch(err) {}
+		}	
+	});
+	
+	
+	var a = $('#tagWelcomeCity2').autocomplete1({ 
+		serviceUrl:'/feed/citysuggest/',
+		minChars:2, 
+		maxHeight:400,
+		width:200,
+		zIndex: 9999,
+		noCache: false, //default is false, set to true to disable caching
+		onSelect: function(value, data){ 
+			var arrdata =data.split('|'); 
+			//alert(arrdata);
+			try{
+				var pushpinimage = $("svg").find("#p_"+arrdata[3]);
+				var pintype="";
+				if (typeof pushpinimage != 'undefined'){
+					pintype = pushpinimage.attr("xlink:href");
+				}
+				
+				if(typeof pintype == 'undefined')
+					 pintype= "";
+					 
+				if (pintype != "" && pintype.lastIndexOf("bing-plan-recommendation-pushpin")<0){
+					//
+				}else{
+					$('#rootvectormap').vectorMap('set', 'label', {"n":arrdata[0], "c": arrdata[4].toLowerCase(), "d":arrdata[5],"lat":arrdata[1],"lon":arrdata[2], "pin":1, "pcolor":"white", "key":arrdata[3], "l":5, "latVar":0, "lonVar":0});
+					saveTripPart(arrdata[3]);
+					map.updateTripNavigationBar("A", "");
+                                        map.pushpins[arrdata[3]].hide();
+				}
+				//map.updateTripNavigationBar("A", "");
+				$('.emptyMessage').fadeOut(function(){
+					$('#welcomeCity2').html(preloadDivS).fadeIn();	
+					fillPlanBucket(2,arrdata[3]);	
+				});		
+			}
+			catch(err) {}
+		}	
+	});
+	
+	var a = $('#tagWelcomeCity3').autocomplete1({ 
+		serviceUrl:'/feed/citysuggest/',
+		minChars:2, 
+		maxHeight:400,
+		width:200,
+		zIndex: 9999,
+		noCache: false, //default is false, set to true to disable caching
+		onSelect: function(value, data){ 
+			var arrdata =data.split('|'); 
+			//alert(arrdata);
+			try{
+				var pushpinimage = $("svg").find("#p_"+arrdata[3]);
+				var pintype="";
+				if (typeof pushpinimage != 'undefined'){
+					pintype = pushpinimage.attr("xlink:href");
+				}
+				if(typeof pintype == 'undefined')
+					 pintype= "";
+				if (pintype != "" && pintype.lastIndexOf("bing-plan-recommendation-pushpin")<0){
+				}else{
+					$('#rootvectormap').vectorMap('set', 'label', {"n":arrdata[0], "c": arrdata[4].toLowerCase(), "d":arrdata[5],"lat":arrdata[1],"lon":arrdata[2], "pin":1, "pcolor":"white", "key":arrdata[3], "l":5, "latVar":0, "lonVar":0});
+					saveTripPart(arrdata[3]);
+					map.updateTripNavigationBar("A", "");
+                                        map.pushpins[arrdata[3]].hide();
+				}
+			//	updateTripInfo(arrdata[3], 'potential');
+				//map.updateTripNavigationBar("A", "");
+				$('.emptyMessage').fadeOut(function(){
+					$('#welcomeCity3').html(preloadDivS).fadeIn();
+					fillPlanBucket(3,arrdata[3]);			
+				});			
+			}
+			catch(err) {}
+		}	
+	});
+
+
+/*$('input[type="text"]').onSelect(function(){
+    var id = $(this).attr('id');
+    alert(id);
+});*/
+
+  autoComplete = function(){
+        $('.multiflightYes_airport').each(function(){
+            var obj = $(this);
+            $(this).autocomplete1({ 
+                serviceUrl:'/feed/airport-suggest/',
+                minChars:2, 
+                maxHeight:220,
+                width:320,
+                zIndex: 9999,
+                noCache: false,
+                onSelect: function(value, data){ 
+                    flight_pushpin_data = data; 
+                    //alert(containerId);
+                    var containerId = obj.siblings("input").attr('id'); 
+					//if(containerId.indexOf('multicityHdn_from')==-1 || containerId.indexOf('multicityHdn_from1')!=-1){                   
+						$("#"+containerId).val(data.geo_city_id);
+						$("#"+containerId).data("cityData", data);
+					//}
+                    //alert($("#"+containerId).val());
+                    //result = $("#"+containerId).data('cityData');
+                    //setNextFromAirPortYes(obj,value);
+					var textval = getAirportNameCorrected(value);
+					//alert(textval);
+					$(obj).val(textval);  
+					setNextFromAirPortYes(obj,textval,data);                  
+                }//end of onSelect
+            })
+        });
+    }
+	autoComplete();
+  
+var newCount = 3;
+function addSegmentsYes()
+{	var lastTovalue = $(".multiflightYes_airport:last").val();
+	var trhtml='';
+	totalCount = $('.flYesSegment').length;
+	var labelNo = totalCount + 1;
+	 newCount = newCount + 1;
+	trhtml='<tr class="flYesSegment"><td style="padding-top:16px;"><span class="grey1 roundbg labelId" style="background-color:#77a1ad">'+labelNo+'</span></td>';
+	trhtml+='<td class="fromAirYes"><span id="w" class="grey1">FROM<br />';
+	trhtml+='<input id="multicity_from'+newCount+'" name="multicity[' + newCount + '][from]" value="' + lastTovalue + '" type="text" onfocus="setText(this,1)" onblur="setText(this,2)" class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">';
+       	trhtml+='<input name="multicityHdn[]" id="multicityHdn_from' + newCount + '" value="" class="multicityHdnYes_fromCityId" type="hidden"></span></td>';
+	trhtml+='<td><span class="grey1">TO<br />';
+	trhtml+='<input id="multicity_to'+newCount+'" name="multicity[' + newCount + '][to]" value="Enter a City or Airport" type="text"  onfocus="setText(this,1)" onblur="setText(this,2)"';        
+	trhtml+= 'class="multiflightYes_airport validate[required,maxSize[70]]" style="width:120px;" maxlength="70">';
+        trhtml+='<input name="multicityHdn[]" id="multicityHdn_to' + newCount + '" value="" type="hidden"></span></td>';
+	trhtml+='<td><span class="grey1">LEAVING<br /><input name="multicity[' + newCount + '][from_date]" value="" class="calendar" type="text" style="width:82px !important;" readonly="readonly" id="Yes_seg_date'+newCount+'"></span></td><td style="padding-top:16px;cursor:pointer !important" onclick="deleteSegmentYes(this);"><span class="grey1 roundbg" style="background-color:#bf8369">x</span></td></tr>';	
+	if(totalCount >= 6){
+           $("#Add_segment_link").hide();
+            return;
+        } else {
+            $(trhtml).insertBefore("#Add_segment_link");
+            if(totalCount + 1 >= 6){
+                $("#Add_segment_link").hide();
+            }
+        }
+        
+        $("#muticity-container .calendar").datepicker({ inline: true, maxDate:'+1y', yearRange: '2012:2014', dateFormat: 'mm-dd-yy', defaultDate: '+1m', 
+        onSelect: function(dateText, inst){
+            setAllDateLimitsYes(this,dateText);
+            //$(this).datepicker("option", "minDate", $("#Yes_seg_date"+(labelNo-1)).val());
+        }});
+        $("#Yes_seg_date"+labelNo).datepicker('setDate', '+1m +'+totalCount+'d');
+        $("#Yes_seg_date"+labelNo).datepicker("option", "minDate", $("#Yes_seg_date"+(labelNo-1)).val());
+        	
+        $('.multiflightYes_airport').each(function(){
+            var obj = $(this);
+            $(this).autocomplete1({ 
+                serviceUrl:'/feed/airport-suggest/',
+                minChars:2, 
+                maxHeight:220,
+                width:320,
+                zIndex: 9999,
+                noCache: false,
+                onSelect: function(value, data){ 
+                    flight_pushpin_data = data;
+                    var containerId = obj.siblings("input").attr('id');                                
+                    $("#"+containerId).val(data.geo_city_id);
+                    $("#"+containerId).data("cityData", data);
+//                    setAirportsinFSpanel(obj,value);
+//                    setNextFromAirPortYes(obj,value);
+					var textval = getAirportNameCorrected(value);
+					$(obj).val(textval);
+					setAirportsinFSpanel(obj,textval,data);
+                    setNextFromAirPortYes(obj,textval,data);
+                }	
+            })
+        });
+}
+
+
+function deleteSegmentYes(object) {
+	//$('.info').hide();
+	//$('.info').parent().parent().remove();
+	$("#Add_segment_link").show();
+	var myobj= object;
+	var id = $(myobj).parent().find(".labelId").html();
+	var objPar = $(myobj).parent();
+	$(myobj).remove();
+	if($(objPar)){$(objPar).remove();}			//  26-11-2012 - 12:52 -DEV-AN*/
+	//alert(objPar);
+	var totalSeg= $('.flYesSegment').length;
+	
+	for(var c = id-1; c < totalSeg; c++){
+		$('.labelId','.flYesSegment:eq(' + c + ')').html(c+1);	
+	}
+}
+	
+function setAirportsinFSpanel(myobj,textAirport,data){
+		var objTextBox = myobj;
+		var objSegment = $(objTextBox).parent().parent();
+		var indxSegment = $("#MultiCityTrip").children().index(objSegment);
+		
+		if($("#MultiCityTrip").children().eq(indxSegment+1)){
+			var nextSegment = $("#MultiCityTrip").children().eq(indxSegment+1);
+			$('.fromAir .multiflight_airport',$(nextSegment)).val(textAirport);	
+			$('.fromAir .multiflight_fromCityId',$(nextSegment)).val(data.geo_city_id);
+			var objectId=$('.fromAir .multiflight_airport',$(nextSegment)).siblings("input").attr('id');
+			$("#"+objectId).val(data.geo_city_id);
+			$("#"+objectId).data("cityData", data);	
+		}
+}
+	
+function setNextFromAirPortYes(myobj,textAirport,data){
+	var objTextBox = myobj;
+	if($(objTextBox).parent().parent().hasClass('fromAirYes'))
+		return;
+		
+	var objSegment = $(objTextBox).parent().parent().parent();
+	var indxSegment = $("#Wfdestination1").children().children().index(objSegment);
+	
+	if($("#Wfdestination1").children().eq(indxSegment+1)){
+		var nextSegment = $("#Wfdestination1").children().children().eq(indxSegment+1);
+		//alert(JSON.stringify(nextSegment));
+		$('.fromAirYes .multiflightYes_airport',$(nextSegment)).val(textAirport);
+		$('.fromAirYes .multicityHdnYes_fromCityId',$(nextSegment)).val(data.geo_city_id);
+		var objectId=$('.fromAirYes .multiflightYes_airport',$(nextSegment)).siblings("input").attr('id');
+		$("#"+objectId).val(data.geo_city_id);
+        $("#"+objectId).data("cityData", data);	
+	}
+}
+function initializeDatePickers(){
+    $("#muticity-container .calendar").datepicker({ inline: true, yearRange: '2012:2014', maxDate:'+1y', dateFormat: 'mm-dd-yy', defaultDate: '+1m', 
+	beforeShow: function (textbox, instance) {
+                instance.dpDiv.css({
+                    marginTop: (-textbox.offsetHeight) + 'px',
+                    marginLeft: textbox.offsetWidth + 'px'
+                });
+                },
+	onSelect: function(dateText, inst){
+            setAllDateLimitsYes(this,dateText);
+}});
+
+$("#Yes_seg_date1").datepicker('setDate', '+1m');
+$("#Yes_seg_date1").datepicker("option", "minDate", '+0d' );
+$("#Yes_seg_date2").datepicker('setDate', '+1m +1d');
+$("#Yes_seg_date2").datepicker("option", "minDate", $("#Yes_seg_date1").val());
+$("#Yes_seg_date3").datepicker('setDate', '+1m +2d');
+$("#Yes_seg_date3").datepicker("option", "minDate", $("#Yes_seg_date2").val() );
+}
+	
+function setAllDateLimitsYes(myObj,dateTxt){
+                var selDateInput = myObj;
+                var newdateText =dateTxt;
+		var selSegment = $(selDateInput).parent().parent().parent();
+		var indxSegment = $("#Wfdestination1").children().children().index(selSegment);
+		var dateText = dateTxt;
+		var totSegments = $('#Wfdestination1 .flYesSegment').length;
+		for(var c = indxSegment; c < totSegments; c++){
+			if($("#Wfdestination1").children().children().eq(c+1)){
+				var nextSegment = $("#Wfdestination1").children().children().eq(c+1);
+				var nextSegmentDateInput = $('.calendar',$(nextSegment));
+                                var prevSegment = $("#Wfdestination1").children().children().eq(c);
+                                var prevSegmentDateInput = $('.calendar',$(prevSegment));
+                                newdateText = $(prevSegmentDateInput).val();
+                                getNextDate(newdateText, nextSegmentDateInput, false);
+			}
+                }
+                for(var c = indxSegment; c > 0; c--){
+                        if($("#Wfdestination1").children().children().eq(c)){
+                            var thisSegment = $("#Wfdestination1").children().children().eq(c);
+                            var thisSegmentDateInput = $('.calendar',$(thisSegment));
+                            var prevSegment = $("#Wfdestination1").children().children().eq(c-1);
+                            var prevSegmentDateInput = $('.calendar',$(prevSegment)); 
+                            var flag = ValidateReservationDates(prevSegmentDateInput,thisSegmentDateInput);
+                            newdateText = $(prevSegmentDateInput).val();
+                            if(!flag){
+                                setPreDefDate(newdateText, prevSegmentDateInput);   
+                            }
+                       }
+		}
+}
+
+if($('#roundtrip_container').is(':visible')){$('#wntReady').parent().show();}
+if($('#muticity-container').is(':visible')){$('#wntReady').parent().hide();} 
+
+function setText(obj,id)
+   {
+	   switch(id)
+	   {
+	   case 1:
+		   if(obj.value == 'Enter a City or Airport')
+		   	obj.value = '';
+//		   else 
+//		   obj.value = 'Enter a City or Airport';
+		   return false; 
+		   break;
+	   case 2:
+		   if(obj.value == '')
+		   obj.value = 'Enter a City or Airport';
+//		   else 
+//		   obj.value = ''; 
+		   return false;
+	   }
+	   //autoComplete();
+}
+
+function updateComponents(objectId){
+    switch(objectId){
+        case 'regularOneway': 		$('#returning-dt').hide(); saveState(1); break;	
+
+        case 'regularRoundway': 	$('#returning-dt').show(); saveState(1); break;	
+
+        case 'regularManyway': 		$('#roundtrip_container').hide();
+                                        $('#muticity-container').show();
+                                        $('#wntReady').parent().hide(); 
+                                        $('#multiManyway').attr('selected',true); saveState(1); initializeDatePickers(); break;
+
+        case 'ONEWAYTRIP': 		$('#roundtrip_container').show();
+                                        $('#muticity-container').hide();
+                                        $('#wntReady').parent().show();
+                                        $('#regularOneway').attr('checked',true);
+                                        $('#returning-dt').hide(); saveState(2); break;	
+
+        case 'ROUNDTRIP': 		$('#roundtrip_container').show();
+                                        $('#muticity-container').hide();
+                                        $('#wntReady').parent().show(); 
+                                        $('#regularRoundway').attr('checked',true);
+                                        $('#returning-dt').show(); saveState(2); break;	
+
+        case 'MULTICITY': 		$('#returning-dt').hide(); saveState(2); break;	
+
+        case'wflight':			if($('#roundtrip_container').is(':visible')){$('#wntReady').parent().show();}
+                                        if($('#muticity-container').is(':visible')){$('#wntReady').parent().hide();}break; 
+        case 'whotel':  		$('#wntReady').parent().show();break;
+        case'whostel':  		$('#wntReady').parent().show();break;
+        case'wcar':     		$('#wntReady').parent().show();break;
+        case 'wactivity': 		$('#wntReady').parent().show();break;
+
+        case 'regularEconomy':		$('#multiEconomy').attr('selected',true);break;
+        case 'regularBusiness': 	$('#multiBusiness').attr('selected',true);break;
+        case 'regularFirst':		$('#multiFirst').attr('selected',true);break;
+
+        case 'ECONOMY':			$('#regularEconomy').attr('checked',true);break;
+        case 'BUSINESS': 		$('#regularBusiness').attr('checked',true);break;
+        case 'FIRST':			$('#regularFirst').attr('checked',true);break;
+
+        default:;
+
+    }//switch
+}//end of function updateComponents
+
+
+function saveState(id){
+	
+	switch(id){
+			case 1:
+			document.getElementById("multi_adWC").value= document.getElementById("adWC").value;
+			document.getElementById("multi_seWC").value= document.getElementById("seWC").value;
+			document.getElementById("multi_chWC").value= document.getElementById("chWC").value;
+			break;
+			
+			case 2:
+			document.getElementById("adWC").value= document.getElementById("multi_adWC").value;
+			document.getElementById("seWC").value= document.getElementById("multi_seWC").value;
+			document.getElementById("chWC").value= document.getElementById("multi_chWC").value;
+			break;
+			
+			default:;
+			
+		}
+	}
+/*END-MUTICITY FLIGHT SEARCH JS IN WELCOME SCREEN|23-11-2012|DEV-AN*/
+</script>  
+
+<script type="text/javascript"> 
+function getHostelCurrencyFromWelcome(){
+if(ipPushPinLoaded == false){
+    ipPushPinLoaded = true;
+    getIpPushpin('false');
+}
+var currency=new Array("AUD","CAD","EUR","GBP","USD","ARS","BRL","CNY","HRK","CZK","DKK","HUF","INR","JPY","NZD","NOK","PLN","RUB","ZAR","KRW","SEK","CHF","TRY");
+var pcurrency=new Array("AUD","CAD","EUR","GBP","USD");
+var currencyCode=$("#initial_currency_code").val();
+var is_exist=contains(currency, currencyCode);
+var top_currency=contains(pcurrency, currencyCode);
+	if(is_exist!=-1){
+		if(top_currency!=-1){
+			var index=pcurrency.indexOf(currencyCode);
+			document.getElementById("Whostel_currency_check").selectedIndex=index;
+		}else{
+	       $("#Whostel_currency_check").val(currencyCode);
+		}
+	}else{
+		$("#Whostel_currency_check").val('USD');
+	}
+}
+</script>
+
+  
+            
+<div class="pageOverlay" onclick="$('#openPage').hide();$('.pageOverlay').hide();"></div>
+<div id="notifyme"></div>
+<!-- New Trip Panel -->
+<section id="my_trip_wrapper"></section>
+<!-- Ending New Trip Panel  Code Shifted to MyTrips/Index.phtml--> 
+
+<!-- Friend Trip Panel -->
+<section id="friend_trip_wrapper" ></section>
+<!-- Friend Trip Panel Code shifted to Friends Trip/Index.phtml -->
+
+<div id="georama-logout" title="Logout of Georama" class="hide">
+  <p><!--<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>-->Are you sure you want to logout of Georama?</p>
+</div>
+
+<!--<div id="cache_clear_id" title="Not logged in" class="hide">
+  <p>Please log in to continue.</p>
+</div>-->
+
+<div id="cache_clear_id" title="Session Expired" class="hide">
+  <p>Your session has expired. Please click OK to continue.</p>
+</div>
+
+
+
+
+<div id="delete-pushpin-popup" title="Delete Pushpin" class="hide">
+  <p><!--<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>-->Are you sure you want to delete <span id="delete_city_pushpin"></span>?</p>
+</div>
+
+<div id="delete-all-pushpin-popup" title="Delete All Pushpins" class="hide">
+  <p><!--<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>-->Are you sure you want to delete all pushpins?</p>
+</div>
+
+<div id="delete-multiPushpin-popup" title="Select Destination To Delete" class="hide">
+  	<div><span style="margin-right:20px;">S.No</span> <span style="margin-right: 184px;">From</span> <span style="margin-right:130px;">To</span>  </div>
+
+    <br><div id="delDestCont_1"><figure id="delDestSNo_1" style="display: inline-block; width: 20px ! important; margin-right: 28px;">1.</figure> <figure style="margin-right: 30px; display: inline-block; width: 121px ! important;" id="delDestFrom_1">Chicago</figure>
+    <figure style="display: inline-block; margin-right: 60px;"> </figure> <figure id="delDestTo_1" style="display: inline-block; width: 121px ! important; margin-right: 25px;">Rio De Jenerio</figure> <input type="radio" id="delDestCB_1"> </div><br>
+    
+    <div id="delDestCont_2"><figure id="delDestSNo_2" style="display: inline-block; width: 20px ! important; margin-right: 28px;">3.</figure> <figure style="margin-right: 30px; display: inline-block; width: 121px ! important;" id="delDestFrom_2">New York</figure>
+    <figure style="display: inline-block; margin-right: 60px;"> </figure> <figure id="delDestTo_2" style="display: inline-block; width: 121px ! important; margin-right: 25px;">Rio De Jenerio</figure> <input type="radio" id="delDestCB_2"> </div>
+    <br>
+    <div id="delDestCont_3"><figure style="display: inline-block; width: 20px ! important; margin-right: 28px;" id="delDestSNo_3">5.</figure> <figure id="delDestFrom_3" style="margin-right: 30px; display: inline-block; width: 121px ! important;">Chandigarh</figure>
+    <figure style="display: inline-block; margin-right: 60px;"> </figure> <figure style="display: inline-block; width: 121px ! important; margin-right: 25px;" id="delDestTo_3">Rio De Jenerio</figure> <input type="radio" id="delDestCB_3"> </div>
+	
+    <div style="display: block; left: 1px; position: absolute; width: 488px;" id="delOriginDiv">
+		<br>
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-delete-multiPushpin-popup">Select Origin To Delete</span></div>
+        <br>
+        <div><figure style="display: inline-block; margin-left: 15px; width: 140px ! important; margin-right: 274px;" id="delOriginName"></figure>
+        <input type="radio" id="delOriginCB"></div>
+    </div>
+
+</div>
+
+
+<div id="georama-login" title="Sign In Required" class="hide">
+  <p style="text-align:center;">Please Sign In to Georama to add this item to your trip<br />
+    <input id="in_loginFromPlanPanel" type="image" src="{{STATIC_URL}}img/facebook-sign-in-t.png" alt="" style="border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; margin-top:15px" onclick="loginFromPlanPanel();" />
+  </p>
+</div>
+
+<div id="override_untitled_trip" title="Replace Old Untitled Trip?" class="hide">
+  <p>You already have an existing Untitled Trip with some data. Would you like to replace this with your new Untitled Trip?</p>
+</div>
+
+
+<!--  Tool tip for No Response     -->
+<div id="topRecmTip" class="noResponse_toolTip" style="display:none;">
+	<div id="exp_toolTip-text" class="fl">
+	  <p style="text-align:left"><span style="color:#314a64; font-size:18px;"> Here are your<br />Top Recommendations! </span><br/><span style="color:#5a7da1; font-size:14px;">Click a city to explore further </span>
+  	  </p>
+      </div>
+  	  <div id="exp_toolTip-image" class="fr topRecommendationArrow">
+ 		 <img src="{{STATIC_URL}}img/guidedmessagearrow.png" alt=""/>
+  </div>
+</div>
+
+<div id="destnTip" class="noResponse_toolTip" style="display:none;">
+	<div id="toolTip-text" class="fl">
+      <p style="text-align:left"><span style="color:#314a64; font-size:18px;"> Here are some<br />Top Destinations! </span><br/><span style="color:#5a7da1; font-size:14px;">Click a city to explore further </span>
+      </p>
+      </div>
+  	  <div id="toolTip-image" class="fr topRecommendationArrow">
+  			<img src="{{STATIC_URL}}img/guidedmessagearrow.png" alt=""/>
+  	  </div>
+</div>
+<!-- end of friend trip --> 
+
+<div id="fb_Container">
+  <!-- Vector Map Starts -->
+  <div id="containervectormap">    
+    <div id="rootvectormap" class="blueSea"></div>
+    <div style="height:40px;"></div>
+  </div>
+  <!-- Vector Map Ends -->
+  
+  <!-- Sharing Buttons -->
+  <section class="rightPanel" style="display:none;"> 
+  
+    <article class="sharePlaces">
+      <h1>Share</h1>
+      <ul>
+              <li class="facebook" id="rightBarFB"> <a href="javascript:void(0);" id="FbPostFeedFrmRight" onclick="SharetabSignIn='posttofeedRight';postToFeed('http://www.georama.com','http://georama.com/images/facebook-icon.png', 'Georama - Plan. Book. Share.', '','Georama is the world\'s first map-based travel platform and the only one-stop solution for travelers. It brings together the best content, fares, and social networks under one roof – helping travelers plan, book, and share their trips on a one-of-a-kind interactive map!')"></a> </li>
+        <li class="twitter" id="rightBarTW"> <a href="javascript:void(0);" onclick="window.open('https://twitter.com/intent/tweet?text=Georama is the only platform that lets travelers plan, book, and share their trips on a map! Check it out at http://www.georama.com', 'tweet_win', 'width=699,height=600');"></a> </li>
+       
+<!--        <li class="mail reset"><span id="span_email_Right_bar" class='st_email_large' st_image='http://georama.com/images/facebook-icon.png' st_url='http://www.georama.com' st_title='Georama - Plan. Book. Share.'></span></li>
+-->         <li id="rightBarEmail" class="mail reset"><span class="st_email_large" displayText="Email" id="span_email_Right_bar"></span></li>
+        <li class="share reset" id="li_sharethis"><span class="st_sharethis_large" displayText="ShareThis" st_summary="Georama is the world's first map-based travel platform and the only one-stop solution for travelers. It brings together the best content, fares, and social networks under one roof – helping travelers plan, book, and share their trips on a one-of-a-kind interactive map!" st_image="http://georama.com/images/facebook-icon.png" st_url="http://www.georama.com" st_title="Georama - Plan. Book. Share."></span></li>
+        <li style="display:none" class="mail reset" id="li_Hidden_st_email"><span id="right_panel_email"  class='st_email_large' st_image='http://georama.com/images/facebook-icon.png' st_url='http://www.georama.com' st_title='Georama' st_summary='I just created a trip using Georama. Recommend me places for my trip !"'></span></li>
+      </ul>
+    </article>
+  
+  </section>
+  <!-- Sharing Buttons -->
+  
+  <div id="bing_city_info"> </div>
+  
+  <div id="BingMaster">
+    <div id="bingRightPanel" class="gradientBlack">
+      <div id="directionbox" class="gradientWhite">
+        <div style="float:right"> <a onclick="closeDirectionBox();" href="javascript:void(0);"><img src="{{STATIC_URL}}img/closeIcon.png" alt=""  style="border:none;" /></a> </div>
+        <div  id="derrmsg" style="background:#F00; border:#900 solid 1px; color:#FFF; height:18px; padding:5px; margin:5px; clear:both; display:none;"></div>
+                <div id="pathinfo" style="display:none;" ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bing Map Starts -->  
+  <div id="mapDiv"></div>
+  <!-- Bing Map Starts -->    
+  
+  <!-- Zoom control div-->
+  <div id="zoomcontrols">
+    <div id="flash-zoom" style="display:block">
+      <ul>
+        <li> <a href="javascript:void(0);" id="zoom_out" class="zoom-out" onclick="mapZoomOut();"><span>Zoom Out</span></a> </li>
+        <li> <a href="javascript:void(0);" id="zoom_in" class="zoom-in" onclick="mapZoomIn();"><span>Zoom In</span></a> </li>
+        <li> <a href="javascript:void(0);" id="zoom_to_first_level" class="zoom-100"  onclick="zoomTo100(); "><span>Zoom to 100%</span></a> </li>
+        <li><span class="disableOverlay"></span><a href="javascript:void(0);" id="zoom_to_cityView" class="zoom-city"  onclick="setZoom(9);"><span>Zoom to City View</span></a> </li>
+        <li><span class="disableOverlay" ></span><a href="javascript:void(0);" id="zoom_to_birdsEyeView" class="zoom-birdseye"  onclick="setZoom(17);"><span>Zoom to Birds Eye View</span></a> </li>
+      </ul>
+    </div>
+    <div id="bing-zoom" style="display:none">
+      <ul>
+        <li> <a href="javascript:void(0);" id="zoom_out_bing" class="zoom-out" onclick="BingMapZoomOut();" ><span>Zoom Out</span></a> </li>
+        <li>
+          <div class="sliderbg">
+            <div class="sliderpadding"><span id="slider"></span></div>
+          </div>
+        </li>
+        <li> <a href="javascript:void(0);"  id="zoom_in_bing"  class="zoom-in" onclick="BingMapZoomIn();"><span>Zoom In</span></a> </li>
+        <li> <a href="javascript:void(0);" id="zoom_to_first_level_bing"  class="zoom-100" onclick="zoomTo100(1);"><span>Zoom to 100%</span></a> </li>
+        <li> <a href="javascript:void(0);" id="zoom_to_cityView_bing"  class="zoom-city" onclick="setZoom(9);"><span>Zoom to City View</span></a> </li>
+        <li class="rotview"> <a href="javascript:void(0);" id="rotate_cw_bing" class="rotate-ccw" onclick="chaneView(90);" ><span>Rotate Clock-Wise</span></a> </li>
+        <li> <a href="javascript:void(0);" id="zoom_to_birdsEyeView_bing" class="zoom-birdseye" onclick="setZoom(17);"><span>Zoom to Birds Eye View</span></a> </li>
+        <li class="rotview"> <a href="javascript:void(0);" id="rotate_acw_bing" class="rotate-cw" onclick="chaneView(-90);"><span>Rotate Anti-Clock-Wise</span></a> </li>
+        <li><span class="zoom-right">&nbsp;</span></li>
+      </ul>
+    </div>
+  </div>
+  <!-- end of Zoom control div -->
+  
+  
+  
+  <!--  Bing Map Context Menu -->
+  <div id="rightmenu" class="gradientBlack">
+    <div class="gradientWhite">
+      <ul id="myMenu" class="contextMenu">
+       <li class="insert1" id="pushpin_ZoomToRegionLevel"> <a href="#" onclick="setZoom(17);">Zoom to birds eye </a> </li>
+        <li class="insert1 hrb" id="pushpin_ZoomToCityLevel"> <a href="#" onclick="setZoom(9);" >Zoom to city </a> </li>
+        <li class="insert1" id="pushpin_ShowTrafic"> <a href="#" onclick="loadTraffic()" >Show traffic </a> </li>
+        <li class="insert1 hrb" id="pushpin_HideTrafic" style="display:none;"> <a href="#" onclick="hideTraffic()" >Hide traffic </a> </li>
+</ul>
+    </div>
+  </div>
+  <!--  Bing Map Context Menu--> 
+  
+  <!--   Right Menu for country pages     -->
+ <div id="tripMenuCountry">
+ <span class="close_right_menu"><img src="{{STATIC_URL}}img/img_close.png" height="20" width="20" alt="" onclick="$(this).parent().parent().hide();" /></span>
+  <div id="" class="gradientBlack" style="display:block; margin-bottom:0px;">
+	<div class="gradientWhite">
+      <ul class="contextMenu" id="">
+        <h5 id="rightMenuCountryName" style="font-size:14px; color:#555; padding:3px; border-bottom: 1px solid #CCCCCC;">CountryName</h5>
+            <li id=""> <a id="" onClick="map.showCountryDetail('view')" style="padding:3px 3px; cursor:pointer;" class="blue_link">View Details</a></li>
+            <li id=""> <a id="" onClick="map.showCountryDetail('zoomin')" style="padding:3px 3px; cursor:pointer;" class="blue_link">Zoom In</a></li>
+            <li id=""> <a id="" onClick="map.showCountryDetail('zoomout')" style="padding:3px 3px; cursor:pointer;" class="blue_link">Zoom Out</a></li>
+      </ul>
+    </div>
+    <input type="hidden" value="73" name="hdnContextMenuCountryId" id="hdnContextMenuCountryId">
+  </div>
+ 
+</div> 
+  <!--   Right menu country pages end     -->
+ 
+ <div id="tripMenu">
+ <span class="close_right_menu"><img src="{{STATIC_URL}}img/img_close.png" height="20" width="20" alt="" onclick="$(this).parent().parent().hide();" /></span>
+ <div style="overflow:hidden;border-radius:5px">
+  <div id="tripMenu1" class="gradientBlack" style="display:block; margin-bottom:0px;">
+	<div class="gradientWhite">
+      <ul class="contextMenu" id="myMenu">
+        <h5 style="font-size:14px; color:#555">Mark <span id="Marked_city_wrap"></span> as:</h5>
+        <ul id="Marking_pushpin_section">
+            <li style="padding:5px 0">
+              <label><input type="radio" name="radio_trip_menu" id="trip_origin_menu" value=""> Origin </label>
+               <label><input type="radio" name="radio_trip_menu" id="trip_destination_menu" value=""> Destination </label>
+              <div id="multiDestListCont"> 
+                   <ul id="multiDestList" style="margin-left: 16px;">
+             
+                      <li id="multiDestTab_1" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>1</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                      <li id="multiDestTab_2" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>2</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                      <li id="multiDestTab_3" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>3</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                      <li id="multiDestTab_4" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>4</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                      <li id="multiDestTab_5" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>5</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                      <li id="multiDestTab_6" class="fl routeDestCount" style="padding:5px 3px;margin:0;"><figure class="routeDestCountFont desableDestCount"><span>6</span><br><input type="checkbox" style="margin-left:1px;" checked > </input></figure></li>
+                   </ul>
+                   <span style="font-style:italic;color:#999999" class="fr">Click to Add Or Drag to change order. </span>
+                   <div class="clear"> </div><br>
+               </div> 
+              <label><input type="radio" checked="checked" name="radio_trip_menu" id="trip_potential_destination_menu" value="">
+               Potential Destination</label>
+             </li> 
+       </ul>
+        <ul id="Delete_pushpin_section" class="borderT1">
+            <li class="fl" style="padding:9px 2px 9px 2px; color:#999999;">Delete:</li>
+            <li class="fl" id="li_delete_pushpin"> <a id="delete_pushpin" href="#" style="padding:7px" class="blue_link">This Pushpin</a></li>
+            <li class="fl" style="padding:8px 0 0 0 ; color:#999999;">|</li>
+            <li class="fl" id="li_delete_all_pushpins"> <a href="#" id="delete_all_pushpins" style="padding:7px" class="blue_link">All Pushpins</a></li><br><br>
+      </ul>
+      </ul>
+    </div>
+    <input type="hidden" value="73" name="hdnContextMenuCityId" id="hdnContextMenuCityId">
+  </div>
+ </div>
+</div>
+ 
+  
+  <div id="hoverInfoBox" class="gradientBlack"> </div>
+  
+  <div id="bing_attraction_info" class="gradientBlack balloon">
+    <div id="bing_atraction_content" class="padding gradientWhite">Content goes here</div>
+  </div>
+  <a id="back-to-map" onclick='$("html, body").animate({ scrollTop: 0 }, "slow");' href="javascript:void(0);">&nbsp;</a> 
+  
+  <!--Begin Welcome Box-->
+   <!--End Welcome Box--> 
+  
+  <!--Begin City Info-->
+  <div class="cityInfo" id="cityInformation" style="display:none;">
+    <div class="gradientBlack">
+      <div class="arrow-up"></div>
+      <div class="gradientWhite">
+        <div id="cityinfoImage" > <img src="{{STATIC_URL}}img/default.png" alt="" class="img88 lazyloading" /> </div>
+        <div class="span-3">
+          <div id="cityinfoDesc">
+            <p><span>Las Vegas</span> is the most populous city in Nevada, United States, the seat of Clark County, and an internat...</p>
+          </div>
+          <div id="cityinfoButton">
+            <input class="view" type="button" value="View" onclick="openCityDetails('New York','852','254')" />
+          </div>
+                   <input type="hidden" name="hdnCity" id="hdnCity"/>
+  <input type="hidden" name="hdnCityId" id="hdnCityId"/>
+   <input type="hidden" name="hdnCountry" id="hdnCountry"/>
+   <input type="hidden" name="hdn-CityKey-Open" id="hdn-CityKey-Open"/>
+    <input type="hidden" name="hdn-Pot-Destination-Counter" id="hdn-Pot-Destination-Counter"/>
+   <input type="hidden" name="hdn-Pot-Destination-Counter-Open" id="hdn-Pot-Destination-Counter-Open"/> 
+        </div>
+        <div class="clearfloat"></div>
+      </div>
+    </div>
+  </div>
+  <!--End City Info-->
+  <img src="{{STATIC_URL}}img/clear.gif"  alt="" width="20" height="17" class="btnTripMenu" /> 
+  <img src="{{STATIC_URL}}img/clear.gif" alt="" width="20" height="17" class="tripBtnClose" />
+  
+</div>
+<!--End fb_container--> 
+
+<!--Begin GeoItinerary-->
+<div id="geoInformation" style="z-index:999;display:none;">
+  <div style="text-align:center;">Loading..<br />
+     <img src="{{STATIC_URL}}img/preloader.gif"  alt=""/></div>
+</div>
+</div>
+<div id="connector" style="background-color:red"></div>
+ 
+<!--End tabs-->
+</div>
+<section id="planHostelBookingAvailability" class="gridBooking " style="display:none;"> 
+  <!-- <div class="info" align="center">Search &amp; Book option coming soon!</div> -->
+  <form id="hplanbook">
+    <section class="show_my_trip">
+      <article class="hotel_detail font_13 light_grey_text form_wrapper"> <a href="javascript:void(0);" onclick="$('#planHostelBookingAvailability').fadeOut();" class="close"></a>
+        <div class="fl">From<br>
+          <input type="text" id="HostelCheckInnDate" name="HostelCheckInnDate" value="" class="input_h31 b_radius_3 calendar mright5 hasdatepicker">
+        </div>
+        <div class="fl">To<br>
+          <input type="text" id="HostelCheckOutDate" name="HostelCheckOutDate" value="" class="input_h31 b_radius_3 calendar mright5 hasdatepicker">
+        </div>
+        
+        
+        <div class="fl">Nights<br>
+          <select class="hotelDetailSelect" name="planNumNights" id="planNumNights">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+        </div>
+        <div class="fl">
+          <input type="button" onclick="checkHostelAvailabilityFromPlan();" value="Check Availability" class="book_now chk_avail mtop_5">
+        </div>
+        <div class="clearfloat"></div>
+      </article>
+    </section>
+    <input type="hidden" name="plan_hostel_id" id="plan_hostel_id" value="" />
+  </form>
+  <!-- end search section -->
+  <article class="shadow_top_inside mrg-pad-top-book">
+    <h4 class="book-msg-box" id="booking_availability_msg">Please Check Availability before Room Booking</h4>
+  </article>
+  
+  <!-- end container message panel -->
+  <article class="grey_border_all padding_all_0 room-list-box" id="hostel_room_box_form" style="display:none;">
+    <h4 class="font_16 mtop_5 padding_all_5">Available Rooms</h4>
+    <div class="scrollbar_wrapper font_16">
+      <div class="scrollbar">
+        <div class="thumb"></div>
+      </div>
+      <div class="viewport" style="height:296px;">
+        <div class="overview">
+          <section class="padding_all_5 grey_box">
+            <div class="fl width_40">Room Booking</div>
+            <div class="fl width_30">$160</div>
+            <div class="fl width_30">
+              <input type="button" value="Book Now" class="book_now" onclick="bookFromPlan('hotel');">
+            </div>
+            <div class="clearfloat"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+<div id="newPlanPanelAjax"></div>
+<div id="countryPlanPanelAjax">
+	<div id="CountryPageComponent"> </div>
+</div>
+<!-- End of hostel availability box --> 
+<!--End InnerBox-->
+</div>
+</div>        <div id="footer">
+    <div class="footerinner"  align="center" >
+        <div class="relative paddingLR"> <a href="/page/index/view/feedback" id="feedback" ondblclick="$('.rightPanel').hide()" onClick="return showPage('feedback');" class="feedback"></a>
+	  
+        <div class="footer_inner" align="center"  >
+          <ul>
+          	<li> <a href="javascript:void(0);" class="lnkHome" id="homeAnchorID" style="cursor:pointer" onClick="checkTripFlag();">Home</a> </li>
+            <li> <a href="/about" id="aboutAnchorID" style="cursor:pointer" onClick="return showPage('about')">About</a> </li>            
+            <li> <a href="/privacy" id="privacyAnchorID" style="cursor:pointer" onClick="return showPage('privacy')">Privacy</a> </li>
+            <li> <a href="/terms" id="termsAnchorID" style="cursor:pointer" onClick="return showPage('terms')">Terms</a> </li>
+            
+            <li> <a href="/press" id="pressAnchorID" style="cursor:pointer" onClick="return showPage('press')">Press</a> </li>
+             <li> <a id="blogAnchorID" href="http://www.georama.com/blog" target="_blank">Blog</a> </li> 
+          </ul>
+        </div>
+      
+        <div id="sharebtns">
+		    <div style="float:left; margin-top:3px;">
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com%2Fgeorama&amp;layout=button_count&amp;show_faces=false&amp;width=71&amp;action=like&amp;font&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:21px;" allowTransparency="true"></iframe>
+            <script type="text/javascript" src="{{STATIC_URL}}js/pinit.js"></script>
+			<a href="//pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.georama.com&media=http%3A%2F%2Fwww.georama.com%2Fimages%2Fgeorama_PBS.png&description=Georama is a one-stop solution that lets travelers plan, book, and share their trips on a one-of-a-kind interactive map. It is visual, immersive, and fun!" data-pin-do="buttonPin" data-pin-config="above" onclick="window.open(this.href, 'Pinterest',
+'left=20,top=20,width=600,height=400'); return false;"><img src="{{STATIC_URL}}img/pin_it_button.png" /></a>           
+            <a href="https://twitter.com/GeoramaTravel" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" style="margin-left:5px;">Follow @GeoramaTravel</a> 
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="{{STATIC_URL}}img/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+            <div style="float:right; margin-top:3px; margin-left:10px;"><small class="fr marginT3 marginL5">Copyright &copy; 2013, Georama Inc.</small> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        <script type="text/javascript">
+            function loadScripts(array,callback){
+                var loader = function(src,handler){
+                    var script = document.createElement("script");
+                    script.src = src;
+                    script.onload = script.onreadystatechange = function(){
+                        script.onreadystatechange = script.onload = null;
+                        handler();
+                    }
+                    var head = document.getElementsByTagName("head")[0];
+                    (document.body || head).appendChild( script );
+                };
+                (function(){
+                    if(array.length!=0){
+                        loader(array.shift(),arguments.callee);
+                    }else{
+                        callback && callback();
+                    }
+                })();
+            }
+            /** if cookie is deleted explicitly, we will given a session **/
+            $(window).click(function(){        
+                try{    
+                    checkLoginStatus();            
+                }catch(e){            
+                }
+            });    
+            jQuery(document).ready(function(){              
+                $('ul li a').each(function(){
+                    $(this).click(function(){
+                        checkLoginStatus();
+                    })
+                })
+            });   
+    
+            /** if cookie is deleted explicitly, we will given a session **/
+        </script>
+
+        
+        <script type="text/javascript">
+            FB_APP_ID_JS = 140862215971215;
+            HTTP_HOST = 'http://www.georama.com';
+            HTTP_ENV = 'http://';
+            HTTPS_URL = 'https://www.georama.com';
+        FB_LOGIN = "0";
+    LOGIN_SESSION = "0";
+    TRIPIT_CRED = false;
+    FBAPP = ""
+    var bh = $(document).height();
+		
+    if(LOGIN_SESSION==0 && FB_LOGIN==0){
+        tripPartIds = 0;
+        tripId='837085';
+    }else{
+        tripPartIds = 	'' ;
+        tripId = '837085';
+    }	
+        </script>
+
+                <script src="{{STATIC_URL}}js/index.js,{{STATIC_URL}}js/organictabs.jquery.js,{{STATIC_URL}}js/jquery.lazyload.mini.js,{{STATIC_URL}}js/raphael-min.js?v=1.15.92"></script>
+
+        
+        <link type="text/css" href="/css/validationEngine.jquery.css" rel="stylesheet" />
+                <script src="{{STATIC_URL}}js/jquery.validationEngine-en.js,{{STATIC_URL}}js/jquery.validationEngine.js,{{STATIC_URL}}js/jquery.ui.widget.js,{{STATIC_URL}}js/jquery.ui.mouse.js?v=1.15.92"></script>
+
+                        <!-- Alerts -->
+        <script src="{{STATIC_URL}}js/jquery.alerts.js" type="text/javascript"></script>
+                    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script> 
+        
+                <script src="{{STATIC_URL}}js/jquery.contextMenu.js,{{STATIC_URL}}js/mytrip.js,{{STATIC_URL}}js/friendtrip.js,{{STATIC_URL}}js/sharepanel.js,{{STATIC_URL}}js/hostel.js?v=1.15.92"></script>
+
+        
+
+        <script type="text/javascript" src="{{STATIC_URL}}js/bingmap.js?v=1.15.92"></script>
+                <script type="text/javascript">
+            //loadScripts(['https://connect.facebook.net/en_US/all.js','/js/fb/fb_lib_common.js?v=']);
+            loadScripts(['{{STATIC_URL}}js/fb_lib_common.js?v=1.15.92']);
+        </script>
+        <script src="{{STATIC_URL}}js/jquery.alphanumeric.pack.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            if(LOGIN_SESSION == 0 &&  FB_LOGIN == 0){
+                //anonymousTripPushPin(document.getElementById("tripPlaceId").value);
+            }
+        </script>
+        <script src="{{STATIC_URL}}js/tinyscrollbar.js" type="text/javascript"></script>
+        <script type="text/javascript">	
+            $('#welcome_close').show();
+            $("#loginPanel .header-facebook").attr('onclick', 'member_login_header();').css('opacity', '1');      
+            $("#header_city").removeAttr('disabled');
+  
+            $('.alphaTN').alphanumeric({allow:"_,-,&,:, "});
+            $('.alphaNM').numeric();
+  
+            $(this).isFacebook();
+        </script>
+
+        <script type="text/javascript">
+            /*****
+             * Load required elements at the end of the page
+             *
+             ****/  
+            myFunc = function(){
+                loadHtmlUrl = '/html5/page/load-html?page=';
+    
+                // load mytrip/index
+                $.ajax({
+                    'async' : false,
+                    'url': loadHtmlUrl + 'mytrip/index',
+                    'success': function(content){
+                        //console.log(content);
+                        $('#my_trip_wrapper').html(content);
+                    }
+                });
+
+                // load friendtrip/index
+                $.ajax({
+                    'async' : false,
+                    'url': loadHtmlUrl + 'friendtrip/index',
+                    'success': function(content){
+                        $('#friend_trip_wrapper').html(content);
+                    }
+                });
+
+                $.ajax({
+                    'async' : false,
+                    'url': loadHtmlUrl + 'panel',
+                    'success': function(content){
+                        //console.log(content);
+                        $('#newPlanPanelAjax').html(content);
+                    }
+                });
+
+                /*$.ajax({
+            'async' : false,
+            'url': loadHtmlUrl + 'countrypanel',
+            'success': function(content){
+                //console.log(content);
+                $('#countryPlanPanelAjax').html(content);
+            }
+        });
+                 */
+                // load plan panel
+                /*    $.ajax({
+                'url': loadHtmlUrl + 'panel',
+                'success': function(content){
+                    $('#loadPlanPanel').html(content);
+                }
+            });
+                 */
+            }
+            // load some phtml files
+            myFunc();
+
+        </script>
+        <!-- Bing Conversion -->
+        <script type="text/javascript">
+
+            // default properties
+            BingConversion = {
+                'siteID' : 'd9f94187-9a55-4169-a6a3-133e7fd60ab2',
+                'domainID' : '1865597',
+                'actionID' : '108894'
+            }
+
+            // put conversion code scripts to DOM
+            BingConversion.get = function(actionID){
+                return true;
+            }
+
+
+
+        </script>
+
+        <!-- End Bing Conversion -->
+    <script type="text/javascript">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.src=(("http:"===document.location.protocol)?"http:":"https:")+"//"+"js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrfj","beacon-5.newrelic.com","7bc0630498","1644205","MQZSbUZUXUpXUU1RXQhMcVpAXFxXGVpNVV5TTFlXUFBLFl9cXV1K",0,439,new Date().getTime(),"","","","",""]);</script>
+</body>
+</html>

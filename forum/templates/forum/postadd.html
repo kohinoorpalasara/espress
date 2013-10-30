@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>New post</title>
+</head>
+
+
+<body>
+
+<form action="{% url 'postperform' %}" method="POST" id="newpost" name="newpost">
+	{% csrf_token %}
+<b>Description</b><br>
+	<textarea rows="5" cols="70" name= "description"></textarea>
+<br>
+	<button style="float:center" class="btn btn-large btn-primary" type="submit">Post</button>
+
+</form>
+
+</body>
+</html>

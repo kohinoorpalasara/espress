@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>Login</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-reponsive.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-reponsive.min.css">
+
+	<script src = "{{ STATIC_URL }}js/jquery.js"></script>
+		
+
+
+</head>
+
+	<body>
+	
+
+		<ul class="nav nav-pills">
+		  <li class="dropdownloc">
+		    <a class="dropdown-toggle"
+		       href="/forum">
+		        Home
+		        <b class="caret"></b>
+		      </a>
+		    <ul class="dropdown-menu">
+		      <!-- links -->
+		    </ul>
+		  </li>
+		</ul>
+
+		<a class="brand" href="./login">Espress</a>
+
+
+
+	<div style="background:red">{{ error }}</div>
+	<div style="height:20px"></div>
+	<form method="post" action="{% url 'performlogin' %}">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>Username : </td>
+				<td><input type="text" name="username"></td>
+			</tr>
+			<tr>
+				<td>Password : </td>
+				<td><input type="password" name="password"></td>
+			</tr>
+		</table>
+		<input type="submit">
+	</form>
+</body>
+
+</html>
