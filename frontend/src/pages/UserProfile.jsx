@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { formatDistanceToNow } from 'date-fns'
 import client from '../api/client'
 import PostCard from '../components/PostCard'
 
-function AuthorAvatar({ username }) {
-  const colors = [
-    'bg-rose-500', 'bg-violet-500', 'bg-blue-500', 'bg-emerald-500',
-    'bg-amber-500', 'bg-pink-500', 'bg-indigo-500', 'bg-teal-500',
-  ]
-  const color = colors[(username?.charCodeAt(0) || 0) % colors.length]
-  return (
-    <div className={`w-24 h-24 ${color} rounded-full flex items-center justify-center text-white font-extrabold text-4xl`}>
-      {username?.[0]?.toUpperCase() || '?'}
-    </div>
-  )
+function getInitials(user) {
+  if (!user) return '?'
+  const first = user.first_name?.[0] || ''
+  const last = user.last_name?.[0] || ''
+  return (first + last).toUpperCase() || user.username?.[0]?.toUpperCase() || '?'
 }
 
 export default function UserProfile() {
@@ -22,110 +15,108 @@ export default function UserProfile() {
   const [profile, setProfile] = useState(null)
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
 
   useEffect(() => {
-    Promise.all([
-      client.get(`/users/${id}/`),
-      client.get(`/posts/?user=${id}`),
-    ])
-      .then(([profileRes, postsRes]) => {
-        setProfile(profileRes.data)
-        setPosts(postsRes.data)
+    client.get(`/profiles/${id}/`)
+      .then(res => {
+        setProfile(res.data)
+        return client.get('/posts/')
       })
-      .catch(() => setError('Failed to load profile.'))
+      .then(postsRes => {
+        const userPosts = postsRes.data.filter(p => p.author?.id === parseInt(id))
+        setPosts(userPosts)
+      })
+      .catch(() => {})
       .finally(() => setLoading(false))
   }, [id])
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-10 animate-pulse space-y-6">
-        <div className="flex items-center gap-6">
-          <div className="w-24 h-24 bg-gray-200 rounded-full" />
-          <div className="space-y-3">
-            <div className="h-6 bg-gray-200 rounded w-36" />
-            <div className="h-4 bg-gray-200 rounded w-24" />
+      <div className="pt-16 min-h-screen bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 py-10 animate-pulse space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-20 rounded-full bg-gray-200" />
+            <div className="space-y-2">
+              <div className="h-6 bg-gray-200 rounded w-40" />
+              <div className="h-4 bg-gray-200 rounded w-24" />
+            </div>
           </div>
+          <div className="h-20 bg-gray-200 rounded" />
         </div>
       </div>
     )
   }
 
-  if (error || !profile) {
+  if (!profile) {
     return (
-      <div className="text-center py-20">
-        <p className="text-red-500">{error || 'User not found.'}</p>
-        <Link to="/" className="text-amber-600 underline mt-4 inline-block">Go Home</Link>
+      <div className="pt-16 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">User not found</h2>
+          <Link to="/explore" className="text-orange-500 hover:underline">Back to Explore</Link>
+        </div>
       </div>
     )
   }
 
-  const joinedDate = profile.profile?.joined_date
-    ? formatDistanceToNow(new Date(profile.profile.joined_date), { addSuffix: true })
+  const user = profile.user
+  const fullName = [user?.first_name, user?.last_name].filter(Boolean).join(' ') || user?.username
+
+  const memberSince = user?.date_joined
+    ? new Date(user.date_joined).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
     : null
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Profile Card */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <AuthorAvatar username={profile.username} />
-          <div className="flex-1">
-            <h1 className="text-3xl font-extrabold text-gray-900">
-              {profile.first_name && profile.last_name
-                ? `${profile.first_name} ${profile.last_name}`
-                : profile.username}
-            </h1>
-            <p className="text-gray-500 text-sm mt-0.5">@{profile.username}</p>
-
-            {profile.profile?.location && (
-              <p className="mt-2 text-sm text-gray-600 flex items-center gap-1.5">
-                <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                {profile.profile.location}
-              </p>
-            )}
-
-            {profile.profile?.bio && (
-              <p className="mt-3 text-gray-700 leading-relaxed">{profile.profile.bio}</p>
-            )}
-
-            <div className="flex items-center gap-5 mt-4 text-sm text-gray-500">
-              {joinedDate && (
-                <span className="flex items-center gap-1.5">
+    <div className="pt-16 min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        {/* Profile card */}
+        <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
+          <div className="flex items-start gap-6">
+            <div className="w-20 h-20 rounded-full bg-orange-400 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+              {getInitials(user)}
+            </div>
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-gray-900">{fullName}</h1>
+              <p className="text-gray-500">@{user?.username}</p>
+              {profile.location && (
+                <p className="text-gray-500 mt-1 flex items-center gap-1">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  Joined {joinedDate}
-                </span>
+                  {profile.location}
+                </p>
               )}
-              <span className="flex items-center gap-1.5">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                </svg>
-                <strong className="text-gray-900">{profile.post_count}</strong> posts
-              </span>
+              {memberSince && (
+                <p className="text-gray-400 text-sm mt-1">Member since {memberSince}</p>
+              )}
             </div>
           </div>
+
+          {profile.bio && (
+            <div className="mt-6 pt-6 border-t border-gray-100">
+              <p className="text-gray-700 leading-relaxed">{profile.bio}</p>
+            </div>
+          )}
         </div>
+
+        {/* Posts */}
+        <h2 className="text-xl font-bold text-gray-900 mb-4">
+          Posts by @{user?.username}
+        </h2>
+
+        {posts.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+            <div className="text-4xl mb-3">✍️</div>
+            <p className="text-gray-500">No posts yet.</p>
+          </div>
+        ) : (
+          <div className="grid gap-4">
+            {posts.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Posts */}
-      <h2 className="text-2xl font-bold text-gray-900 mb-5">Travel Stories</h2>
-
-      {posts.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-2xl border border-gray-100">
-          <div className="text-4xl mb-3">✍️</div>
-          <p className="text-gray-500">No posts yet.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      )}
     </div>
   )
 }

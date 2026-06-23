@@ -1,52 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { formatDistanceToNow, format } from 'date-fns'
+import { useState, useEffect } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import client from '../api/client'
-import { useAuth } from '../context/AuthContext'
 import CommentSection from '../components/CommentSection'
+import { useAuth } from '../context/AuthContext'
 
-function AuthorAvatar({ username, size = 'md' }) {
-  const colors = [
-    'bg-rose-500', 'bg-violet-500', 'bg-blue-500', 'bg-emerald-500',
-    'bg-amber-500', 'bg-pink-500', 'bg-indigo-500', 'bg-teal-500',
-  ]
-  const color = colors[(username?.charCodeAt(0) || 0) % colors.length]
-  const sizeClass = size === 'md' ? 'w-10 h-10 text-base' : 'w-14 h-14 text-xl'
-  return (
-    <div className={`${sizeClass} ${color} rounded-full flex items-center justify-center text-white font-bold flex-shrink-0`}>
-      {username?.[0]?.toUpperCase() || '?'}
-    </div>
-  )
+function getInitials(user) {
+  if (!user) return '?'
+  const first = user.first_name?.[0] || ''
+  const last = user.last_name?.[0] || ''
+  return (first + last).toUpperCase() || user.username?.[0]?.toUpperCase() || '?'
 }
 
 export default function PostDetail() {
   const { id } = useParams()
   const { user } = useAuth()
+  const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
   const [liked, setLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(0)
   const [liking, setLiking] = useState(false)
 
   useEffect(() => {
     client.get(`/posts/${id}/`)
-      .then((res) => {
+      .then(res => {
         setPost(res.data)
         setLiked(res.data.is_liked)
         setLikesCount(res.data.likes_count)
       })
-      .catch(() => setError('Failed to load post.'))
+      .catch(() => {})
       .finally(() => setLoading(false))
   }, [id])
 
   const handleLike = async () => {
-    if (!user) { window.location.href = '/login'; return }
+    if (!user) { navigate('/login'); return }
+    if (liking) return
     setLiking(true)
     try {
       const res = await client.post(`/posts/${id}/like/`)
       setLiked(res.data.liked)
-      setLikesCount(res.data.likes_count)
+      setLikesCount(res.data.count)
     } catch {
       // ignore
     } finally {
@@ -56,83 +49,105 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-10 animate-pulse space-y-4">
-        <div className="h-6 bg-gray-200 rounded w-24" />
-        <div className="h-10 bg-gray-200 rounded w-3/4" />
-        <div className="h-4 bg-gray-200 rounded w-full" />
-        <div className="h-4 bg-gray-200 rounded w-full" />
-        <div className="h-4 bg-gray-200 rounded w-2/3" />
-      </div>
-    )
-  }
-
-  if (error || !post) {
-    return (
-      <div className="text-center py-20">
-        <p className="text-red-500">{error || 'Post not found.'}</p>
-        <Link to="/cities" className="text-amber-600 underline mt-4 inline-block">Back to Cities</Link>
-      </div>
-    )
-  }
-
-  return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* City Badge */}
-      {post.city && (
-        <Link
-          to={`/cities/${post.city.id}`}
-          className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1.5 rounded-full mb-5 hover:bg-amber-200 transition-colors"
-        >
-          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-          </svg>
-          {post.city.name}, {post.city.country}
-        </Link>
-      )}
-
-      <h1 className="text-4xl font-extrabold text-gray-900 leading-tight mb-6">{post.title}</h1>
-
-      {/* Author */}
-      <div className="flex items-center gap-3 mb-8">
-        <AuthorAvatar username={post.author?.username} />
-        <div>
-          <Link to={`/profile/${post.author?.id}`} className="font-semibold text-gray-900 hover:text-amber-600 transition-colors">
-            {post.author?.username}
-          </Link>
-          <p className="text-sm text-gray-400">
-            {post.created_at ? format(new Date(post.created_at), 'MMMM d, yyyy') : ''}
-            {' · '}
-            {post.created_at ? formatDistanceToNow(new Date(post.created_at), { addSuffix: true }) : ''}
-          </p>
+      <div className="pt-16 min-h-screen bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 py-10 space-y-4 animate-pulse">
+          <div className="h-10 bg-gray-200 rounded w-3/4" />
+          <div className="h-4 bg-gray-200 rounded w-1/2" />
+          <div className="h-64 bg-gray-200 rounded" />
         </div>
       </div>
+    )
+  }
 
-      {/* Body */}
-      <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-10 whitespace-pre-wrap">
-        {post.body}
+  if (!post) {
+    return (
+      <div className="pt-16 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">Post not found</h2>
+          <Link to="/explore" className="text-orange-500 hover:underline">Back to Explore</Link>
+        </div>
       </div>
+    )
+  }
 
-      {/* Like */}
-      <div className="flex items-center gap-4 py-6 border-y border-gray-100">
+  const formattedDate = new Date(post.created_at).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  })
+
+  return (
+    <div className="pt-16 min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        {/* Back button */}
         <button
-          onClick={handleLike}
-          disabled={liking}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
-            liked
-              ? 'bg-rose-100 text-rose-600 hover:bg-rose-200'
-              : 'bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500'
-          }`}
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-gray-500 hover:text-orange-500 mb-6 transition-colors"
         >
-          <svg className="w-5 h-5" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          {liked ? 'Liked' : 'Like'}
-          <span className="bg-white/60 px-2 py-0.5 rounded-full">{likesCount}</span>
+          Back
         </button>
-        <span className="text-gray-400 text-sm">{post.comment_count} comments</span>
-      </div>
 
-      <CommentSection postId={id} />
+        <div className="bg-white rounded-xl shadow-sm p-8">
+          {/* City badge */}
+          {post.city && (
+            <Link
+              to={`/cities/${post.city.id}`}
+              className="inline-block bg-orange-100 text-orange-700 text-sm font-medium px-3 py-1 rounded-full mb-4 hover:bg-orange-200 transition-colors"
+            >
+              {post.city.name}, {post.city.country}
+            </Link>
+          )}
+
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h1>
+
+          {/* Author row */}
+          <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+            <div className="w-10 h-10 rounded-full bg-orange-400 flex items-center justify-center text-white font-semibold text-sm">
+              {getInitials(post.author)}
+            </div>
+            <div>
+              <Link to={`/profile/${post.author?.id}`} className="font-medium text-gray-900 hover:text-orange-500 transition-colors">
+                @{post.author?.username}
+              </Link>
+              <p className="text-sm text-gray-500">{formattedDate}</p>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="text-gray-700 leading-relaxed whitespace-pre-wrap mb-8 text-base">
+            {post.body}
+          </div>
+
+          {/* Like button */}
+          <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+            <button
+              onClick={handleLike}
+              disabled={liking}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 font-medium transition-all ${
+                liked
+                  ? 'border-red-400 bg-red-50 text-red-500'
+                  : 'border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500'
+              }`}
+            >
+              <svg
+                className="w-5 h-5"
+                fill={liked ? 'currentColor' : 'none'}
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              {likesCount} {likesCount === 1 ? 'like' : 'likes'}
+            </button>
+          </div>
+        </div>
+
+        {/* Comments */}
+        <div className="bg-white rounded-xl shadow-sm p-8 mt-6">
+          <CommentSection postId={post.id} initialComments={post.comments || []} />
+        </div>
+      </div>
     </div>
   )
 }

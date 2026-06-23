@@ -1,132 +1,163 @@
-import React, { useState } from 'react'
-import { Link, useNavigate, Navigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function Register() {
-  const { user, register, loading } = useAuth()
+  const { register, login } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState({
-    username: '', email: '', password: '', first_name: '', last_name: '',
+    first_name: '',
+    last_name: '',
+    username: '',
+    email: '',
+    password: '',
+    password2: '',
   })
   const [error, setError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  if (!loading && user) return <Navigate to="/" replace />
+  const handleChange = e => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  }
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    setSubmitting(true)
     setError('')
+    if (form.password !== form.password2) {
+      setError('Passwords do not match.')
+      return
+    }
+    if (form.password.length < 8) {
+      setError('Password must be at least 8 characters.')
+      return
+    }
+    setLoading(true)
     try {
       await register(form)
-      navigate('/')
+      await login(form.username, form.password)
+      navigate('/explore')
     } catch (err) {
       const data = err.response?.data
       if (data) {
-        const msgs = Object.entries(data).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join(' | ')
-        setError(msgs)
+        const messages = Object.values(data).flat().join(' ')
+        setError(messages || 'Registration failed. Please try again.')
       } else {
         setError('Registration failed. Please try again.')
       }
     } finally {
-      setSubmitting(false)
+      setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-10">
+    <div className="pt-16 min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-extrabold text-amber-500">Espress ✈</Link>
-          <h1 className="text-2xl font-bold text-gray-900 mt-3">Join the community</h1>
-          <p className="text-gray-500 mt-1">Start sharing your travel stories</p>
-        </div>
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="text-center mb-8">
+            <div className="text-4xl mb-2">✈</div>
+            <h1 className="text-2xl font-bold text-gray-900">Join Espress</h1>
+            <p className="text-gray-500 mt-1">Create your free travel community account</p>
+          </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 space-y-4">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm">
               {error}
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  value={form.first_name}
+                  onChange={handleChange}
+                  placeholder="First name"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={form.last_name}
+                  onChange={handleChange}
+                  placeholder="Last name"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                />
+              </div>
+            </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Username <span className="text-red-500">*</span></label>
               <input
                 type="text"
-                name="first_name"
-                value={form.first_name}
+                name="username"
+                value={form.username}
                 onChange={handleChange}
-                placeholder="Alex"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                placeholder="Choose a username"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                required
+                autoComplete="username"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
               <input
-                type="text"
-                name="last_name"
-                value={form.last_name}
+                type="email"
+                name="email"
+                value={form.email}
                 onChange={handleChange}
-                placeholder="Morrison"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                placeholder="your@email.com"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                required
+                autoComplete="email"
               />
             </div>
-          </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Password <span className="text-red-500">*</span></label>
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                placeholder="At least 8 characters"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                required
+                autoComplete="new-password"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Confirm Password <span className="text-red-500">*</span></label>
+              <input
+                type="password"
+                name="password2"
+                value={form.password2}
+                onChange={handleChange}
+                placeholder="Repeat your password"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                required
+                autoComplete="new-password"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-3 rounded-full font-semibold transition-colors mt-2"
+            >
+              {loading ? 'Creating account...' : 'Create Account'}
+            </button>
+          </form>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Username *</label>
-            <input
-              type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              placeholder="traveler123"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Password *</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="At least 6 characters"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 text-white font-bold py-3.5 rounded-xl transition-colors mt-2"
-          >
-            {submitting ? 'Creating account...' : 'Create Account'}
-          </button>
-
-          <p className="text-center text-sm text-gray-500 pt-2">
+          <p className="text-center text-gray-500 mt-6 text-sm">
             Already have an account?{' '}
-            <Link to="/login" className="text-amber-600 font-semibold hover:underline">Sign in</Link>
+            <Link to="/login" className="text-orange-500 hover:text-orange-600 font-medium">
+              Sign in
+            </Link>
           </p>
-        </form>
+        </div>
       </div>
     </div>
   )
