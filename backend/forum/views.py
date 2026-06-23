@@ -1,113 +1,105 @@
 from django.contrib.auth.models import User
-from rest_framework import generics, viewsets, status
+from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-
-from .models import City, Post, Comment, Like, UserProfile
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import UserProfile, City, Post, Comment, Like
 from .serializers import (
-    RegisterSerializer, UserSerializer, UserProfileSerializer,
-    CitySerializer, PostSerializer, CommentSerializer
+    UserSerializer, RegisterSerializer, CitySerializer,
+    PostSerializer, CommentSerializer
 )
 
+class RegisterView(APIView):
+    permission_classes = [permissions.AllowAny]
 
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'user': UserSerializer(user).data,
+                'access': str(refresh.access_token),
+                'refresh': str(refresh),
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+class MeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
 
-
-class MeView(generics.RetrieveAPIView):
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        return self.request.user
-
-
-class CommentCreateView(generics.CreateAPIView):
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
-
-    def perform_create(self, serializer):
-        post_id = self.request.data.get('post_id')
-        post = generics.get_object_or_404(Post, pk=post_id)
-        serializer.save(post=post, author=self.request.user)
-
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 class CityViewSet(viewsets.ModelViewSet):
     queryset = City.objects.all()
     serializer_class = CitySerializer
 
-    def get_queryset(self):
-        qs = City.objects.all()
-        continent = self.request.query_params.get('continent')
-        search = self.request.query_params.get('search')
-        if continent:
-            qs = qs.filter(continent=continent)
-        if search:
-            qs = qs.filter(name__icontains=search)
-        return qs
-
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
 
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        qs = Post.objects.select_related('author', 'city').all()
+        queryset = Post.objects.select_related('author', 'city').all().order_by('-created_at')
         city_id = self.request.query_params.get('city')
-        author_id = self.request.query_params.get('author')
         if city_id:
-            qs = qs.filter(city_id=city_id)
-        if author_id:
-            qs = qs.filter(author_id=author_id)
-        return qs
+            queryset = queryset.filter(city_id=city_id)
+        user_id = self.request.query_params.get('user')
+        if user_id:
+            queryset = queryset.filter(author_id=user_id)
+        return queryset
 
-    def get_serializer_context(self):
-        return {'request': self.request}
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-    def destroy(self, request, *args, **kwargs):
-        post = self.get_object()
-        if post.author != request.user:
-            return Response({'detail': 'Not allowed.'}, status=status.HTTP_403_FORBIDDEN)
-        post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
-    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
     def like(self, request, pk=None):
         post = self.get_object()
         like, created = Like.objects.get_or_create(post=post, user=request.user)
         if not created:
             like.delete()
+            post.likes_count = max(0, post.likes_count - 1)
+            post.save()
             return Response({'liked': False, 'likes_count': post.likes_count})
+        post.likes_count += 1
+        post.save()
         return Response({'liked': True, 'likes_count': post.likes_count})
 
-    @action(detail=True, methods=['get', 'post'])
+    @action(detail=True, methods=['get', 'post'], permission_classes=[permissions.IsAuthenticatedOrReadOnly])
     def comments(self, request, pk=None):
         post = self.get_object()
         if request.method == 'GET':
-            comments = post.comments.select_related('author').all()
-            return Response(CommentSerializer(comments, many=True).data)
-        if not request.user.is_authenticated:
-            return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+            comments = post.comments.select_related('author').order_by('created_at')
+            serializer = CommentSerializer(comments, many=True)
+            return Response(serializer.data)
         serializer = CommentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(post=post, author=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            serializer.save(post=post, author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserProfileView(APIView):
+    permission_classes = [permissions.AllowAny]
 
-class UserProfileView(generics.RetrieveAPIView):
-    serializer_class = UserProfileSerializer
-
-    def get_object(self):
-        user = generics.get_object_or_404(User, pk=self.kwargs['pk'])
-        profile, _ = UserProfile.objects.get_or_create(user=user)
-        return profile
+    def get(self, request, pk):
+        try:
+            user = User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
