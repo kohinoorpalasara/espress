@@ -78,10 +78,10 @@ images:
   - 'gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA'
   - 'gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA'
 
-# Leave _CLOUDSQL_INSTANCE empty to deploy on SQLite. Set it to
-# PROJECT:REGION:INSTANCE (in the trigger's substitutions) to switch to Cloud SQL.
+# _CLOUDSQL_INSTANCE points at the Cloud SQL instance (PROJECT:REGION:INSTANCE).
+# Clear it (here or in the trigger's substitutions) to fall back to SQLite.
 substitutions:
-  _CLOUDSQL_INSTANCE: ''
+  _CLOUDSQL_INSTANCE: 'vertex-ai-507310:australia-southeast1:espress-db'
   _DB_NAME: 'espress'
   _DB_USER: 'espress'
   _SECRET_KEY_NAME: 'django-secret-key'
