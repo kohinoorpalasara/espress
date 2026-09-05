@@ -4,22 +4,21 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA'
+      - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:$COMMIT_SHA'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/espress-backend:latest'
+      - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:latest'
       - './backend'
 
   # Push backend image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA']
+    args: ['push', 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:$COMMIT_SHA']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/espress-backend:latest']
+    args: ['push', 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:latest']
 
   # Deploy backend to Cloud Run.
   # Repeated --set-env-vars flags overwrite each other in gcloud, so every var
   # goes in one comma-separated flag. Cloud SQL flags are only added when
-  # _CLOUDSQL_INSTANCE is set, so this still deploys on SQLite before the
-  # database exists.
+  # _CLOUDSQL_INSTANCE is set; blank it out to fall back to SQLite.
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: bash
     args:
@@ -37,7 +36,7 @@ steps:
         fi
 
         gcloud run deploy espress \
-          --image=gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA \
+          --image=australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:$COMMIT_SHA \
           --region=australia-southeast1 \
           --platform=managed \
           --allow-unauthenticated \
@@ -50,16 +49,16 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA'
+      - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:$COMMIT_SHA'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/espress-frontend:latest'
+      - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:latest'
       - './frontend'
 
   # Push frontend image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA']
+    args: ['push', 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:$COMMIT_SHA']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/espress-frontend:latest']
+    args: ['push', 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:latest']
 
   # Deploy frontend to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -68,15 +67,15 @@ steps:
       - 'run'
       - 'deploy'
       - 'espress-frontend'
-      - '--image=gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA'
+      - '--image=australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:$COMMIT_SHA'
       - '--region=australia-southeast1'
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--port=8080'
 
 images:
-  - 'gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA'
-  - 'gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA'
+  - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-backend:$COMMIT_SHA'
+  - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:$COMMIT_SHA'
 
 # _CLOUDSQL_INSTANCE points at the Cloud SQL instance (PROJECT:REGION:INSTANCE).
 # Clear it (here or in the trigger's substitutions) to fall back to SQLite.

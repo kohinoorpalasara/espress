@@ -107,6 +107,26 @@ Base URL: `http://localhost:8000/api/`
 
 Region for both: `australia-southeast1`. Project: `vertex-ai-507310`.
 
+### One-time: create the Artifact Registry repo
+
+Images push to `australia-southeast1-docker.pkg.dev/<project>/espress/`. That
+repo must exist before the first build — Cloud Build will **not** create it on
+push (that needs the `artifactregistry.repositories.createOnPush` permission,
+which the default Cloud Build service account does not have):
+
+```bash
+gcloud artifacts repositories create espress \
+  --repository-format=docker \
+  --location=australia-southeast1
+```
+
+Or in the Console: **Artifact Registry → Create Repository** → name `espress`,
+format Docker, region `australia-southeast1`.
+
+Without it the build fails at the push step with
+`denied: ... repo does not exist. Creating on push requires the
+artifactregistry.repositories.createOnPush permission`.
+
 ### Option 1: Cloud Build CI/CD (Recommended)
 
 Push to `master` (this repo's default branch — **not** `main`) to auto-deploy
