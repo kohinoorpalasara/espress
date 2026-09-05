@@ -36,7 +36,7 @@ steps:
           EXTRA="$${EXTRA} --set-secrets=SECRET_KEY=${_SECRET_KEY_NAME}:latest,DB_PASSWORD=${_DB_PASSWORD_SECRET}:latest"
         fi
 
-        gcloud run deploy espress-backend \
+        gcloud run deploy espress \
           --image=gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA \
           --region=australia-southeast1 \
           --platform=managed \
