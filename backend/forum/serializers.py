@@ -5,7 +5,7 @@ from .models import UserProfile, City, Post, Comment, Like
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['bio', 'avatar_url', 'location', 'joined_date']
+        fields = ['bio', 'avatar_url', 'location']
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer(read_only=True)
@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'profile', 'post_count']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'profile', 'post_count']
 
     def get_post_count(self, obj):
         return obj.posts.count()
