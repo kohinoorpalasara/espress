@@ -98,22 +98,42 @@ Base URL: `http://localhost:8000/api/`
 | `DB_HOST` | Host override, used only when `INSTANCE_CONNECTION_NAME` is unset | `127.0.0.1` |
 | `SEED_ON_START` | Seed cities/posts on container start (idempotent) | `true` |
 
+### Services
+
+| Cloud Run service | Source | Notes |
+|---|---|---|
+| `espress` | `backend/` (root `Dockerfile`) | The Django API. Owns the public URL. |
+| `espress-frontend` | `frontend/` | React SPA served by nginx. |
+
+Region for both: `australia-southeast1`. Project: `vertex-ai-507310`.
+
 ### Option 1: Cloud Build CI/CD (Recommended)
 
-Push to main to auto-deploy both services:
+Push to `master` (this repo's default branch — **not** `main`) to auto-deploy
+both services:
 
 ```bash
 gcloud builds submit --config cloudbuild.yaml
 ```
 
-Or connect via the Cloud Run Console → **Create Service** → **Continuously deploy from a source repository** → select this GitHub repo.
+> **The trigger must be pointed at `cloudbuild.yaml`.** The Cloud Run
+> "Continuously deploy from a repository" wizard creates a trigger that builds
+> the root `Dockerfile` with its own inline config and **ignores this file**.
+> If that trigger is what's running, nothing in `cloudbuild.yaml` — Cloud SQL,
+> secrets, env vars — takes effect. Check Cloud Build → Triggers →
+> Configuration; it should read *Cloud Build configuration file* → `/cloudbuild.yaml`.
+> Also confirm the branch pattern is `^master$`.
+
+If the live URL serves a "Sorry, this is just a placeholder" page, the service
+is still running `gcr.io/cloudrun/placeholder` and no build has ever deployed
+to it successfully.
 
 ### Option 2: Manual Deploy
 
 ```bash
 # Backend
 cd backend
-gcloud run deploy espress-backend \
+gcloud run deploy espress \
   --source . \
   --region australia-southeast1 \
   --allow-unauthenticated \
@@ -179,22 +199,30 @@ for s in django-secret-key espress-db-password; do
 done
 ```
 
-**4. Point the service at it**
+**4. Nothing to wire up — it's already in `cloudbuild.yaml`**
 
-```bash
-INSTANCE="$(gcloud config get-value project):australia-southeast1:espress-db"
+The instance is set there as a substitution:
 
-gcloud run services update espress \
-  --region=australia-southeast1 \
-  --add-cloudsql-instances="$INSTANCE" \
-  --set-env-vars="DEBUG=False,ALLOWED_HOSTS=*,SEED_ON_START=true" \
-  --set-env-vars="DB_NAME=espress,DB_USER=espress,INSTANCE_CONNECTION_NAME=$INSTANCE" \
-  --set-secrets="SECRET_KEY=django-secret-key:latest,DB_PASSWORD=espress-db-password:latest"
+```yaml
+substitutions:
+  _CLOUDSQL_INSTANCE: 'vertex-ai-507310:australia-southeast1:espress-db'
 ```
 
+When it's non-empty, the deploy step adds `--add-cloudsql-instances`, sets
+`DB_NAME`/`DB_USER`/`INSTANCE_CONNECTION_NAME`, and pulls `SECRET_KEY` and
+`DB_PASSWORD` from Secret Manager.
+
+> Because this is set, **every build now requires** the `espress-db` instance
+> and both secrets to exist, with `roles/secretmanager.secretAccessor` granted
+> to the runtime service account. If any are missing the deploy step fails and
+> the service keeps serving its previous revision.
+>
+> To fall back to SQLite (no instance, no secrets needed — useful for getting a
+> first green deploy), set `_CLOUDSQL_INSTANCE: ''`.
+
 `startup.sh` runs `migrate` on every start, so the schema is created on the
-first deploy against the new database. Once real data exists, drop
-`SEED_ON_START` so the sample content stops being re-inserted.
+first deploy against the new database. Once real data exists, set
+`_SEED_ON_START: 'false'` so the sample content stops being re-inserted.
 
 ---
 
