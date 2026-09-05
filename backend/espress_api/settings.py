@@ -56,14 +56,21 @@ WSGI_APPLICATION = 'espress_api.wsgi.application'
 
 _db_name = os.environ.get('DB_NAME')
 if _db_name:
+    # On Cloud Run, INSTANCE_CONNECTION_NAME makes Django talk to Cloud SQL over
+    # the /cloudsql unix socket the runtime mounts; DB_HOST is the escape hatch
+    # for the proxy or any other host.
+    _instance = os.environ.get('INSTANCE_CONNECTION_NAME')
+    _host = f'/cloudsql/{_instance}' if _instance else os.environ.get('DB_HOST', '127.0.0.1')
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': _db_name,
             'USER': os.environ.get('DB_USER', 'postgres'),
             'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-            'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+            'HOST': _host,
             'PORT': os.environ.get('DB_PORT', '5432'),
+            'CONN_MAX_AGE': 60,
         }
     }
 else:
@@ -72,7 +79,7 @@ else:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-}
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

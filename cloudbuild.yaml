@@ -15,20 +15,35 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/espress-backend:latest']
 
-  # Deploy backend to Cloud Run
+  # Deploy backend to Cloud Run.
+  # Repeated --set-env-vars flags overwrite each other in gcloud, so every var
+  # goes in one comma-separated flag. Cloud SQL flags are only added when
+  # _CLOUDSQL_INSTANCE is set, so this still deploys on SQLite before the
+  # database exists.
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
+    entrypoint: bash
     args:
-      - 'run'
-      - 'deploy'
-      - 'espress-backend'
-      - '--image=gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA'
-      - '--region=australia-southeast1'
-      - '--platform=managed'
-      - '--allow-unauthenticated'
-      - '--port=8080'
-      - '--set-env-vars=DEBUG=False'
-      - '--set-env-vars=ALLOWED_HOSTS=*'
+      - '-c'
+      - |
+        set -e
+        ENV_VARS="DEBUG=False,ALLOWED_HOSTS=*,SEED_ON_START=${_SEED_ON_START}"
+        EXTRA=""
+
+        if [ -n "${_CLOUDSQL_INSTANCE}" ]; then
+          ENV_VARS="$${ENV_VARS},DB_NAME=${_DB_NAME},DB_USER=${_DB_USER}"
+          ENV_VARS="$${ENV_VARS},INSTANCE_CONNECTION_NAME=${_CLOUDSQL_INSTANCE}"
+          EXTRA="--add-cloudsql-instances=${_CLOUDSQL_INSTANCE}"
+          EXTRA="$${EXTRA} --set-secrets=SECRET_KEY=${_SECRET_KEY_NAME}:latest,DB_PASSWORD=${_DB_PASSWORD_SECRET}:latest"
+        fi
+
+        gcloud run deploy espress-backend \
+          --image=gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA \
+          --region=australia-southeast1 \
+          --platform=managed \
+          --allow-unauthenticated \
+          --port=8080 \
+          --set-env-vars="$${ENV_VARS}" \
+          $${EXTRA}
 
   # Build frontend image
   - name: 'gcr.io/cloud-builders/docker'
@@ -62,6 +77,16 @@ steps:
 images:
   - 'gcr.io/$PROJECT_ID/espress-backend:$COMMIT_SHA'
   - 'gcr.io/$PROJECT_ID/espress-frontend:$COMMIT_SHA'
+
+# Leave _CLOUDSQL_INSTANCE empty to deploy on SQLite. Set it to
+# PROJECT:REGION:INSTANCE (in the trigger's substitutions) to switch to Cloud SQL.
+substitutions:
+  _CLOUDSQL_INSTANCE: ''
+  _DB_NAME: 'espress'
+  _DB_USER: 'espress'
+  _SECRET_KEY_NAME: 'django-secret-key'
+  _DB_PASSWORD_SECRET: 'espress-db-password'
+  _SEED_ON_START: 'true'
 
 options:
   logging: CLOUD_LOGGING_ONLY
