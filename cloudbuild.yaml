@@ -1,4 +1,22 @@
 steps:
+  # Ensure the Artifact Registry repo exists. Cloud Build will not create it on
+  # push, so a fresh project fails at the push step without this. Non-fatal:
+  # it already exists on every build after the first, and if the build service
+  # account lacks artifactregistry.repositories.create the push error below
+  # stays the actionable one.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        gcloud artifacts repositories describe espress \
+          --location=australia-southeast1 >/dev/null 2>&1 && exit 0
+        echo "Artifact Registry repo 'espress' not found, creating it..."
+        gcloud artifacts repositories create espress \
+          --repository-format=docker \
+          --location=australia-southeast1 \
+          || echo "Could not create it; create the repo manually (see README)."
+
   # Build backend image
   - name: 'gcr.io/cloud-builders/docker'
     args:
