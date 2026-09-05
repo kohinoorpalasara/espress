@@ -113,7 +113,7 @@ Or connect via the Cloud Run Console → **Create Service** → **Continuously d
 cd backend
 gcloud run deploy espress-backend \
   --source . \
-  --region us-central1 \
+  --region australia-southeast1 \
   --allow-unauthenticated \
   --port 8080 \
   --set-env-vars "SECRET_KEY=your-key,DEBUG=False"
@@ -122,7 +122,7 @@ gcloud run deploy espress-backend \
 cd frontend
 gcloud run deploy espress-frontend \
   --source . \
-  --region us-central1 \
+  --region australia-southeast1 \
   --allow-unauthenticated \
   --port 8080
 ```
