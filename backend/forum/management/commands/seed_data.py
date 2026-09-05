@@ -80,7 +80,7 @@ class Command(BaseCommand):
                 'country': 'Italy',
                 'continent': 'EU',
                 'description': 'The Eternal City is an open-air museum where every cobblestone has a story. Walking from the Colosseum to the Pantheon, tossing a coin in the Trevi Fountain, and savoring authentic Roman pasta are bucket-list experiences that never disappoint.',
-                'image_url': 'https://images.unsplash.com/photo-1552832230-c0197DD89863?w=800',
+                'image_url': 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
             },
             {
                 'name': 'Bangkok',

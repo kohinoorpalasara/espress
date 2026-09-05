@@ -21,7 +21,7 @@ function Bubble({ className }) {
 export default function PostCard({ post, showCity = true }) {
   const excerpt = post.body?.length > 180 ? post.body.slice(0, 180).trimEnd() + '…' : post.body
   return (
-    <Link to={`/posts/${post.id}`} className="block group" data-cursor="Read">
+    <Link to={`/posts/${post.id}`} className="block group">
       <Tilt max={3} lift={-3} className="glass rounded-3xl p-6 sm:p-7">
         <div className="flex items-center gap-3 mb-5">
           <Avatar user={post.author} size="md" />

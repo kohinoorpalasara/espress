@@ -34,7 +34,7 @@ export default function Register() {
     <AuthShell
       eyebrow="Join Espress"
       title={<>Somewhere is <span className="display-italic text-crema-400">waiting</span></>}
-      footer={<>Already have an account? <Link to="/login" className="text-crema-400 hover:text-crema-200 transition-colors" data-cursor="Sign in">Sign in</Link></>}
+      footer={<>Already have an account? <Link to="/login" className="text-crema-400 hover:text-crema-200 transition-colors">Sign in</Link></>}
     >
       <form onSubmit={submit} className="space-y-4">
         {error && <div className="rounded-2xl border border-red-400/30 bg-red-400/10 text-red-200 px-4 py-3 text-sm">{error}</div>}
@@ -53,7 +53,7 @@ export default function Register() {
         </div>
         <div className="field"><input type="password" name="password2" value={form.password2} onChange={set} placeholder=" " required autoComplete="new-password" /><label>Confirm password</label></div>
         <div className="pt-2">
-          <Button type="submit" size="lg" disabled={busy} className="w-full" cursor="Join" flip={false}>{busy ? 'Creating…' : 'Create account'}</Button>
+          <Button type="submit" size="lg" disabled={busy} className="w-full" flip={false}>{busy ? 'Creating…' : 'Create account'}</Button>
         </div>
       </form>
     </AuthShell>

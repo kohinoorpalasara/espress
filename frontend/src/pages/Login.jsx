@@ -23,7 +23,7 @@ export default function Login() {
     <AuthShell
       eyebrow="Welcome back"
       title={<>Pick up where you <span className="display-italic text-crema-400">left off</span></>}
-      footer={<>New here? <Link to="/register" className="text-crema-400 hover:text-crema-200 transition-colors" data-cursor="Join">Create an account</Link></>}
+      footer={<>New here? <Link to="/register" className="text-crema-400 hover:text-crema-200 transition-colors">Create an account</Link></>}
     >
       <form onSubmit={submit} className="space-y-4">
         {error && <div className="rounded-2xl border border-red-400/30 bg-red-400/10 text-red-200 px-4 py-3 text-sm">{error}</div>}
@@ -36,7 +36,7 @@ export default function Login() {
           <label>Password</label>
         </div>
         <div className="pt-2">
-          <Button type="submit" size="lg" disabled={busy} className="w-full" cursor="Sign in" flip={false}>{busy ? 'Signing in…' : 'Sign in'}</Button>
+          <Button type="submit" size="lg" disabled={busy} className="w-full" flip={false}>{busy ? 'Signing in…' : 'Sign in'}</Button>
         </div>
       </form>
     </AuthShell>

@@ -6,6 +6,8 @@ import Button from '../components/Button'
 import Reveal from '../components/Reveal'
 import Marquee from '../components/Marquee'
 import LiveClock from '../components/LiveClock'
+import Gallery from '../components/Gallery'
+import { featuredScenes } from '../lib/scenes'
 import { zoneFor, localHour, moodFor } from '../lib/time'
 
 const WORDS = ['changes you.', 'slows you down.', 'wakes you up.', 'stays with you.']
@@ -47,7 +49,7 @@ function Board({ cities }) {
               <Link
                 to={typeof c.id === 'number' ? `/cities/${c.id}` : '/explore'}
                 className="board-row grid grid-cols-2 sm:grid-cols-[1.4fr_1fr_1fr_1.2fr_.6fr_.4fr] gap-x-4 gap-y-1 items-center px-6 py-4 border-b hairline last:border-b-0"
-                data-cursor="Board"
+               
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <span className="font-display text-2xl tracking-tight">{c.name}</span>
@@ -103,8 +105,8 @@ export default function LandingPage() {
                 with the local time still ticking under every city.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button to="/explore" size="lg" cursor="Explore">Explore cities</Button>
-                <Button to="/register" size="lg" variant="ghost" cursor="Join">Join the community</Button>
+                <Button to="/explore" size="lg">Explore cities</Button>
+                <Button to="/register" size="lg" variant="ghost">Join the community</Button>
               </div>
             </Reveal>
             <Reveal delay={320} className="lg:col-span-6 lg:justify-self-end">
@@ -156,7 +158,7 @@ export default function LandingPage() {
               <h2 className="mt-3 font-display text-4xl sm:text-5xl tracking-tight">Where people are <span className="display-italic">writing from</span></h2>
             </Reveal>
             <Reveal delay={100}>
-              <Link to="/explore" className="hidden sm:inline-flex items-center gap-2 text-sm text-crema-400 hover:gap-3 transition-all" data-cursor="All">
+              <Link to="/explore" className="hidden sm:inline-flex items-center gap-2 text-sm text-crema-400 hover:gap-3 transition-all">
                 All cities <span aria-hidden>→</span>
               </Link>
             </Reveal>
@@ -168,6 +170,18 @@ export default function LandingPage() {
           </div>
         </section>
       )}
+
+      {/* Streets & plates */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 pt-32">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <Reveal>
+            <span className="eyebrow">Streets &amp; plates</span>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl tracking-tight">What the walk <span className="display-italic">tasted</span> like</h2>
+          </Reveal>
+          <Reveal delay={120}><p className="text-muted max-w-sm">The street you got lost on, and the thing you ate when you found your way back.</p></Reveal>
+        </div>
+        <Reveal delay={100}><Gallery scenes={featuredScenes(8)} /></Reveal>
+      </section>
 
       {/* Manifesto */}
       <section className="max-w-5xl mx-auto px-5 sm:px-8 pt-36">
@@ -199,7 +213,7 @@ export default function LandingPage() {
             ['03', 'Leave yours', 'Write while it still feels like something. Thirty seconds after you land is fine.'],
           ].map(([n, t, b], i) => (
             <Reveal key={n} delay={i * 100}>
-              <div className="glass rounded-3xl p-8 h-full group hover:-translate-y-1 transition-transform duration-500 ease-out" data-cursor="✦">
+              <div className="glass rounded-3xl p-8 h-full group hover:-translate-y-1 transition-transform duration-500 ease-out">
                 <div className="font-mono text-crema-400 text-sm">{n}</div>
                 <h3 className="mt-6 font-display text-3xl tracking-tight">{t}</h3>
                 <p className="mt-3 text-bone/65 leading-relaxed">{b}</p>
@@ -219,7 +233,7 @@ export default function LandingPage() {
               <div className="font-mono text-xs uppercase tracking-tag opacity-70">Boarding now</div>
               <h2 className="mt-4 font-display text-5xl sm:text-7xl tracking-tight leading-none">Ready when <span className="display-italic">you</span> are.</h2>
               <div className="mt-10 inline-flex">
-                <Link to="/register" className="btn bg-ink-900 text-bone px-8 py-4 text-base hover:bg-ink-800 transition-colors" data-cursor="Join">
+                <Link to="/register" className="btn bg-ink-900 text-bone px-8 py-4 text-base hover:bg-ink-800 transition-colors">
                   Create an account
                 </Link>
               </div>

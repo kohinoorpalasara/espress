@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import FlipText from './FlipText'
 import LiveClock from './LiveClock'
 
 const ZONES = [
@@ -25,7 +24,7 @@ export default function Footer() {
             <div className="eyebrow mb-5">Go</div>
             <ul className="space-y-3">
               {[['Explore cities', '/explore'], ['Write a story', '/create-post'], ['Join', '/register'], ['Sign in', '/login']].map(([l, to]) => (
-                <li key={to}><Link to={to} className="text-bone/80 hover:text-bone" data-cursor="Go"><FlipText>{l}</FlipText></Link></li>
+                <li key={to}><Link to={to} className="text-bone/80 hover:text-bone link-u">{l}</Link></li>
               ))}
             </ul>
           </div>

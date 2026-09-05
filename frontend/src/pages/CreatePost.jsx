@@ -75,8 +75,8 @@ export default function CreatePost() {
               <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
                 <span className="tag">{words} words · ~{Math.max(1, Math.round(words / 200))} min read</span>
                 <div className="flex gap-3">
-                  <Button type="button" variant="ghost" onClick={() => navigate(-1)} cursor="Back">Cancel</Button>
-                  <Button type="submit" disabled={busy} cursor="Publish" flip={false}>{busy ? 'Publishing…' : 'Publish'}</Button>
+                  <Button type="button" variant="ghost" onClick={() => navigate(-1)}>Cancel</Button>
+                  <Button type="submit" disabled={busy} flip={false}>{busy ? 'Publishing…' : 'Publish'}</Button>
                 </div>
               </div>
             </form>

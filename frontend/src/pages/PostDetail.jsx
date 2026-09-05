@@ -20,7 +20,6 @@ function LikeButton({ liked, count, onClick, busy }) {
     <button
       onClick={handle}
       disabled={busy}
-      data-cursor={liked ? 'Unlike' : 'Like'}
       className={`relative inline-flex items-center gap-3 px-5 py-3 rounded-full border transition-all duration-400 ease-out ${
         liked ? 'border-crema-400 bg-crema-400/10 text-crema-300' : 'border-white/15 text-bone/80 hover:border-crema-400/60 hover:text-crema-300'
       }`}
@@ -101,7 +100,7 @@ export default function PostDetail() {
         <Reveal>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 tag">
             {post.city && (
-              <Link to={`/cities/${post.city.id}`} className="text-crema-400 hover:text-crema-200 transition-colors normal-case tracking-normal text-sm" data-cursor="City">
+              <Link to={`/cities/${post.city.id}`} className="text-crema-400 hover:text-crema-200 transition-colors normal-case tracking-normal text-sm">
                 {post.city.name}, {post.city.country}
               </Link>
             )}
@@ -116,7 +115,7 @@ export default function PostDetail() {
           <div className="mt-10 flex items-center gap-4">
             <Avatar user={post.author} size="lg" />
             <div>
-              <Link to={`/profile/${post.author?.id}`} className="font-medium hover:text-crema-300 transition-colors" data-cursor="Profile">
+              <Link to={`/profile/${post.author?.id}`} className="font-medium hover:text-crema-300 transition-colors">
                 {displayName(post.author)}
               </Link>
               <p className="tag mt-0.5">@{post.author?.username} · {longDate(post.created_at)}</p>
@@ -133,7 +132,7 @@ export default function PostDetail() {
         <Reveal delay={100}>
           <div className="mt-14 pt-8 border-t hairline flex flex-wrap items-center justify-between gap-4">
             <LikeButton liked={liked} count={likes} onClick={toggleLike} busy={busy} />
-            <button onClick={() => navigate(-1)} className="tag hover:text-bone transition-colors" data-cursor="Back">← Back</button>
+            <button onClick={() => navigate(-1)} className="tag hover:text-bone transition-colors">← Back</button>
           </div>
         </Reveal>
 

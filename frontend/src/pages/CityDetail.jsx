@@ -6,6 +6,8 @@ import Button from '../components/Button'
 import Reveal from '../components/Reveal'
 import Empty from '../components/Empty'
 import LiveClock from '../components/LiveClock'
+import Gallery from '../components/Gallery'
+import { scenesFor } from '../lib/scenes'
 import { zoneFor, localHour, moodFor } from '../lib/time'
 import { CONTINENTS, FALLBACK_IMG } from '../lib/format'
 import { useAuth } from '../context/AuthContext'
@@ -68,7 +70,7 @@ export default function CityDetail() {
         <div className="absolute inset-x-0 bottom-0 pb-14 px-5 sm:px-8">
           <div className="max-w-7xl mx-auto">
             <Reveal>
-              <Link to="/explore" className="inline-flex items-center gap-2 tag hover:text-bone transition-colors" data-cursor="Back">
+              <Link to="/explore" className="inline-flex items-center gap-2 tag hover:text-bone transition-colors">
                 <span aria-hidden>←</span> {CONTINENTS[city.continent] || 'Explore'}
               </Link>
             </Reveal>
@@ -87,8 +89,22 @@ export default function CityDetail() {
         </div>
       </section>
 
+      {/* Streets & plates */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 pt-20">
+        <Reveal>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span className="eyebrow">Streets &amp; plates</span>
+              <h2 className="mt-3 font-display text-4xl tracking-tight">Walk it, then <span className="display-italic">eat</span></h2>
+            </div>
+            <p className="text-muted max-w-sm text-sm">What {city.name} looks like at street level, and what to order when you sit down.</p>
+          </div>
+        </Reveal>
+        <Reveal delay={100}><Gallery scenes={scenesFor(city)} /></Reveal>
+      </section>
+
       {/* Body */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-8 pt-20 grid lg:grid-cols-12 gap-12">
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 pt-24 grid lg:grid-cols-12 gap-12">
         <aside className="lg:col-span-4">
           <div className="lg:sticky lg:top-32 space-y-8">
             <Reveal>
@@ -98,7 +114,7 @@ export default function CityDetail() {
               <div className="glass rounded-3xl p-6">
                 <div className="tag mb-3">Been here?</div>
                 <p className="text-bone/70 mb-6">Write it down while it still feels like something.</p>
-                <Button to={writeTo} cursor="Write" className="w-full">Share your story</Button>
+                <Button to={writeTo} className="w-full">Share your story</Button>
               </div>
             </Reveal>
           </div>

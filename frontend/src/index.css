@@ -27,13 +27,6 @@ body {
   overflow-x: hidden;
 }
 
-/* The custom cursor only takes over on fine pointers. */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  body.has-cursor, body.has-cursor a, body.has-cursor button,
-  body.has-cursor input, body.has-cursor textarea, body.has-cursor select,
-  body.has-cursor label { cursor: none; }
-}
-
 ::selection { background: rgba(233, 181, 106, 0.35); color: #fff; }
 
 ::-webkit-scrollbar { width: 10px; }
@@ -99,49 +92,6 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Cursor                                                              */
-/* ------------------------------------------------------------------ */
-.cursor-dot, .cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  border-radius: 9999px;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  width: 6px; height: 6px;
-  background: #fff;
-}
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1.5px solid rgba(255,255,255,0.9);
-  transition: width .35s var(--ease-out), height .35s var(--ease-out),
-              background .35s var(--ease-out), border-color .35s var(--ease-out);
-  display: grid; place-items: center;
-}
-.cursor-ring.is-hover {
-  width: 72px; height: 72px;
-  background: rgba(255,255,255,0.92);
-  border-color: transparent;
-}
-.cursor-ring.is-text {
-  width: 3px; height: 28px; border-radius: 2px;
-  background: #fff; border-color: transparent;
-}
-.cursor-ring.is-hidden { opacity: 0; }
-.cursor-label {
-  font: 500 10px/1 'JetBrains Mono', monospace;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: #000;
-  opacity: 0; transform: scale(.6);
-  transition: opacity .25s var(--ease-out), transform .35s var(--ease-spring);
-  white-space: nowrap;
-}
-.cursor-ring.is-hover .cursor-label { opacity: 1; transform: scale(1); }
-
-/* ------------------------------------------------------------------ */
 /* Tilt cards + spotlight                                              */
 /* ------------------------------------------------------------------ */
 .tilt {
@@ -170,13 +120,19 @@ body {
 .tilt.is-active .parallax { transition: transform .08s linear; }
 
 /* ------------------------------------------------------------------ */
-/* Split-flap text roll                                                */
+/* Calm link hover: colour shift + underline that draws in from the left */
 /* ------------------------------------------------------------------ */
-.flip { display: inline-block; overflow: hidden; line-height: 1.1; vertical-align: bottom; }
-.flip-inner { display: block; transition: transform .5s var(--ease-out); }
-.flip-inner > span { display: block; }
-.flip-inner > span:nth-child(2) { color: var(--crema); }
-.flip:hover .flip-inner, a:hover .flip .flip-inner, button:hover .flip .flip-inner { transform: translateY(-100%); }
+.link-u { position: relative; display: inline-block; }
+.link-u::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform .45s var(--ease-out);
+}
+.link-u:hover::after, a:hover > .link-u::after { transform: scaleX(1); }
+
+/* Photo tiles: soft lift and a hairline that warms on hover */
+.photo { transition: transform .7s var(--ease-out), box-shadow .7s var(--ease-out); box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+.photo:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(233,181,106,.45), 0 30px 60px -30px rgba(0,0,0,.8); }
 
 /* ------------------------------------------------------------------ */
 /* Magnetic + shine buttons                                            */

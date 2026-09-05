@@ -7,7 +7,7 @@ import { CONTINENTS, FALLBACK_IMG } from '../lib/format'
 export default function CityCard({ city, index = 0 }) {
   const tz = zoneFor(city)
   return (
-    <Link to={`/cities/${city.id}`} className="block group" data-cursor="Explore">
+    <Link to={`/cities/${city.id}`} className="block group">
       <Tilt className="rounded-3xl overflow-hidden aspect-[4/5] bg-ink-800 shadow-card">
         <img
           src={city.image_url || FALLBACK_IMG}

@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import Cursor from './components/Cursor'
 import Ambient from './components/Ambient'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -24,7 +23,6 @@ export default function App() {
   const { pathname } = useLocation()
   return (
     <AuthProvider>
-      <Cursor />
       <Ambient />
       <ScrollToTop />
       <div className="min-h-screen flex flex-col">

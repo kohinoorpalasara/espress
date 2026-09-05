@@ -69,7 +69,7 @@ export default function CityExplorer() {
                 <button
                   key={f.key}
                   onClick={() => setFilter(f.key)}
-                  data-cursor="Filter"
+                 
                   className={`group px-4 py-2 rounded-full text-sm border transition-all duration-400 ease-out ${
                     on ? 'bg-crema-400 text-ink-900 border-crema-400' : 'border-white/10 text-bone/80 hover:border-white/30 hover:bg-white/5'
                   }`}

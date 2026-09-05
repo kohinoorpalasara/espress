@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import FlipText from './FlipText'
 import Button from './Button'
 import Avatar from './Avatar'
 import LiveClock from './LiveClock'
@@ -38,14 +37,14 @@ export default function Navbar() {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const linkCls = ({ isActive }) =>
-    `text-sm font-medium transition-colors ${isActive ? 'text-crema-400' : 'text-bone/80 hover:text-bone'}`
+    `link-u text-sm font-medium transition-colors ${isActive ? 'text-crema-400' : 'text-bone/80 hover:text-bone'}`
 
   return (
     <>
       <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-out ${scrolled ? 'py-3' : 'py-5'}`}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <nav className={`flex items-center justify-between rounded-full px-4 sm:px-5 h-14 transition-all duration-500 ease-out ${scrolled ? 'glass shadow-card' : ''}`}>
-            <Link to="/" className="flex items-center gap-2.5 group" data-cursor="Home">
+            <Link to="/" className="flex items-center gap-2.5 group">
               <span className="relative grid place-items-center w-9 h-9 rounded-full bg-crema-400 text-ink-900 overflow-hidden">
                 <Plane className="w-5 h-5 transition-transform duration-700 ease-out group-hover:translate-x-8 group-hover:-translate-y-8" />
                 <Plane className="w-5 h-5 absolute -translate-x-8 translate-y-8 transition-transform duration-700 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
@@ -54,8 +53,8 @@ export default function Navbar() {
             </Link>
 
             <div className="hidden md:flex items-center gap-7">
-              <NavLink to="/explore" className={linkCls} data-cursor="Explore"><FlipText>Explore</FlipText></NavLink>
-              {user && <NavLink to="/create-post" className={linkCls} data-cursor="Write"><FlipText>Write</FlipText></NavLink>}
+              <NavLink to="/explore" className={linkCls}>Explore</NavLink>
+              {user && <NavLink to="/create-post" className={linkCls}>Write</NavLink>}
               <span className="hidden lg:inline-flex tag items-center">
                 <LiveClock timeZone={tz} seconds={false} className="text-[11px]" />
                 <span className="ml-2">you</span>
@@ -65,19 +64,19 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-3">
               {!user ? (
                 <>
-                  <Link to="/login" className="text-sm font-medium text-bone/80 hover:text-bone transition-colors px-2" data-cursor="Sign in">
-                    <FlipText>Sign in</FlipText>
+                  <Link to="/login" className="text-sm font-medium text-bone/80 hover:text-bone transition-colors px-2 link-u">
+                    Sign in
                   </Link>
-                  <Button to="/register" size="sm" cursor="Join">Join</Button>
+                  <Button to="/register" size="sm">Join</Button>
                 </>
               ) : (
                 <>
-                  <Link to={`/profile/${user.id}`} className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-white/5 transition-colors" data-cursor="Profile">
+                  <Link to={`/profile/${user.id}`} className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-white/5 transition-colors">
                     <Avatar user={user} size="sm" />
                     <span className="text-sm font-medium">{user.username}</span>
                   </Link>
-                  <button onClick={handleLogout} className="text-sm text-muted hover:text-bone transition-colors" data-cursor="Bye">
-                    <FlipText>Log out</FlipText>
+                  <button onClick={handleLogout} className="text-sm text-muted hover:text-bone transition-colors link-u">
+                    Log out
                   </button>
                 </>
               )}

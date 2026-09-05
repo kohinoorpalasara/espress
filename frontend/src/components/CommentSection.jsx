@@ -56,7 +56,7 @@ export default function CommentSection({ postId, onCountChange }) {
               <Avatar user={c.author} size="sm" className="mt-1" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-3">
-                  <Link to={`/profile/${c.author?.id}`} className="text-sm font-medium hover:text-crema-300 transition-colors" data-cursor="Profile">
+                  <Link to={`/profile/${c.author?.id}`} className="text-sm font-medium hover:text-crema-300 transition-colors">
                     {c.author?.username}
                   </Link>
                   <span className="tag">{timeAgo(c.created_at)}</span>
@@ -82,7 +82,7 @@ export default function CommentSection({ postId, onCountChange }) {
               />
               <div className="mt-3 flex items-center justify-between">
                 <span className="tag">{error ? <span className="text-red-400 normal-case tracking-normal">{error}</span> : `${body.length} chars`}</span>
-                <Button type="submit" size="sm" disabled={submitting || !body.trim()} cursor="Send" flip={false}>
+                <Button type="submit" size="sm" disabled={submitting || !body.trim()} flip={false}>
                   {submitting ? 'Sending…' : 'Reply'}
                 </Button>
               </div>
@@ -92,7 +92,7 @@ export default function CommentSection({ postId, onCountChange }) {
       ) : (
         <div className="glass rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p className="text-bone/80">Been there too? <span className="text-muted">Sign in to reply.</span></p>
-          <Button to="/login" variant="ghost" size="sm" cursor="Sign in">Sign in</Button>
+          <Button to="/login" variant="ghost" size="sm">Sign in</Button>
         </div>
       )}
     </section>
