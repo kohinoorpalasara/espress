@@ -10,8 +10,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python manage.py collectstatic --noinput
+# collectstatic needs a dummy SECRET_KEY at build time (not the real one)
+RUN SECRET_KEY=build-time-placeholder python manage.py collectstatic --noinput
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "60", "espress_api.wsgi:application"]
+CMD ["/app/startup.sh"]
