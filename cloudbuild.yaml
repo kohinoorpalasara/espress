@@ -98,7 +98,10 @@ images:
 # _CLOUDSQL_INSTANCE points at the Cloud SQL instance (PROJECT:REGION:INSTANCE).
 # Clear it (here or in the trigger's substitutions) to fall back to SQLite.
 substitutions:
-  _CLOUDSQL_INSTANCE: 'vertex-ai-507310:australia-southeast1:espress-db'
+  # TEMPORARY: blanked to get a working deploy on SQLite while the Cloud SQL
+  # instance and secrets are confirmed. Restore to
+  # 'vertex-ai-507310:australia-southeast1:espress-db' to switch back.
+  _CLOUDSQL_INSTANCE: ''
   _DB_NAME: 'espress'
   _DB_USER: 'espress'
   _SECRET_KEY_NAME: 'django-secret-key'

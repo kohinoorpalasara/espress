@@ -71,6 +71,9 @@ if _db_name:
             'HOST': _host,
             'PORT': os.environ.get('DB_PORT', '5432'),
             'CONN_MAX_AGE': 60,
+            # Fail fast instead of blocking until Cloud Run's start-up timeout,
+            # which surfaces as an opaque "container failed to listen on 8080".
+            'OPTIONS': {'connect_timeout': 10},
         }
     }
 else:
