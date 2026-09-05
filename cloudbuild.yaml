@@ -66,6 +66,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
+      - '--build-arg'
+      - 'VITE_API_URL=${_API_URL}'
       - '-t'
       - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/espress/espress-frontend:$COMMIT_SHA'
       - '-t'
@@ -102,6 +104,9 @@ substitutions:
   # instance and secrets are confirmed. Restore to
   # 'vertex-ai-507310:australia-southeast1:espress-db' to switch back.
   _CLOUDSQL_INSTANCE: ''
+  # Baked into the frontend bundle at build time. Must be the backend's public
+  # URL including the /api suffix.
+  _API_URL: 'https://espress-2egijg22ka-ts.a.run.app/api'
   _DB_NAME: 'espress'
   _DB_USER: 'espress'
   _SECRET_KEY_NAME: 'django-secret-key'
