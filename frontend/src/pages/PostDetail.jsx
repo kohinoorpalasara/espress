@@ -1,14 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import client from '../api/client'
 import CommentSection from '../components/CommentSection'
+import Avatar from '../components/Avatar'
+import Reveal from '../components/Reveal'
+import Empty from '../components/Empty'
+import LiveClock from '../components/LiveClock'
 import { useAuth } from '../context/AuthContext'
+import { longDate, zoneFor } from '../lib/time'
+import { displayName } from '../lib/format'
 
-function getInitials(user) {
-  if (!user) return '?'
-  const first = user.first_name?.[0] || ''
-  const last = user.last_name?.[0] || ''
-  return (first + last).toUpperCase() || user.username?.[0]?.toUpperCase() || '?'
+function LikeButton({ liked, count, onClick, busy }) {
+  const [bursts, setBursts] = useState([])
+  const handle = () => {
+    if (!liked) setBursts(b => [...b, Date.now()])
+    onClick()
+  }
+  return (
+    <button
+      onClick={handle}
+      disabled={busy}
+      data-cursor={liked ? 'Unlike' : 'Like'}
+      className={`relative inline-flex items-center gap-3 px-5 py-3 rounded-full border transition-all duration-400 ease-out ${
+        liked ? 'border-crema-400 bg-crema-400/10 text-crema-300' : 'border-white/15 text-bone/80 hover:border-crema-400/60 hover:text-crema-300'
+      }`}
+    >
+      <svg className={`w-5 h-5 transition-transform duration-500 ${liked ? 'scale-110' : ''}`} viewBox="0 0 24 24" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" aria-hidden>
+        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+      <span className="tabular-nums">{count} {count === 1 ? 'like' : 'likes'}</span>
+      {bursts.map(k => (
+        <span key={k} className="burst" onAnimationEnd={() => setBursts(b => b.filter(x => x !== k))}>
+          {Array.from({ length: 8 }).map((_, i) => <i key={i} style={{ '--a': `${i * 45}deg` }} />)}
+        </span>
+      ))}
+    </button>
+  )
 }
 
 export default function PostDetail() {
@@ -18,136 +45,100 @@ export default function PostDetail() {
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [liked, setLiked] = useState(false)
-  const [likesCount, setLikesCount] = useState(0)
-  const [liking, setLiking] = useState(false)
+  const [likes, setLikes] = useState(0)
+  const [busy, setBusy] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    setLoading(true)
     client.get(`/posts/${id}/`)
-      .then(res => {
-        setPost(res.data)
-        setLiked(res.data.is_liked)
-        setLikesCount(res.data.likes_count)
-      })
-      .catch(() => {})
+      .then(res => { setPost(res.data); setLiked(!!res.data.is_liked); setLikes(res.data.likes_count ?? 0) })
+      .catch(() => setPost(null))
       .finally(() => setLoading(false))
   }, [id])
 
-  const handleLike = async () => {
+  // Reading progress bar.
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement
+      const max = h.scrollHeight - h.clientHeight
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const toggleLike = async () => {
     if (!user) { navigate('/login'); return }
-    if (liking) return
-    setLiking(true)
+    if (busy) return
+    setBusy(true)
     try {
       const res = await client.post(`/posts/${id}/like/`)
-      setLiked(res.data.liked)
-      setLikesCount(res.data.count)
-    } catch {
-      // ignore
-    } finally {
-      setLiking(false)
-    }
+      setLiked(res.data.liked); setLikes(res.data.likes_count)
+    } catch { /* leave state as-is */ } finally { setBusy(false) }
   }
 
   if (loading) {
     return (
-      <div className="pt-16 min-h-screen bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 py-10 space-y-4 animate-pulse">
-          <div className="h-10 bg-gray-200 rounded w-3/4" />
-          <div className="h-4 bg-gray-200 rounded w-1/2" />
-          <div className="h-64 bg-gray-200 rounded" />
-        </div>
+      <div className="pt-40 max-w-3xl mx-auto px-5 space-y-5">
+        <div className="h-4 w-24 rounded shimmer" /><div className="h-16 w-4/5 rounded shimmer" /><div className="h-64 rounded-3xl shimmer" />
       </div>
     )
   }
-
   if (!post) {
-    return (
-      <div className="pt-16 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">Post not found</h2>
-          <Link to="/explore" className="text-orange-500 hover:underline">Back to Explore</Link>
-        </div>
-      </div>
-    )
+    return <div className="pt-48 px-5 max-w-xl mx-auto"><Empty glyph="?" title="Story not found" action="Back to the board" to="/explore" /></div>
   }
 
-  const formattedDate = new Date(post.created_at).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric'
-  })
+  const tz = zoneFor(post.city)
+  const words = post.body?.trim().split(/\s+/).length || 0
+  const mins = Math.max(1, Math.round(words / 200))
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 py-10">
-        {/* Back button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-500 hover:text-orange-500 mb-6 transition-colors"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back
-        </button>
+    <article className="pt-36 pb-10">
+      <div className="fixed top-0 inset-x-0 h-[2px] z-[60] bg-crema-400 origin-left transition-transform duration-150" style={{ transform: `scaleX(${progress})` }} aria-hidden />
 
-        <div className="bg-white rounded-xl shadow-sm p-8">
-          {/* City badge */}
-          {post.city && (
-            <Link
-              to={`/cities/${post.city.id}`}
-              className="inline-block bg-orange-100 text-orange-700 text-sm font-medium px-3 py-1 rounded-full mb-4 hover:bg-orange-200 transition-colors"
-            >
-              {post.city.name}, {post.city.country}
-            </Link>
-          )}
-
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h1>
-
-          {/* Author row */}
-          <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
-            <div className="w-10 h-10 rounded-full bg-orange-400 flex items-center justify-center text-white font-semibold text-sm">
-              {getInitials(post.author)}
-            </div>
-            <div>
-              <Link to={`/profile/${post.author?.id}`} className="font-medium text-gray-900 hover:text-orange-500 transition-colors">
-                @{post.author?.username}
+      <header className="max-w-4xl mx-auto px-5 sm:px-8">
+        <Reveal>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 tag">
+            {post.city && (
+              <Link to={`/cities/${post.city.id}`} className="text-crema-400 hover:text-crema-200 transition-colors normal-case tracking-normal text-sm" data-cursor="City">
+                {post.city.name}, {post.city.country}
               </Link>
-              <p className="text-sm text-gray-500">{formattedDate}</p>
+            )}
+            {tz && <LiveClock timeZone={tz} seconds={false} className="text-[11px]" />}
+            <span>{mins} min read</span>
+          </div>
+        </Reveal>
+        <Reveal delay={80}>
+          <h1 className="mt-6 font-display text-5xl sm:text-7xl leading-[0.98] tracking-[-0.03em]">{post.title}</h1>
+        </Reveal>
+        <Reveal delay={160}>
+          <div className="mt-10 flex items-center gap-4">
+            <Avatar user={post.author} size="lg" />
+            <div>
+              <Link to={`/profile/${post.author?.id}`} className="font-medium hover:text-crema-300 transition-colors" data-cursor="Profile">
+                {displayName(post.author)}
+              </Link>
+              <p className="tag mt-0.5">@{post.author?.username} · {longDate(post.created_at)}</p>
             </div>
           </div>
+        </Reveal>
+      </header>
 
-          {/* Body */}
-          <div className="text-gray-700 leading-relaxed whitespace-pre-wrap mb-8 text-base">
-            {post.body}
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 mt-16">
+        <Reveal>
+          <div className="dropcap font-display text-[1.35rem] sm:text-2xl leading-[1.6] text-bone/90 whitespace-pre-wrap">{post.body}</div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="mt-14 pt-8 border-t hairline flex flex-wrap items-center justify-between gap-4">
+            <LikeButton liked={liked} count={likes} onClick={toggleLike} busy={busy} />
+            <button onClick={() => navigate(-1)} className="tag hover:text-bone transition-colors" data-cursor="Back">← Back</button>
           </div>
+        </Reveal>
 
-          {/* Like button */}
-          <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-            <button
-              onClick={handleLike}
-              disabled={liking}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 font-medium transition-all ${
-                liked
-                  ? 'border-red-400 bg-red-50 text-red-500'
-                  : 'border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500'
-              }`}
-            >
-              <svg
-                className="w-5 h-5"
-                fill={liked ? 'currentColor' : 'none'}
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-              {likesCount} {likesCount === 1 ? 'like' : 'likes'}
-            </button>
-          </div>
-        </div>
-
-        {/* Comments */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mt-6">
-          <CommentSection postId={post.id} initialComments={post.comments || []} />
-        </div>
+        <CommentSection postId={post.id} />
       </div>
-    </div>
+    </article>
   )
 }

@@ -1,112 +1,124 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import client from '../api/client'
 import PostCard from '../components/PostCard'
+import Button from '../components/Button'
+import Reveal from '../components/Reveal'
+import Empty from '../components/Empty'
+import LiveClock from '../components/LiveClock'
+import { zoneFor, localHour, moodFor } from '../lib/time'
+import { CONTINENTS, FALLBACK_IMG } from '../lib/format'
 import { useAuth } from '../context/AuthContext'
 
 export default function CityDetail() {
   const { id } = useParams()
   const { user } = useAuth()
-  const navigate = useNavigate()
   const [city, setCity] = useState(null)
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
+  const heroImg = useRef(null)
 
   useEffect(() => {
-    Promise.all([
-      client.get(`/cities/${id}/`),
-      client.get(`/posts/?city=${id}`)
-    ])
-      .then(([cityRes, postsRes]) => {
-        setCity(cityRes.data)
-        setPosts(postsRes.data)
-      })
-      .catch(() => {})
+    setLoading(true)
+    Promise.all([client.get(`/cities/${id}/`), client.get(`/posts/?city=${id}`)])
+      .then(([c, p]) => { setCity(c.data); setPosts(p.data) })
+      .catch(() => setCity(null))
       .finally(() => setLoading(false))
   }, [id])
 
+  // Parallax the hero image against scroll.
+  useEffect(() => {
+    const onScroll = () => {
+      if (heroImg.current) heroImg.current.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.1)`
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   if (loading) {
     return (
-      <div className="pt-16 min-h-screen">
-        <div className="h-80 bg-gray-200 animate-pulse" />
-        <div className="max-w-4xl mx-auto px-4 py-8 space-y-4">
-          <div className="h-8 bg-gray-200 rounded animate-pulse w-1/2" />
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-full" />
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4" />
+      <div className="pt-24">
+        <div className="h-[70vh] shimmer" />
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 space-y-4">
+          <div className="h-6 w-1/3 rounded shimmer" /><div className="h-4 w-2/3 rounded shimmer" />
         </div>
       </div>
     )
   }
-
   if (!city) {
     return (
-      <div className="pt-16 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">City not found</h2>
-          <Link to="/explore" className="text-orange-500 hover:underline">Back to Explore</Link>
-        </div>
+      <div className="pt-48 px-5 max-w-xl mx-auto">
+        <Empty glyph="?" title="No such city" body="It may have been removed, or the link is off." action="Back to the board" to="/explore" />
       </div>
     )
   }
 
+  const tz = zoneFor(city)
+  const mood = tz ? moodFor(localHour(tz)) : null
+  const writeTo = user ? `/create-post?city=${id}` : '/login'
+
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
+    <div>
       {/* Hero */}
-      <div className="relative h-80 md:h-96 overflow-hidden">
-        <img
-          src={city.image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200'}
-          alt={city.name}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-1">{city.name}</h1>
-            <p className="text-xl text-orange-300">{city.country}</p>
+      <section className="relative h-[86vh] min-h-[560px] overflow-hidden">
+        <img ref={heroImg} src={city.image_url || FALLBACK_IMG} alt={city.name} className="absolute inset-0 w-full h-full object-cover scale-110 will-change-transform" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/50 to-ink-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-900/60 to-transparent" />
+
+        <div className="absolute inset-x-0 bottom-0 pb-14 px-5 sm:px-8">
+          <div className="max-w-7xl mx-auto">
+            <Reveal>
+              <Link to="/explore" className="inline-flex items-center gap-2 tag hover:text-bone transition-colors" data-cursor="Back">
+                <span aria-hidden>←</span> {CONTINENTS[city.continent] || 'Explore'}
+              </Link>
+            </Reveal>
+            <Reveal delay={80}>
+              <h1 className="mt-5 font-display text-[16vw] sm:text-[11vw] lg:text-[9vw] leading-[0.85] tracking-[-0.04em]">{city.name}</h1>
+            </Reveal>
+            <Reveal delay={160}>
+              <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+                <span className="text-xl text-crema-300">{city.country}</span>
+                {tz && <LiveClock timeZone={tz} className="text-lg" />}
+                {mood && <span className="text-bone/70">{mood.icon} {mood.label} there</span>}
+                <span className="tag">{posts.length} {posts.length === 1 ? 'story' : 'stories'}</span>
+              </div>
+            </Reveal>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Description */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-          <p className="text-gray-700 leading-relaxed text-lg">{city.description}</p>
-          <div className="mt-6 flex items-center justify-between">
-            <span className="text-gray-500">{posts.length} {posts.length === 1 ? 'story' : 'stories'} shared</span>
-            <button
-              onClick={() => user ? navigate(`/create-post?city=${id}`) : navigate('/login')}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors"
-            >
-              Share your experience
-            </button>
+      {/* Body */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 pt-20 grid lg:grid-cols-12 gap-12">
+        <aside className="lg:col-span-4">
+          <div className="lg:sticky lg:top-32 space-y-8">
+            <Reveal>
+              <p className="font-display text-2xl sm:text-3xl leading-snug text-bone/90">{city.description}</p>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="glass rounded-3xl p-6">
+                <div className="tag mb-3">Been here?</div>
+                <p className="text-bone/70 mb-6">Write it down while it still feels like something.</p>
+                <Button to={writeTo} cursor="Write" className="w-full">Share your story</Button>
+              </div>
+            </Reveal>
           </div>
+        </aside>
+
+        <div className="lg:col-span-8">
+          <Reveal>
+            <div className="flex items-baseline justify-between mb-8">
+              <h2 className="font-display text-4xl tracking-tight">Stories from <span className="display-italic">{city.name}</span></h2>
+            </div>
+          </Reveal>
+          {posts.length === 0 ? (
+            <Reveal><Empty glyph="✎" title="No stories yet" body={`Be the first to write about ${city.name}.`} action="Write the first one" to={writeTo} /></Reveal>
+          ) : (
+            <div className="grid gap-5">
+              {posts.map((p, i) => <Reveal key={p.id} delay={i * 60}><PostCard post={p} showCity={false} /></Reveal>)}
+            </div>
+          )}
         </div>
-
-        {/* Posts */}
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Stories from {city.name}
-        </h2>
-
-        {posts.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-xl shadow-sm">
-            <div className="text-5xl mb-4">✍️</div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">No stories yet</h3>
-            <p className="text-gray-500 mb-4">Be the first to share your experience in {city.name}!</p>
-            <Link
-              to={user ? `/create-post?city=${id}` : '/login'}
-              className="bg-orange-500 text-white px-6 py-2 rounded-full font-medium hover:bg-orange-600 transition-colors"
-            >
-              Write a story
-            </Link>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {posts.map(post => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
-      </div>
+      </section>
     </div>
   )
 }

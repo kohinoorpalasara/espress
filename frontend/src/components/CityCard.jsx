@@ -1,51 +1,39 @@
 import { Link } from 'react-router-dom'
+import Tilt from './Tilt'
+import LiveClock from './LiveClock'
+import { zoneFor } from '../lib/time'
+import { CONTINENTS, FALLBACK_IMG } from '../lib/format'
 
-const CONTINENT_COLORS = {
-  EU: 'bg-blue-100 text-blue-700',
-  AS: 'bg-red-100 text-red-700',
-  NA: 'bg-green-100 text-green-700',
-  SA: 'bg-yellow-100 text-yellow-700',
-  AF: 'bg-orange-100 text-orange-700',
-  OC: 'bg-purple-100 text-purple-700',
-}
-
-const CONTINENT_NAMES = {
-  EU: 'Europe',
-  AS: 'Asia',
-  NA: 'North America',
-  SA: 'South America',
-  AF: 'Africa',
-  OC: 'Oceania',
-}
-
-export default function CityCard({ city }) {
+export default function CityCard({ city, index = 0 }) {
+  const tz = zoneFor(city)
   return (
-    <Link to={`/cities/${city.id}`} className="block group">
-      <div className="rounded-xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300">
-        <div className="overflow-hidden h-48">
-          <img
-            src={city.image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800'}
-            alt={city.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+    <Link to={`/cities/${city.id}`} className="block group" data-cursor="Explore">
+      <Tilt className="rounded-3xl overflow-hidden aspect-[4/5] bg-ink-800 shadow-card">
+        <img
+          src={city.image_url || FALLBACK_IMG}
+          alt={city.name}
+          loading={index < 4 ? 'eager' : 'lazy'}
+          className="parallax absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/50 via-transparent to-transparent" />
+
+        <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+          <span className="tag px-2.5 py-1 rounded-full glass text-bone/80">{CONTINENTS[city.continent] || city.continent}</span>
+          {tz && <LiveClock timeZone={tz} seconds={false} className="text-[11px] px-2.5 py-1 rounded-full glass text-bone/90" />}
         </div>
-        <div className="p-4">
-          <div className="flex items-start justify-between mb-2">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-500 transition-colors">
-                {city.name}
-              </h3>
-              <p className="text-gray-500 text-sm">{city.country}</p>
-            </div>
-            <span className={`text-xs font-medium px-2 py-1 rounded-full ${CONTINENT_COLORS[city.continent] || 'bg-gray-100 text-gray-700'}`}>
-              {CONTINENT_NAMES[city.continent] || city.continent}
+
+        <div className="absolute bottom-0 inset-x-0 p-5" style={{ transform: 'translateZ(30px)' }}>
+          <div className="tag mb-1 text-crema-300/90">{city.country}</div>
+          <h3 className="font-display text-3xl leading-none tracking-tight">{city.name}</h3>
+          <div className="mt-3 flex items-center justify-between text-sm">
+            <span className="text-bone/70">{city.post_count} {city.post_count === 1 ? 'story' : 'stories'}</span>
+            <span className="inline-flex items-center gap-1 text-crema-400 translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+              Read <span aria-hidden>→</span>
             </span>
           </div>
-          <p className="text-orange-500 text-sm font-medium">
-            {city.post_count} {city.post_count === 1 ? 'post' : 'posts'}
-          </p>
         </div>
-      </div>
+      </Tilt>
     </Link>
   )
 }

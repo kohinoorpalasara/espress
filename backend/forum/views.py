@@ -73,12 +73,8 @@ class PostViewSet(viewsets.ModelViewSet):
         like, created = Like.objects.get_or_create(post=post, user=request.user)
         if not created:
             like.delete()
-            post.likes_count = max(0, post.likes_count - 1)
-            post.save()
-            return Response({'liked': False, 'likes_count': post.likes_count})
-        post.likes_count += 1
-        post.save()
-        return Response({'liked': True, 'likes_count': post.likes_count})
+        # likes_count is a read-only property derived from the Like rows.
+        return Response({'liked': created, 'likes_count': post.likes_count})
 
     @action(detail=True, methods=['get', 'post'], permission_classes=[permissions.IsAuthenticatedOrReadOnly])
     def comments(self, request, pk=None):

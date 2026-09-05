@@ -1,121 +1,80 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import client from '../api/client'
 import PostCard from '../components/PostCard'
-
-function getInitials(user) {
-  if (!user) return '?'
-  const first = user.first_name?.[0] || ''
-  const last = user.last_name?.[0] || ''
-  return (first + last).toUpperCase() || user.username?.[0]?.toUpperCase() || '?'
-}
+import Avatar from '../components/Avatar'
+import Reveal from '../components/Reveal'
+import Empty from '../components/Empty'
+import { displayName } from '../lib/format'
+import { useAuth } from '../context/AuthContext'
 
 export default function UserProfile() {
   const { id } = useParams()
-  const [profile, setProfile] = useState(null)
+  const { user: me } = useAuth()
+  const [user, setUser] = useState(null)
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    client.get(`/profiles/${id}/`)
-      .then(res => {
-        setProfile(res.data)
-        return client.get('/posts/')
-      })
-      .then(postsRes => {
-        const userPosts = postsRes.data.filter(p => p.author?.id === parseInt(id))
-        setPosts(userPosts)
-      })
-      .catch(() => {})
+    setLoading(true)
+    Promise.all([client.get(`/users/${id}/`), client.get(`/posts/?user=${id}`)])
+      .then(([u, p]) => { setUser(u.data); setPosts(p.data) })
+      .catch(() => setUser(null))
       .finally(() => setLoading(false))
   }, [id])
 
   if (loading) {
     return (
-      <div className="pt-16 min-h-screen bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 py-10 animate-pulse space-y-4">
-          <div className="flex items-center gap-4">
-            <div className="w-20 h-20 rounded-full bg-gray-200" />
-            <div className="space-y-2">
-              <div className="h-6 bg-gray-200 rounded w-40" />
-              <div className="h-4 bg-gray-200 rounded w-24" />
-            </div>
-          </div>
-          <div className="h-20 bg-gray-200 rounded" />
-        </div>
+      <div className="pt-40 max-w-4xl mx-auto px-5 space-y-6">
+        <div className="flex items-center gap-6"><div className="w-24 h-24 rounded-full shimmer" /><div className="space-y-3"><div className="h-8 w-56 rounded shimmer" /><div className="h-4 w-32 rounded shimmer" /></div></div>
       </div>
     )
   }
+  if (!user) return <div className="pt-48 px-5 max-w-xl mx-auto"><Empty glyph="?" title="No such traveller" action="Back to the board" to="/explore" /></div>
 
-  if (!profile) {
-    return (
-      <div className="pt-16 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">User not found</h2>
-          <Link to="/explore" className="text-orange-500 hover:underline">Back to Explore</Link>
-        </div>
-      </div>
-    )
-  }
-
-  const user = profile.user
-  const fullName = [user?.first_name, user?.last_name].filter(Boolean).join(' ') || user?.username
-
-  const memberSince = user?.date_joined
-    ? new Date(user.date_joined).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
-    : null
+  const profile = user.profile || {}
+  const since = user.date_joined ? new Date(user.date_joined).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : null
+  const isMe = me?.id === user.id
+  const cities = new Set(posts.map(p => p.city?.id).filter(Boolean)).size
+  const likes = posts.reduce((n, p) => n + (p.likes_count || 0), 0)
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 py-10">
-        {/* Profile card */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
-          <div className="flex items-start gap-6">
-            <div className="w-20 h-20 rounded-full bg-orange-400 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-              {getInitials(user)}
-            </div>
+    <div className="pt-36 pb-10 px-5 sm:px-8">
+      <div className="max-w-5xl mx-auto">
+        <Reveal>
+          <div className="flex flex-col sm:flex-row sm:items-end gap-6">
+            <Avatar user={user} size="xl" className="ring-4 ring-crema-400/20" />
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900">{fullName}</h1>
-              <p className="text-gray-500">@{user?.username}</p>
-              {profile.location && (
-                <p className="text-gray-500 mt-1 flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  {profile.location}
-                </p>
-              )}
-              {memberSince && (
-                <p className="text-gray-400 text-sm mt-1">Member since {memberSince}</p>
-              )}
+              <div className="tag">{isMe ? 'This is you' : 'Traveller'}{since && ` · since ${since}`}</div>
+              <h1 className="mt-2 font-display text-5xl sm:text-7xl tracking-[-0.03em] leading-[0.95]">{displayName(user)}</h1>
+              <p className="mt-2 text-muted">@{user.username}{profile.location && <> · {profile.location}</>}</p>
             </div>
           </div>
+        </Reveal>
 
-          {profile.bio && (
-            <div className="mt-6 pt-6 border-t border-gray-100">
-              <p className="text-gray-700 leading-relaxed">{profile.bio}</p>
+        {profile.bio && <Reveal delay={80}><p className="mt-10 font-display text-2xl sm:text-3xl leading-snug text-bone/85 max-w-3xl">{profile.bio}</p></Reveal>}
+
+        <Reveal delay={140}>
+          <div className="mt-12 grid grid-cols-3 gap-5 max-w-xl">
+            {[[posts.length, 'stories'], [cities, cities === 1 ? 'city' : 'cities'], [likes, 'likes']].map(([n, l]) => (
+              <div key={l} className="glass rounded-2xl px-5 py-4">
+                <div className="font-display text-3xl text-crema-400 tabular-nums">{n}</div>
+                <div className="tag mt-1">{l}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mt-20">
+          <Reveal><h2 className="font-display text-4xl tracking-tight mb-8">Stories by <span className="display-italic">{user.username}</span></h2></Reveal>
+          {posts.length === 0 ? (
+            <Reveal><Empty glyph="✎" title="Nothing written yet" body={isMe ? 'Your first story is one click away.' : 'Check back after their next trip.'} action={isMe ? 'Write one' : undefined} to={isMe ? '/create-post' : undefined} /></Reveal>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-5">
+              {posts.map((p, i) => <Reveal key={p.id} delay={(i % 2) * 80}><PostCard post={p} /></Reveal>)}
             </div>
           )}
         </div>
-
-        {/* Posts */}
-        <h2 className="text-xl font-bold text-gray-900 mb-4">
-          Posts by @{user?.username}
-        </h2>
-
-        {posts.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
-            <div className="text-4xl mb-3">✍️</div>
-            <p className="text-gray-500">No posts yet.</p>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {posts.map(post => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   )

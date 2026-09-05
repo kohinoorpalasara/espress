@@ -1,164 +1,61 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import AuthShell from '../components/AuthShell'
+import Button from '../components/Button'
 
 export default function Register() {
   const { register, login } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({
-    first_name: '',
-    last_name: '',
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
-  })
+  const [form, setForm] = useState({ first_name: '', last_name: '', username: '', email: '', password: '', password2: '' })
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const set = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleChange = e => {
-    setForm(f => ({ ...f, [e.target.name]: e.target.value }))
-  }
+  const strength = Math.min(4, [form.password.length >= 8, /[A-Z]/.test(form.password), /\d/.test(form.password), /[^\w]/.test(form.password)].filter(Boolean).length)
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    setError('')
-    if (form.password !== form.password2) {
-      setError('Passwords do not match.')
-      return
-    }
-    if (form.password.length < 8) {
-      setError('Password must be at least 8 characters.')
-      return
-    }
-    setLoading(true)
+  const submit = async e => {
+    e.preventDefault(); setError('')
+    if (form.password !== form.password2) return setError("Passwords don't match.")
+    if (form.password.length < 8) return setError('Use at least 8 characters.')
+    setBusy(true)
     try {
-      await register(form)
+      const { password2, ...payload } = form
+      await register(payload)
       await login(form.username, form.password)
       navigate('/explore')
     } catch (err) {
       const data = err.response?.data
-      if (data) {
-        const messages = Object.values(data).flat().join(' ')
-        setError(messages || 'Registration failed. Please try again.')
-      } else {
-        setError('Registration failed. Please try again.')
-      }
-    } finally {
-      setLoading(false)
-    }
+      setError(data ? Object.values(data).flat().join(' ') : "Couldn't create the account. Try again?")
+    } finally { setBusy(false) }
   }
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <div className="text-center mb-8">
-            <div className="text-4xl mb-2">✈</div>
-            <h1 className="text-2xl font-bold text-gray-900">Join Espress</h1>
-            <p className="text-gray-500 mt-1">Create your free travel community account</p>
-          </div>
-
-          {error && (
-            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                <input
-                  type="text"
-                  name="first_name"
-                  value={form.first_name}
-                  onChange={handleChange}
-                  placeholder="First name"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  value={form.last_name}
-                  onChange={handleChange}
-                  placeholder="Last name"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Username <span className="text-red-500">*</span></label>
-              <input
-                type="text"
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="Choose a username"
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                required
-                autoComplete="username"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                required
-                autoComplete="email"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Password <span className="text-red-500">*</span></label>
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="At least 8 characters"
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                required
-                autoComplete="new-password"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Confirm Password <span className="text-red-500">*</span></label>
-              <input
-                type="password"
-                name="password2"
-                value={form.password2}
-                onChange={handleChange}
-                placeholder="Repeat your password"
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                required
-                autoComplete="new-password"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white py-3 rounded-full font-semibold transition-colors mt-2"
-            >
-              {loading ? 'Creating account...' : 'Create Account'}
-            </button>
-          </form>
-
-          <p className="text-center text-gray-500 mt-6 text-sm">
-            Already have an account?{' '}
-            <Link to="/login" className="text-orange-500 hover:text-orange-600 font-medium">
-              Sign in
-            </Link>
-          </p>
+    <AuthShell
+      eyebrow="Join Espress"
+      title={<>Somewhere is <span className="display-italic text-crema-400">waiting</span></>}
+      footer={<>Already have an account? <Link to="/login" className="text-crema-400 hover:text-crema-200 transition-colors" data-cursor="Sign in">Sign in</Link></>}
+    >
+      <form onSubmit={submit} className="space-y-4">
+        {error && <div className="rounded-2xl border border-red-400/30 bg-red-400/10 text-red-200 px-4 py-3 text-sm">{error}</div>}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="field"><input name="first_name" value={form.first_name} onChange={set} placeholder=" " autoComplete="given-name" /><label>First name</label></div>
+          <div className="field"><input name="last_name" value={form.last_name} onChange={set} placeholder=" " autoComplete="family-name" /><label>Last name</label></div>
         </div>
-      </div>
-    </div>
+        <div className="field"><input name="username" value={form.username} onChange={set} placeholder=" " required autoComplete="username" /><label>Username</label></div>
+        <div className="field"><input type="email" name="email" value={form.email} onChange={set} placeholder=" " required autoComplete="email" /><label>Email</label></div>
+        <div className="field">
+          <input type="password" name="password" value={form.password} onChange={set} placeholder=" " required autoComplete="new-password" />
+          <label>Password</label>
+        </div>
+        <div className="flex gap-1.5 px-1" aria-hidden>
+          {[0, 1, 2, 3].map(i => <span key={i} className={`h-px flex-1 transition-colors duration-500 ${i < strength ? 'bg-crema-400' : 'bg-white/10'}`} />)}
+        </div>
+        <div className="field"><input type="password" name="password2" value={form.password2} onChange={set} placeholder=" " required autoComplete="new-password" /><label>Confirm password</label></div>
+        <div className="pt-2">
+          <Button type="submit" size="lg" disabled={busy} className="w-full" cursor="Join" flip={false}>{busy ? 'Creating…' : 'Create account'}</Button>
+        </div>
+      </form>
+    </AuthShell>
   )
 }

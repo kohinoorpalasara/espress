@@ -1,5 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import Cursor from './components/Cursor'
+import Ambient from './components/Ambient'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import LandingPage from './pages/LandingPage'
@@ -11,12 +14,23 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import UserProfile from './pages/UserProfile'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [pathname])
+  return null
+}
+
 export default function App() {
+  const { pathname } = useLocation()
   return (
     <AuthProvider>
+      <Cursor />
+      <Ambient />
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-1">
+        {/* Keyed on pathname so every route change replays the enter animation. */}
+        <main key={pathname} className="flex-1 page">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/explore" element={<CityExplorer />} />
